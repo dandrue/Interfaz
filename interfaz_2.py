@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#!/usr/bin/env python3.6
+#!/usr/bin/env python3
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from utilities import *
