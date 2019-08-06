@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
+#!/usr/bin/env python3.6
 
-
+from PyQt5 import QtCore, QtGui, QtWidgets
 from utilities import *
 from PyQt5 import QtCore, QtGui, QtWidgets
 from odrive.enums import *
@@ -53,31 +54,13 @@ class Ui_MainWindow(object):
         self.groupBox.setObjectName("groupBox")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.groupBox)
         self.gridLayout_3.setObjectName("gridLayout_3")
-        self.label = QtWidgets.QLabel(self.groupBox)
-        self.label.setObjectName("label")
-        self.gridLayout_3.addWidget(self.label, 1, 0, 1, 1)
-        self.pushButton = QtWidgets.QPushButton(self.groupBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton.sizePolicy().hasHeightForWidth())
-        self.pushButton.setSizePolicy(sizePolicy)
-        self.pushButton.setMaximumSize(QtCore.QSize(75, 16777215))
-        self.pushButton.setObjectName("pushButton")
-        self.gridLayout_3.addWidget(self.pushButton, 7, 0, 1, 1, QtCore.Qt.AlignHCenter)
+        self.label_2 = QtWidgets.QLabel(self.groupBox)
+        self.label_2.setObjectName("label_2")
+        self.gridLayout_3.addWidget(self.label_2, 3, 0, 1, 2, QtCore.Qt.AlignLeft)
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout_3.addItem(spacerItem, 8, 0, 1, 1)
+        self.gridLayout_3.addItem(spacerItem, 9, 0, 1, 1)
         spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout_3.addItem(spacerItem1, 0, 0, 1, 1)
-        self.lineEdit = QtWidgets.QLineEdit(self.groupBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.lineEdit.sizePolicy().hasHeightForWidth())
-        self.lineEdit.setSizePolicy(sizePolicy)
-        self.lineEdit.setMaximumSize(QtCore.QSize(75, 16777215))
-        self.lineEdit.setObjectName("lineEdit")
-        self.gridLayout_3.addWidget(self.lineEdit, 2, 0, 1, 1, QtCore.Qt.AlignHCenter)
         self.lineEdit_2 = QtWidgets.QLineEdit(self.groupBox)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -87,14 +70,44 @@ class Ui_MainWindow(object):
         self.lineEdit_2.setMaximumSize(QtCore.QSize(75, 16777215))
         self.lineEdit_2.setObjectName("lineEdit_2")
         self.gridLayout_3.addWidget(self.lineEdit_2, 4, 0, 1, 1, QtCore.Qt.AlignHCenter)
-        self.label_3 = QtWidgets.QLabel(self.groupBox)
-        self.label_3.setObjectName("label_3")
-        self.gridLayout_3.addWidget(self.label_3, 6, 0, 1, 1)
-        self.label_2 = QtWidgets.QLabel(self.groupBox)
-        self.label_2.setObjectName("label_2")
-        self.gridLayout_3.addWidget(self.label_2, 3, 0, 1, 1)
         spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout_3.addItem(spacerItem2, 5, 0, 1, 1)
+        self.pushButton_5 = QtWidgets.QPushButton(self.groupBox)
+        self.pushButton_5.setObjectName("pushButton_5")
+        self.gridLayout_3.addWidget(self.pushButton_5, 4, 1, 1, 1, QtCore.Qt.AlignHCenter)
+        self.label = QtWidgets.QLabel(self.groupBox)
+        self.label.setObjectName("label")
+        self.gridLayout_3.addWidget(self.label, 1, 0, 1, 2, QtCore.Qt.AlignLeft)
+        self.pushButton_4 = QtWidgets.QPushButton(self.groupBox)
+        self.pushButton_4.setObjectName("pushButton_4")
+        self.gridLayout_3.addWidget(self.pushButton_4, 2, 1, 1, 1, QtCore.Qt.AlignHCenter)
+        self.lineEdit = QtWidgets.QLineEdit(self.groupBox)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.lineEdit.sizePolicy().hasHeightForWidth())
+        self.lineEdit.setSizePolicy(sizePolicy)
+        self.lineEdit.setMaximumSize(QtCore.QSize(75, 16777215))
+        self.lineEdit.setObjectName("lineEdit")
+        self.gridLayout_3.addWidget(self.lineEdit, 2, 0, 1, 1, QtCore.Qt.AlignHCenter)
+        self.label_3 = QtWidgets.QLabel(self.groupBox)
+        self.label_3.setObjectName("label_3")
+        self.gridLayout_3.addWidget(self.label_3, 7, 1, 1, 1)
+        self.pushButton = QtWidgets.QPushButton(self.groupBox)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton.sizePolicy().hasHeightForWidth())
+        self.pushButton.setSizePolicy(sizePolicy)
+        self.pushButton.setMaximumSize(QtCore.QSize(75, 16777215))
+        self.pushButton.setObjectName("pushButton")
+        self.gridLayout_3.addWidget(self.pushButton, 8, 1, 1, 1, QtCore.Qt.AlignHCenter)
+        self.label_6 = QtWidgets.QLabel(self.groupBox)
+        self.label_6.setObjectName("label_6")
+        self.gridLayout_3.addWidget(self.label_6, 7, 0, 1, 1, QtCore.Qt.AlignHCenter)
+        self.pushButton_6 = QtWidgets.QPushButton(self.groupBox)
+        self.pushButton_6.setObjectName("pushButton_6")
+        self.gridLayout_3.addWidget(self.pushButton_6, 8, 0, 1, 1, QtCore.Qt.AlignHCenter)
         self.gridLayout_2.addWidget(self.groupBox, 0, 0, 1, 1)
         self.groupBox_2 = QtWidgets.QGroupBox(self.widget)
         self.groupBox_2.setObjectName("groupBox_2")
@@ -185,12 +198,6 @@ class Ui_MainWindow(object):
         self.dockWidget.setWidget(self.dockWidgetContents)
         MainWindow.addDockWidget(QtCore.Qt.DockWidgetArea(8), self.dockWidget)
 
-        self.pushButton.clicked.connect(self.get_data)
-        self.pushButton_2.clicked.connect(self.closed_loop)
-        self.pushButton_3.clicked.connect(self.set_point)
-        self.pushButton_6.clicked.connect(self.errors)
-        self.plainTextEdit.appendPlainText("...Iniciando...")
-
         self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -199,32 +206,20 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Interfaz de Usuario"))
         self.groupBox.setTitle(_translate("MainWindow", "Configuración Inicial del Sistema"))
-        self.label.setText(_translate("MainWindow", "Setear velocidad límite [rpm]"))
-        self.pushButton.setText(_translate("MainWindow", "Iniciar"))
-        self.label_3.setText(_translate("MainWindow", "Sequencia de calibración"))
         self.label_2.setText(_translate("MainWindow", "Setear Corriente límite [A]"))
+        self.pushButton_5.setText(_translate("MainWindow", "Setear"))
+        self.label.setText(_translate("MainWindow", "Setear velocidad límite [rpm]"))
+        self.pushButton_4.setText(_translate("MainWindow", "Setear"))
+        self.label_3.setText(_translate("MainWindow", "Sequencia de calibración"))
+        self.pushButton.setText(_translate("MainWindow", "Iniciar"))
+        self.label_6.setText(_translate("MainWindow", "Errores"))
+        self.pushButton_6.setText(_translate("MainWindow", "Revisar"))
         self.groupBox_2.setTitle(_translate("MainWindow", "Control de lazo cerrado"))
         self.label_5.setText(_translate("MainWindow", "Set point"))
         self.label_4.setText(_translate("MainWindow", "Iniciar control de lazo cerrado"))
         self.pushButton_2.setText(_translate("MainWindow", "Iniciar"))
         self.pushButton_3.setText(_translate("MainWindow", "Setear"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.Tab1), _translate("MainWindow", "Configuración"))
-
-    print("finding an odrive...")
-    my_drive = odrive.find_any()
-
-
-    def get_data(MainWindow, my_drive):
-        Functionalities.calibration(MainWindow, my_drive)
-
-    def closed_loop(MainWindow, my_drive):
-        Functionalities.closed_loop(MainWindow, my_drive)
-
-    def set_point(MainWindow, my_drive):
-        Functionalities.set_point(MainWindow, my_drive)
-
-    def errors(MainWindow, my_drive):
-        Functionalities.errors(MainWindow, my_drive)
 
 
 if __name__ == "__main__":
