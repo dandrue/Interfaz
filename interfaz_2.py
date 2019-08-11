@@ -3,7 +3,6 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from utilities import *
-from PyQt5 import QtCore, QtGui, QtWidgets
 from odrive.enums import *
 import time
 import math
