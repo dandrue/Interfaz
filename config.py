@@ -2,7 +2,7 @@
 #!/usr/bin/env python3.6
 
 import odrive
-from nuevo import Ui_MainWindow
+# from nuevo import Ui_MainWindow
 from odrive.enums import *
 from odrive import shell
 import math
