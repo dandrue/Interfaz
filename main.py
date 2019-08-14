@@ -14,6 +14,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setWindowModality(QtCore.Qt.WindowModal)
+        MainWindow.showMaximized()
         MainWindow.resize(1349, 618)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Ignored)
         sizePolicy.setHorizontalStretch(0)
@@ -2254,6 +2255,18 @@ class Ui_MainWindow(object):
         self.menuBar.addAction(self.menuPacientes.menuAction())
         self.menuBar.addAction(self.menuSistema.menuAction())
 
+
+        self.dateEdit.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.dateEdit_2.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.dateEdit_3.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.dateEdit_4.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.dateEdit_5.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.dateEdit_6.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.dateEdit_7.setDateTime(QtCore.QDateTime.currentDateTime())
+
+        self.timeEdit.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.timeEdit_2.setDateTime(QtCore.QDateTime.currentDateTime())
+
         self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(0)
         self.stackedWidget.setCurrentIndex(0)
@@ -2267,7 +2280,29 @@ class Ui_MainWindow(object):
         self.actionSesion.triggered.connect(self.sesion)
 
         self.onlyInt = QtGui.QIntValidator()
+
+        # lineas de texto limitadas a enteros
         self.lineEdit_8.setValidator(self.onlyInt)
+        self.lineEdit_9.setValidator(self.onlyInt)
+        self.lineEdit_13.setValidator(self.onlyInt)
+        self.lineEdit_14.setValidator(self.onlyInt)
+        self.lineEdit_15.setValidator(self.onlyInt)
+        self.lineEdit_16.setValidator(self.onlyInt)
+        self.lineEdit_17.setValidator(self.onlyInt)
+        self.lineEdit_18.setValidator(self.onlyInt)
+        self.lineEdit_19.setValidator(self.onlyInt)
+        self.lineEdit_21.setValidator(self.onlyInt)
+        self.lineEdit_22.setValidator(self.onlyInt)
+        self.lineEdit_23.setValidator(self.onlyInt)
+        self.lineEdit_24.setValidator(self.onlyInt)
+        self.lineEdit_25.setValidator(self.onlyInt)
+        self.lineEdit_26.setValidator(self.onlyInt)
+        self.lineEdit_27.setValidator(self.onlyInt)
+        self.lineEdit_45.setValidator(self.onlyInt)
+        self.lineEdit_46.setValidator(self.onlyInt)
+        self.lineEdit_29.setValidator(self.onlyInt)
+        self.lineEdit_30.setValidator(self.onlyInt)
+
 
         self.comboBox.currentIndexChanged.connect(self.validator)
         self.plainTextEdit.appendPlainText("Iniciando comunicación")
@@ -2571,6 +2606,9 @@ class Ui_MainWindow(object):
         if MainWindow.comboBox.currentText() == "Id":
             MainWindow.onlyInt = QtGui.QIntValidator()
             MainWindow.lineEdit_5.setValidator(MainWindow.onlyInt)
+        else:
+            MainWindow.onlyStr = QtGui.QRegExpValidator()
+            MainWindow.lineEdit_5.setValidator(MainWindow.onlyStr)
 
 if __name__ == "__main__":
     import sys
