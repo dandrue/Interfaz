@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1429</width>
-    <height>766</height>
+    <width>1440</width>
+    <height>837</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -573,7 +573,7 @@
                  </sizepolicy>
                 </property>
                 <property name="currentIndex">
-                 <number>4</number>
+                 <number>5</number>
                 </property>
                 <widget class="QWidget" name="page">
                  <layout class="QGridLayout" name="gridLayout_14">
@@ -591,7 +591,7 @@
                        <x>0</x>
                        <y>0</y>
                        <width>958</width>
-                       <height>627</height>
+                       <height>698</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_6">
@@ -932,7 +932,7 @@
                        <x>0</x>
                        <y>0</y>
                        <width>958</width>
-                       <height>627</height>
+                       <height>698</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_9">
@@ -1365,8 +1365,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>941</width>
-                       <height>629</height>
+                       <width>958</width>
+                       <height>698</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_37">
@@ -1711,13 +1711,13 @@
                              <widget class="QTreeWidget" name="treeWidget">
                               <property name="minimumSize">
                                <size>
-                                <width>0</width>
+                                <width>900</width>
                                 <height>200</height>
                                </size>
                               </property>
                               <property name="maximumSize">
                                <size>
-                                <width>1200</width>
+                                <width>900</width>
                                 <height>600</height>
                                </size>
                               </property>
@@ -1779,49 +1779,6 @@
                                 <string>°S Final</string>
                                </property>
                               </column>
-                              <item>
-                               <property name="text">
-                                <string>Programa 0</string>
-                               </property>
-                               <property name="text">
-                                <string>Activo</string>
-                               </property>
-                               <property name="text">
-                                <string>02/09/19</string>
-                               </property>
-                               <property name="text">
-                                <string>10/12/20</string>
-                               </property>
-                               <property name="text">
-                                <string>4</string>
-                               </property>
-                               <property name="text">
-                                <string>60</string>
-                               </property>
-                               <property name="text">
-                                <string>60</string>
-                               </property>
-                               <property name="text">
-                                <string>60</string>
-                               </property>
-                               <property name="text">
-                                <string>40</string>
-                               </property>
-                               <property name="text">
-                                <string>40</string>
-                               </property>
-                               <property name="text">
-                                <string>40</string>
-                               </property>
-                               <item>
-                                <property name="text">
-                                 <string>Sesion 1</string>
-                                </property>
-                                <property name="text">
-                                 <string>Terminada</string>
-                                </property>
-                               </item>
-                              </item>
                              </widget>
                             </item>
                             <item row="1" column="0" colspan="2">
@@ -1892,7 +1849,7 @@
                        <x>0</x>
                        <y>0</y>
                        <width>958</width>
-                       <height>627</height>
+                       <height>698</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_10">
@@ -2667,7 +2624,7 @@
                        <x>0</x>
                        <y>0</y>
                        <width>958</width>
-                       <height>627</height>
+                       <height>698</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_41">
@@ -3415,7 +3372,7 @@
                      <property name="geometry">
                       <rect>
                        <x>0</x>
-                       <y>-120</y>
+                       <y>0</y>
                        <width>941</width>
                        <height>747</height>
                       </rect>
@@ -4976,7 +4933,7 @@
                    <x>0</x>
                    <y>0</y>
                    <width>976</width>
-                   <height>645</height>
+                   <height>716</height>
                   </rect>
                  </property>
                  <property name="sizePolicy">
@@ -5953,7 +5910,7 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>400</width>
+     <width>50</width>
      <height>145</height>
     </size>
    </property>
@@ -6038,7 +5995,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1429</width>
+     <width>1440</width>
      <height>21</height>
     </rect>
    </property>
