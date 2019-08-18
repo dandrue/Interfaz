@@ -948,8 +948,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>609</width>
-                       <height>361</height>
+                       <width>960</width>
+                       <height>566</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_9">
@@ -1336,8 +1336,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>546</width>
-                       <height>499</height>
+                       <width>960</width>
+                       <height>566</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_37">
@@ -1759,14 +1759,6 @@
                                <property name="text">
                                 <string>40</string>
                                </property>
-                               <item>
-                                <property name="text">
-                                 <string>Sesion 1</string>
-                                </property>
-                                <property name="text">
-                                 <string>Terminada</string>
-                                </property>
-                               </item>
                               </item>
                              </widget>
                             </item>
@@ -1810,8 +1802,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>605</width>
-                       <height>329</height>
+                       <width>960</width>
+                       <height>566</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_10">
@@ -2477,8 +2469,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>526</width>
-                       <height>486</height>
+                       <width>960</width>
+                       <height>566</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_41">
@@ -3039,29 +3031,6 @@
                              <string>°S Final</string>
                             </property>
                            </column>
-                           <item>
-                            <property name="text">
-                             <string>Sesion 1</string>
-                            </property>
-                            <property name="text">
-                             <string/>
-                            </property>
-                            <property name="text">
-                             <string>30</string>
-                            </property>
-                            <property name="text">
-                             <string/>
-                            </property>
-                            <property name="text">
-                             <string/>
-                            </property>
-                            <property name="text">
-                             <string/>
-                            </property>
-                            <property name="text">
-                             <string/>
-                            </property>
-                           </item>
                           </widget>
                          </item>
                          <item row="2" column="0">
@@ -3116,8 +3085,8 @@
                      <property name="geometry">
                       <rect>
                        <x>0</x>
-                       <y>0</y>
-                       <width>686</width>
+                       <y>-285</y>
+                       <width>946</width>
                        <height>851</height>
                       </rect>
                      </property>
@@ -5662,22 +5631,6 @@
         </size>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
-        <item>
-         <spacer name="verticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>10</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
         <item>
          <widget class="QPlainTextEdit" name="plainTextEdit">
           <property name="enabled">
