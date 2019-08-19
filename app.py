@@ -15,6 +15,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setWindowModality(QtCore.Qt.WindowModal)
         MainWindow.resize(1366, 713)
+        MainWindow.showMaximized()
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Ignored)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -2254,6 +2255,19 @@ class Ui_MainWindow(object):
         self.stackedWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        # Inicio de codigo
+
+        self.dateEdit.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.dateEdit_2.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.dateEdit_3.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.dateEdit_4.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.dateEdit_5.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.dateEdit_6.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.dateEdit_7.setDateTime(QtCore.QDateTime.currentDateTime())
+
+        self.timeEdit.setDateTime(QtCore.QDateTime.currentDateTime())
+        self.timeEdit_2.setDateTime(QtCore.QDateTime.currentDateTime())
+
         self.actionBuscar.triggered.connect(self.buscar)
         self.actionNuevo.triggered.connect(self.nuevo)
         self.actionPerfil.triggered.connect(self.perfil)
@@ -2262,20 +2276,46 @@ class Ui_MainWindow(object):
         self.actionSesion.triggered.connect(self.sesion)
 
         self.onlyInt = QtGui.QIntValidator()
+
+        # lineas de texto limitadas a enteros
         self.lineEdit_8.setValidator(self.onlyInt)
+        self.lineEdit_9.setValidator(self.onlyInt)
+        self.lineEdit_13.setValidator(self.onlyInt)
+        self.lineEdit_14.setValidator(self.onlyInt)
+        self.lineEdit_15.setValidator(self.onlyInt)
+        self.lineEdit_16.setValidator(self.onlyInt)
+        self.lineEdit_17.setValidator(self.onlyInt)
+        self.lineEdit_18.setValidator(self.onlyInt)
+        self.lineEdit_19.setValidator(self.onlyInt)
+        self.lineEdit_21.setValidator(self.onlyInt)
+        self.lineEdit_22.setValidator(self.onlyInt)
+        self.lineEdit_23.setValidator(self.onlyInt)
+        self.lineEdit_24.setValidator(self.onlyInt)
+        self.lineEdit_25.setValidator(self.onlyInt)
+        self.lineEdit_26.setValidator(self.onlyInt)
+        self.lineEdit_27.setValidator(self.onlyInt)
+        self.lineEdit_45.setValidator(self.onlyInt)
+        self.lineEdit_46.setValidator(self.onlyInt)
+        self.lineEdit_29.setValidator(self.onlyInt)
+        self.lineEdit_30.setValidator(self.onlyInt)
+
+        # Line Edit editing Finished
+        self.lineEdit
 
         self.comboBox.currentIndexChanged.connect(self.validator)
         self.plainTextEdit.appendPlainText("Iniciando comunicación")
-        self.pushButton_12.clicked.connect(self.buscar)
-        self.pushButton_7.clicked.connect(self.set_vel)
-        self.pushButton_8.clicked.connect(self.set_current)
-        self.pushButton_9.clicked.connect(self.set_calibration_current)
+
+        # PushButton connect
         self.pushButton.clicked.connect(self.initial_calibration)
         self.pushButton_2.clicked.connect(self.closed_loop)
         self.pushButton_3.clicked.connect(self.set_point)
         self.pushButton_6.clicked.connect(self.errors)
+        self.pushButton_7.clicked.connect(self.set_vel)
+        self.pushButton_8.clicked.connect(self.set_current)
+        self.pushButton_9.clicked.connect(self.set_calibration_current)
         self.pushButton_10.clicked.connect(self.save_config)
         self.pushButton_11.clicked.connect(self.reboot)
+        self.pushButton_12.clicked.connect(self.buscar)
         self.pushButton_13.clicked.connect(self.nuevo_paciente)
         self.pushButton_32.clicked.connect(self.buscar_perfiles)
         # self.Counter.valueChange(self.vel_control)
@@ -2558,6 +2598,9 @@ class Ui_MainWindow(object):
         if MainWindow.comboBox.currentText() == "Id":
             MainWindow.onlyInt = QtGui.QIntValidator()
             MainWindow.lineEdit_5.setValidator(MainWindow.onlyInt)
+        else:
+            MainWindow.onlyStr = QtGui.QRegExpValidator()
+            MainWindow.lineEdit_5.setValidator(MainWindow.onlyStr)
 
     def selectedItems(MainWindow):
         items = MainWindow.treeWidget_2.selectedItems()
