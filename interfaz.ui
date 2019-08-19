@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1440</width>
-    <height>837</height>
+    <width>1366</width>
+    <height>713</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -590,8 +590,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>958</width>
-                       <height>698</height>
+                       <width>642</width>
+                       <height>407</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_6">
@@ -931,13 +931,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-<<<<<<< HEAD
-                       <width>960</width>
-                       <height>566</height>
-=======
-                       <width>958</width>
-                       <height>698</height>
->>>>>>> f9115acf35a7a5e44e188489a63084a225ec06a8
+                       <width>609</width>
+                       <height>379</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_9">
@@ -1370,13 +1365,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-<<<<<<< HEAD
                        <width>960</width>
-                       <height>566</height>
-=======
-                       <width>958</width>
-                       <height>698</height>
->>>>>>> f9115acf35a7a5e44e188489a63084a225ec06a8
+                       <height>678</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_37">
@@ -1789,7 +1779,6 @@
                                 <string>°S Final</string>
                                </property>
                               </column>
-<<<<<<< HEAD
                               <item>
                                <property name="text">
                                 <string>Programa 0</string>
@@ -1825,7 +1814,6 @@
                                 <string>40</string>
                                </property>
                               </item>
-=======
                              </widget>
                             </item>
                             <item row="1" column="0" colspan="2">
@@ -1853,7 +1841,6 @@
                                 </widget>
                                </item>
                               </layout>
->>>>>>> f9115acf35a7a5e44e188489a63084a225ec06a8
                              </widget>
                             </item>
                            </layout>
@@ -1896,13 +1883,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-<<<<<<< HEAD
-                       <width>960</width>
-                       <height>566</height>
-=======
-                       <width>958</width>
-                       <height>698</height>
->>>>>>> f9115acf35a7a5e44e188489a63084a225ec06a8
+                       <width>680</width>
+                       <height>527</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_10">
@@ -2676,13 +2658,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-<<<<<<< HEAD
-                       <width>960</width>
-                       <height>566</height>
-=======
-                       <width>958</width>
-                       <height>698</height>
->>>>>>> f9115acf35a7a5e44e188489a63084a225ec06a8
+                       <width>640</width>
+                       <height>647</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_41">
@@ -3335,8 +3312,6 @@
                              <string>°P Final</string>
                             </property>
                            </column>
-<<<<<<< HEAD
-=======
                            <column>
                             <property name="text">
                              <string>°S Inicial</string>
@@ -3357,7 +3332,6 @@
                              <string>Sesion 1</string>
                             </property>
                            </item>
->>>>>>> f9115acf35a7a5e44e188489a63084a225ec06a8
                           </widget>
                          </item>
                          <item row="5" column="3" alignment="Qt::AlignHCenter">
@@ -3433,15 +3407,9 @@
                      <property name="geometry">
                       <rect>
                        <x>0</x>
-<<<<<<< HEAD
-                       <y>-285</y>
-                       <width>946</width>
-                       <height>851</height>
-=======
                        <y>0</y>
-                       <width>941</width>
-                       <height>747</height>
->>>>>>> f9115acf35a7a5e44e188489a63084a225ec06a8
+                       <width>946</width>
+                       <height>900</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_40">
@@ -3949,7 +3917,7 @@
                              </widget>
                             </item>
                             <item row="0" column="1">
-                             <widget class="QwtCounter" name="Counter_3" native="true">
+                             <widget class="QwtCounter" name="Counter_3">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                                 <horstretch>0</horstretch>
@@ -3962,10 +3930,10 @@
                                 <height>16777215</height>
                                </size>
                               </property>
-                              <property name="maximum" stdset="0">
+                              <property name="maximum">
                                <double>60.000000000000000</double>
                               </property>
-                              <property name="singleStep" stdset="0">
+                              <property name="singleStep">
                                <double>1.000000000000000</double>
                               </property>
                              </widget>
@@ -4338,7 +4306,7 @@
                              </widget>
                             </item>
                             <item row="0" column="1" alignment="Qt::AlignHCenter">
-                             <widget class="QwtCounter" name="Counter_4" native="true">
+                             <widget class="QwtCounter" name="Counter_4">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                                 <horstretch>0</horstretch>
@@ -4351,13 +4319,13 @@
                                 <height>16777215</height>
                                </size>
                               </property>
-                              <property name="maximum" stdset="0">
+                              <property name="maximum">
                                <double>60.000000000000000</double>
                               </property>
-                              <property name="singleStep" stdset="0">
+                              <property name="singleStep">
                                <double>1.000000000000000</double>
                               </property>
-                              <property name="numButtons" stdset="0">
+                              <property name="numButtons">
                                <number>1</number>
                               </property>
                              </widget>
@@ -4999,8 +4967,8 @@
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>976</width>
-                   <height>716</height>
+                   <width>918</width>
+                   <height>388</height>
                   </rect>
                  </property>
                  <property name="sizePolicy">
@@ -5977,7 +5945,7 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>50</width>
+     <width>106</width>
      <height>145</height>
     </size>
    </property>
@@ -6062,8 +6030,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1440</width>
-     <height>21</height>
+     <width>1366</width>
+     <height>22</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -6077,8 +6045,8 @@
      <rect>
       <x>0</x>
       <y>42</y>
-      <width>150</width>
-      <height>191</height>
+      <width>178</width>
+      <height>202</height>
      </rect>
     </property>
     <property name="sizePolicy">
