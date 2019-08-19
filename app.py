@@ -2257,6 +2257,9 @@ class Ui_MainWindow(object):
 
         # Inicio de codigo
 
+        self.onlyInt = QtGui.QIntValidator()
+        self.plainTextEdit.appendPlainText("Iniciando comunicación")
+
         self.dateEdit.setDateTime(QtCore.QDateTime.currentDateTime())
         self.dateEdit_2.setDateTime(QtCore.QDateTime.currentDateTime())
         self.dateEdit_3.setDateTime(QtCore.QDateTime.currentDateTime())
@@ -2274,8 +2277,6 @@ class Ui_MainWindow(object):
         self.actionNuevo_Programa_2.triggered.connect(self.nuevo_programa)
         self.actionDetalles.triggered.connect(self.detalles)
         self.actionSesion.triggered.connect(self.sesion)
-
-        self.onlyInt = QtGui.QIntValidator()
 
         # lineas de texto limitadas a enteros
         self.lineEdit_8.setValidator(self.onlyInt)
@@ -2299,11 +2300,10 @@ class Ui_MainWindow(object):
         self.lineEdit_29.setValidator(self.onlyInt)
         self.lineEdit_30.setValidator(self.onlyInt)
 
-        # Line Edit editing Finished
-        self.lineEdit
+        # Señales desde widgets
+        self.lineEdit_5.editingFinished.connect(self.buscar_perfiles)
 
         self.comboBox.currentIndexChanged.connect(self.validator)
-        self.plainTextEdit.appendPlainText("Iniciando comunicación")
 
         # PushButton connect
         self.pushButton.clicked.connect(self.initial_calibration)
@@ -2318,10 +2318,9 @@ class Ui_MainWindow(object):
         self.pushButton_12.clicked.connect(self.buscar)
         self.pushButton_13.clicked.connect(self.nuevo_paciente)
         self.pushButton_32.clicked.connect(self.buscar_perfiles)
+        self.pushButton_30.clicked.connect(self.ir_a_perfil)
         # self.Counter.valueChange(self.vel_control)
-
-
-        self.pushButton_30.clicked.connect(self.selectedItems)
+        self.list_all()
 
 
 
@@ -2340,11 +2339,6 @@ class Ui_MainWindow(object):
         self.treeWidget_2.headerItem().setText(4, _translate("MainWindow", "Fecha ingreso"))
         __sortingEnabled = self.treeWidget_2.isSortingEnabled()
         self.treeWidget_2.setSortingEnabled(False)
-        self.treeWidget_2.topLevelItem(0).setText(0, _translate("MainWindow", "DIEGO"))
-        self.treeWidget_2.topLevelItem(0).setText(1, _translate("MainWindow", "RUEDA"))
-        self.treeWidget_2.topLevelItem(0).setText(2, _translate("MainWindow", "cédula"))
-        self.treeWidget_2.topLevelItem(0).setText(3, _translate("MainWindow", "1098781804"))
-        self.treeWidget_2.topLevelItem(0).setText(4, _translate("MainWindow", "0210/2019"))
         self.treeWidget_2.setSortingEnabled(__sortingEnabled)
         self.comboBox.setItemText(0, _translate("MainWindow", "Nombre"))
         self.comboBox.setItemText(1, _translate("MainWindow", "Apellido"))
@@ -2602,9 +2596,18 @@ class Ui_MainWindow(object):
             MainWindow.onlyStr = QtGui.QRegExpValidator()
             MainWindow.lineEdit_5.setValidator(MainWindow.onlyStr)
 
-    def selectedItems(MainWindow):
-        items = MainWindow.treeWidget_2.selectedItems()
-        print(items[0])
+    def ir_a_perfil(MainWindow):
+        item = MainWindow.treeWidget_2.selectedItems()[0]
+        index = MainWindow.treeWidget_2.indexFromItem(item).row()
+        data = MainWindow.treeWidget_2.topLevelItem(index).text(3)
+        MainWindow.lineEdit_5.clear()
+        MainWindow.treeWidget_2.clear()
+        MainWindow.stackedWidget.setCurrentIndex(2)
+
+    def list_all(MainWindow):
+        Paciente.list_all(MainWindow)
+
+
 
 
 if __name__ == "__main__":

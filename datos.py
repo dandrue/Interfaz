@@ -32,6 +32,11 @@ class Paciente(object):
             con.commit()
             con.close()
             MainWindow.plainTextEdit.appendPlainText("Perfil del paciente creado")
+            MainWindow.stackedWidget.setCurrentIndex(0)
+            MainWindow.lineEdit_5.clear()
+            MainWindow.lineEdit_7.clear()
+            MainWindow.lineEdit_8.clear()
+            MainWindow.plainTextEdit_2.clear()
 
         except sqlite3.IntegrityError:
             MainWindow.plainTextEdit.appendPlainText("Ya existe un perfil con este id")
@@ -59,6 +64,35 @@ class Paciente(object):
                 cursor.execute('SELECT * FROM pacientes WHERE Id=?', (value,))
                 rows = cursor.fetchall()
 
+            con.commit()
+            con.close()
+
+            MainWindow.treeWidget_2.clear()
+            MainWindow.treeWidget_2.setEnabled(True)
+            if range(len(rows)) == range(0, 0):
+                MainWindow.treeWidget_2.setDisabled(True)
+                MainWindow.plainTextEdit.appendPlainText("Ningún perfil encontrado")
+                print("Ningún perfil encontrado")
+
+            for i in range(len(rows)):
+                item = "item_" + str(i)
+                item = QtWidgets.QTreeWidgetItem(MainWindow.treeWidget_2)
+            for i in range(len(rows)):
+                for j in range(5):
+                    MainWindow.treeWidget_2.topLevelItem(i).setText(j, str(rows[i][j]))
+            MainWindow.plainTextEdit.appendPlainText("Pacientes listados")
+            print("Pacientes listados")
+
+        except Error:
+            MainWindow.plainTextEdit.appendPlainText("Error buscando pacientes")
+            print("Error buscando pacientes")
+
+    def list_all(MainWindow):
+        try:
+            con = sqlite3.connect('pacientes')
+            cursor = con.cursor()
+            cursor.execute("SELECT * FROM pacientes ORDER BY Apellido ASC")
+            rows = cursor.fetchall()
             con.commit()
             con.close()
 

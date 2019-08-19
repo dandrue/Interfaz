@@ -573,7 +573,7 @@
                  </sizepolicy>
                 </property>
                 <property name="currentIndex">
-                 <number>5</number>
+                 <number>1</number>
                 </property>
                 <widget class="QWidget" name="page">
                  <layout class="QGridLayout" name="gridLayout_14">
@@ -590,8 +590,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>642</width>
-                       <height>407</height>
+                       <width>958</width>
+                       <height>574</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_6">
@@ -736,6 +736,9 @@
                             <bool>false</bool>
                            </property>
                            <property name="wordWrap">
+                            <bool>false</bool>
+                           </property>
+                           <property name="headerHidden">
                             <bool>false</bool>
                            </property>
                            <property name="columnCount">
@@ -931,8 +934,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>609</width>
-                       <height>379</height>
+                       <width>958</width>
+                       <height>574</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_9">
@@ -1122,6 +1125,9 @@
                              <width>150</width>
                              <height>16777215</height>
                             </size>
+                           </property>
+                           <property name="alignment">
+                            <set>Qt::AlignCenter</set>
                            </property>
                           </widget>
                          </item>
@@ -1365,8 +1371,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>960</width>
-                       <height>678</height>
+                       <width>956</width>
+                       <height>629</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_37">
@@ -1883,8 +1889,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>680</width>
-                       <height>527</height>
+                       <width>958</width>
+                       <height>574</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_10">
@@ -2658,8 +2664,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>640</width>
-                       <height>647</height>
+                       <width>941</width>
+                       <height>578</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_41">
@@ -3408,8 +3414,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>946</width>
-                       <height>900</height>
+                       <width>941</width>
+                       <height>747</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_40">
@@ -3917,7 +3923,7 @@
                              </widget>
                             </item>
                             <item row="0" column="1">
-                             <widget class="QwtCounter" name="Counter_3">
+                             <widget class="QwtCounter" name="Counter_3" native="true">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                                 <horstretch>0</horstretch>
@@ -3930,10 +3936,10 @@
                                 <height>16777215</height>
                                </size>
                               </property>
-                              <property name="maximum">
+                              <property name="maximum" stdset="0">
                                <double>60.000000000000000</double>
                               </property>
-                              <property name="singleStep">
+                              <property name="singleStep" stdset="0">
                                <double>1.000000000000000</double>
                               </property>
                              </widget>
@@ -4306,7 +4312,7 @@
                              </widget>
                             </item>
                             <item row="0" column="1" alignment="Qt::AlignHCenter">
-                             <widget class="QwtCounter" name="Counter_4">
+                             <widget class="QwtCounter" name="Counter_4" native="true">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                                 <horstretch>0</horstretch>
@@ -4319,13 +4325,13 @@
                                 <height>16777215</height>
                                </size>
                               </property>
-                              <property name="maximum">
+                              <property name="maximum" stdset="0">
                                <double>60.000000000000000</double>
                               </property>
-                              <property name="singleStep">
+                              <property name="singleStep" stdset="0">
                                <double>1.000000000000000</double>
                               </property>
-                              <property name="numButtons">
+                              <property name="numButtons" stdset="0">
                                <number>1</number>
                               </property>
                              </widget>
@@ -4967,8 +4973,8 @@
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>918</width>
-                   <height>388</height>
+                   <width>976</width>
+                   <height>592</height>
                   </rect>
                  </property>
                  <property name="sizePolicy">
@@ -5945,7 +5951,7 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>106</width>
+     <width>107</width>
      <height>145</height>
     </size>
    </property>
@@ -6031,7 +6037,7 @@
      <x>0</x>
      <y>0</y>
      <width>1366</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -6043,10 +6049,10 @@
    <widget class="QMenu" name="menuPacientes">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>42</y>
-      <width>178</width>
-      <height>202</height>
+      <x>13</x>
+      <y>70</y>
+      <width>150</width>
+      <height>191</height>
      </rect>
     </property>
     <property name="sizePolicy">
