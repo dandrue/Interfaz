@@ -2602,9 +2602,6 @@ class Ui_MainWindow(object):
     def list_all(MainWindow):
         Paciente.list_all(MainWindow)
 
-
-
-
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
