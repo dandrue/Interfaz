@@ -39,7 +39,7 @@ class Paciente(object):
             MainWindow.lineEdit_7.clear()
             MainWindow.lineEdit_8.clear()
             MainWindow.plainTextEdit_2.clear()
-            self.list_all()
+            MainWindow.list_all()
 
         except sqlite3.IntegrityError:
             MainWindow.plainTextEdit.appendPlainText("Ya existe un perfil con este id")
