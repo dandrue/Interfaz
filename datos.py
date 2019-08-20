@@ -34,6 +34,7 @@ class Paciente(object):
             MainWindow.plainTextEdit.appendPlainText("Perfil del paciente creado")
             MainWindow.stackedWidget.setCurrentIndex(0)
             MainWindow.lineEdit_5.clear()
+            MainWindow.lineEdit_6.clear()
             MainWindow.lineEdit_7.clear()
             MainWindow.lineEdit_8.clear()
             MainWindow.plainTextEdit_2.clear()
@@ -86,6 +87,41 @@ class Paciente(object):
         except Error:
             MainWindow.plainTextEdit.appendPlainText("Error buscando pacientes")
             print("Error buscando pacientes")
+
+
+    def ir_a_perfil(MainWindow):
+        item = MainWindow.treeWidget_2.selectedItems()[0]
+        index = MainWindow.treeWidget_2.indexFromItem(item).row()
+        data = MainWindow.treeWidget_2.topLevelItem(index).text(3)
+
+        con = sqlite3.connect('pacientes')
+        cursor = con.cursor()
+        cursor.execute('SELECT * FROM pacientes WHERE Id = ?', (data,))
+        row = cursor.fetchone()
+        nombre = row[0]
+        apellido = row[1]
+        tipoid = row[2]
+        id = data
+        fechaingreso = row[4]
+        comentarios = row[5]
+        date = datetime.strptime(fechaingreso, '%d/%m/%y')
+        MainWindow.lineEdit_11.setText(nombre)
+        MainWindow.lineEdit_10.setText(apellido)
+        MainWindow.lineEdit_9.setText(id)
+        MainWindow.dateEdit_2.setDateTime(QtCore.QDateTime(date))
+
+        if tipoid == 'Cédula':
+            MainWindow.comboBox_3.setCurrentIndex(0)
+
+        elif tipoid == 'Tarjeta de identidad':
+            MainWindow.comboBox_3.setCurrentIndex(1)
+        elif tipoid == 'Pasaporte':
+            MainWindow.comboBox_3.setCurrentIndex(2)
+
+        MainWindow.plainTextEdit_3.setPlainText(comentarios)
+        MainWindow.lineEdit_5.clear()
+        MainWindow.treeWidget_2.clear()
+        MainWindow.stackedWidget.setCurrentIndex(2)
 
     def list_all(MainWindow):
         try:

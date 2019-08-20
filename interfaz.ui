@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>1366</width>
-    <height>713</height>
+    <height>648</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -573,7 +573,7 @@
                  </sizepolicy>
                 </property>
                 <property name="currentIndex">
-                 <number>1</number>
+                 <number>0</number>
                 </property>
                 <widget class="QWidget" name="page">
                  <layout class="QGridLayout" name="gridLayout_14">
@@ -591,7 +591,7 @@
                        <x>0</x>
                        <y>0</y>
                        <width>958</width>
-                       <height>574</height>
+                       <height>509</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_6">
@@ -699,6 +699,9 @@
                            <property name="tabKeyNavigation">
                             <bool>true</bool>
                            </property>
+                           <property name="alternatingRowColors">
+                            <bool>false</bool>
+                           </property>
                            <property name="selectionMode">
                             <enum>QAbstractItemView::SingleSelection</enum>
                            </property>
@@ -721,7 +724,7 @@
                             <bool>true</bool>
                            </property>
                            <property name="uniformRowHeights">
-                            <bool>false</bool>
+                            <bool>true</bool>
                            </property>
                            <property name="itemsExpandable">
                             <bool>true</bool>
@@ -733,7 +736,7 @@
                             <bool>false</bool>
                            </property>
                            <property name="allColumnsShowFocus">
-                            <bool>false</bool>
+                            <bool>true</bool>
                            </property>
                            <property name="wordWrap">
                             <bool>false</bool>
@@ -745,7 +748,7 @@
                             <number>5</number>
                            </property>
                            <attribute name="headerVisible">
-                            <bool>false</bool>
+                            <bool>true</bool>
                            </attribute>
                            <attribute name="headerCascadingSectionResizes">
                             <bool>false</bool>
@@ -763,25 +766,40 @@
                             <property name="text">
                              <string>Nombre</string>
                             </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
+                            </property>
                            </column>
                            <column>
                             <property name="text">
                              <string>Apellido</string>
+                            </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
                             </property>
                            </column>
                            <column>
                             <property name="text">
                              <string>Tipo Id</string>
                             </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
+                            </property>
                            </column>
                            <column>
                             <property name="text">
-                             <string>id</string>
+                             <string>Id</string>
+                            </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
                             </property>
                            </column>
                            <column>
                             <property name="text">
                              <string>Fecha ingreso</string>
+                            </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
                             </property>
                            </column>
                           </widget>
@@ -935,7 +953,7 @@
                        <x>0</x>
                        <y>0</y>
                        <width>958</width>
-                       <height>574</height>
+                       <height>509</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_9">
@@ -1095,13 +1113,6 @@
                            </property>
                           </widget>
                          </item>
-                         <item row="10" column="5" alignment="Qt::AlignHCenter">
-                          <widget class="QPushButton" name="pushButton_31">
-                           <property name="text">
-                            <string>Ir a perfil</string>
-                           </property>
-                          </widget>
-                         </item>
                          <item row="8" column="0" colspan="8">
                           <widget class="QPlainTextEdit" name="plainTextEdit_2">
                            <property name="maximumSize">
@@ -1160,25 +1171,6 @@
                            </property>
                            <property name="text">
                             <string>Apellido</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="10" column="1" colspan="2" alignment="Qt::AlignHCenter">
-                          <widget class="QPushButton" name="pushButton_12">
-                           <property name="sizePolicy">
-                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                             <horstretch>0</horstretch>
-                             <verstretch>0</verstretch>
-                            </sizepolicy>
-                           </property>
-                           <property name="maximumSize">
-                            <size>
-                             <width>75</width>
-                             <height>16777215</height>
-                            </size>
-                           </property>
-                           <property name="text">
-                            <string>Eliminar</string>
                            </property>
                           </widget>
                          </item>
@@ -1372,7 +1364,7 @@
                        <x>0</x>
                        <y>0</y>
                        <width>956</width>
-                       <height>629</height>
+                       <height>647</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_37">
@@ -1424,8 +1416,8 @@
                             <string>Información del paciente</string>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_18">
-                            <item row="4" column="0">
-                             <spacer name="horizontalSpacer_35">
+                            <item row="4" column="7">
+                             <spacer name="horizontalSpacer_37">
                               <property name="orientation">
                                <enum>Qt::Horizontal</enum>
                               </property>
@@ -1437,8 +1429,8 @@
                               </property>
                              </spacer>
                             </item>
-                            <item row="4" column="6">
-                             <spacer name="horizontalSpacer_37">
+                            <item row="4" column="0">
+                             <spacer name="horizontalSpacer_35">
                               <property name="orientation">
                                <enum>Qt::Horizontal</enum>
                               </property>
@@ -1488,6 +1480,25 @@
                               </property>
                              </widget>
                             </item>
+                            <item row="4" column="1" alignment="Qt::AlignRight">
+                             <widget class="QLabel" name="label_22">
+                              <property name="sizePolicy">
+                               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                               </sizepolicy>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>150</width>
+                                <height>16777215</height>
+                               </size>
+                              </property>
+                              <property name="text">
+                               <string>Nombre</string>
+                              </property>
+                             </widget>
+                            </item>
                             <item row="5" column="2" alignment="Qt::AlignHCenter">
                              <widget class="QComboBox" name="comboBox_3">
                               <property name="sizePolicy">
@@ -1517,25 +1528,6 @@
                                 <string>Pasaporte</string>
                                </property>
                               </item>
-                             </widget>
-                            </item>
-                            <item row="4" column="1" alignment="Qt::AlignRight">
-                             <widget class="QLabel" name="label_22">
-                              <property name="sizePolicy">
-                               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                                <horstretch>0</horstretch>
-                                <verstretch>0</verstretch>
-                               </sizepolicy>
-                              </property>
-                              <property name="maximumSize">
-                               <size>
-                                <width>150</width>
-                                <height>16777215</height>
-                               </size>
-                              </property>
-                              <property name="text">
-                               <string>Nombre</string>
-                              </property>
                              </widget>
                             </item>
                             <item row="5" column="1" alignment="Qt::AlignRight">
@@ -1573,6 +1565,16 @@
                               </property>
                               <property name="text">
                                <string>Id</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item row="9" column="0" colspan="8">
+                             <widget class="QPlainTextEdit" name="plainTextEdit_3">
+                              <property name="maximumSize">
+                               <size>
+                                <width>16777215</width>
+                                <height>100</height>
+                               </size>
                               </property>
                              </widget>
                             </item>
@@ -1614,13 +1616,6 @@
                               </property>
                              </widget>
                             </item>
-                            <item row="8" column="0" colspan="7">
-                             <widget class="QLabel" name="label_20">
-                              <property name="text">
-                               <string>Comentarios</string>
-                              </property>
-                             </widget>
-                            </item>
                             <item row="4" column="3">
                              <spacer name="horizontalSpacer_36">
                               <property name="orientation">
@@ -1634,20 +1629,10 @@
                               </property>
                              </spacer>
                             </item>
-                            <item row="9" column="0" colspan="7">
-                             <widget class="QPlainTextEdit" name="plainTextEdit_3">
-                              <property name="maximumSize">
-                               <size>
-                                <width>16777215</width>
-                                <height>100</height>
-                               </size>
-                              </property>
-                             </widget>
-                            </item>
-                            <item row="6" column="0" colspan="2" alignment="Qt::AlignRight">
-                             <widget class="QLabel" name="label_16">
+                            <item row="8" column="0" colspan="8">
+                             <widget class="QLabel" name="label_20">
                               <property name="text">
-                               <string>Fecha de Ingreso</string>
+                               <string>Comentarios</string>
                               </property>
                              </widget>
                             </item>
@@ -1678,30 +1663,62 @@
                               </property>
                              </widget>
                             </item>
-                            <item row="10" column="6" alignment="Qt::AlignHCenter">
-                             <widget class="QPushButton" name="pushButton_4">
-                              <property name="maximumSize">
-                               <size>
-                                <width>75</width>
-                                <height>16777215</height>
-                               </size>
-                              </property>
+                            <item row="6" column="0" colspan="2" alignment="Qt::AlignRight">
+                             <widget class="QLabel" name="label_16">
                               <property name="text">
-                               <string>Modificar</string>
+                               <string>Fecha de Ingreso</string>
                               </property>
                              </widget>
                             </item>
-                            <item row="10" column="5" alignment="Qt::AlignHCenter">
-                             <widget class="QPushButton" name="pushButton_5">
-                              <property name="maximumSize">
-                               <size>
-                                <width>75</width>
-                                <height>16777215</height>
-                               </size>
-                              </property>
-                              <property name="text">
-                               <string>Volver</string>
-                              </property>
+                            <item row="10" column="1" colspan="5">
+                             <widget class="QWidget" name="widget_7" native="true">
+                              <layout class="QGridLayout" name="gridLayout_44">
+                               <item row="0" column="1">
+                                <widget class="QPushButton" name="pushButton_12">
+                                 <property name="sizePolicy">
+                                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                                   <horstretch>0</horstretch>
+                                   <verstretch>0</verstretch>
+                                  </sizepolicy>
+                                 </property>
+                                 <property name="maximumSize">
+                                  <size>
+                                   <width>75</width>
+                                   <height>16777215</height>
+                                  </size>
+                                 </property>
+                                 <property name="text">
+                                  <string>Eliminar</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="0" column="0">
+                                <widget class="QPushButton" name="pushButton_5">
+                                 <property name="maximumSize">
+                                  <size>
+                                   <width>75</width>
+                                   <height>16777215</height>
+                                  </size>
+                                 </property>
+                                 <property name="text">
+                                  <string>Volver</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item row="0" column="2">
+                                <widget class="QPushButton" name="pushButton_4">
+                                 <property name="maximumSize">
+                                  <size>
+                                   <width>75</width>
+                                   <height>16777215</height>
+                                  </size>
+                                 </property>
+                                 <property name="text">
+                                  <string>Modificar</string>
+                                 </property>
+                                </widget>
+                               </item>
+                              </layout>
                              </widget>
                             </item>
                            </layout>
@@ -1734,90 +1751,156 @@
                                <property name="text">
                                 <string>Nombre</string>
                                </property>
+                               <property name="textAlignment">
+                                <set>AlignCenter</set>
+                               </property>
                               </column>
                               <column>
                                <property name="text">
                                 <string>Status</string>
+                               </property>
+                               <property name="textAlignment">
+                                <set>AlignCenter</set>
                                </property>
                               </column>
                               <column>
                                <property name="text">
                                 <string>Inicio</string>
                                </property>
+                               <property name="textAlignment">
+                                <set>AlignCenter</set>
+                               </property>
                               </column>
                               <column>
                                <property name="text">
                                 <string>Fin</string>
+                               </property>
+                               <property name="textAlignment">
+                                <set>AlignCenter</set>
                                </property>
                               </column>
                               <column>
                                <property name="text">
                                 <string>N° Sesiones</string>
                                </property>
+                               <property name="textAlignment">
+                                <set>AlignCenter</set>
+                               </property>
                               </column>
                               <column>
                                <property name="text">
                                 <string>°P Inicial</string>
+                               </property>
+                               <property name="textAlignment">
+                                <set>AlignCenter</set>
                                </property>
                               </column>
                               <column>
                                <property name="text">
                                 <string>°P Actual</string>
                                </property>
+                               <property name="textAlignment">
+                                <set>AlignCenter</set>
+                               </property>
                               </column>
                               <column>
                                <property name="text">
                                 <string>°P Final</string>
+                               </property>
+                               <property name="textAlignment">
+                                <set>AlignCenter</set>
                                </property>
                               </column>
                               <column>
                                <property name="text">
                                 <string>°S Inicial</string>
                                </property>
+                               <property name="textAlignment">
+                                <set>AlignCenter</set>
+                               </property>
                               </column>
                               <column>
                                <property name="text">
                                 <string>°S Actual</string>
+                               </property>
+                               <property name="textAlignment">
+                                <set>AlignCenter</set>
                                </property>
                               </column>
                               <column>
                                <property name="text">
                                 <string>°S Final</string>
                                </property>
+                               <property name="textAlignment">
+                                <set>AlignCenter</set>
+                               </property>
                               </column>
                               <item>
                                <property name="text">
                                 <string>Programa 0</string>
                                </property>
+                               <property name="textAlignment">
+                                <set>AlignCenter</set>
+                               </property>
                                <property name="text">
                                 <string>Activo</string>
+                               </property>
+                               <property name="textAlignment">
+                                <set>AlignCenter</set>
                                </property>
                                <property name="text">
                                 <string>02/09/19</string>
                                </property>
+                               <property name="textAlignment">
+                                <set>AlignCenter</set>
+                               </property>
                                <property name="text">
                                 <string>10/12/20</string>
+                               </property>
+                               <property name="textAlignment">
+                                <set>AlignCenter</set>
                                </property>
                                <property name="text">
                                 <string>4</string>
                                </property>
-                               <property name="text">
-                                <string>60</string>
+                               <property name="textAlignment">
+                                <set>AlignCenter</set>
                                </property>
                                <property name="text">
                                 <string>60</string>
                                </property>
+                               <property name="textAlignment">
+                                <set>AlignCenter</set>
+                               </property>
                                <property name="text">
                                 <string>60</string>
                                </property>
+                               <property name="textAlignment">
+                                <set>AlignCenter</set>
+                               </property>
                                <property name="text">
-                                <string>40</string>
+                                <string>60</string>
+                               </property>
+                               <property name="textAlignment">
+                                <set>AlignCenter</set>
                                </property>
                                <property name="text">
                                 <string>40</string>
                                </property>
+                               <property name="textAlignment">
+                                <set>AlignCenter</set>
+                               </property>
                                <property name="text">
                                 <string>40</string>
+                               </property>
+                               <property name="textAlignment">
+                                <set>AlignCenter</set>
+                               </property>
+                               <property name="text">
+                                <string>40</string>
+                               </property>
+                               <property name="textAlignment">
+                                <set>AlignCenter</set>
                                </property>
                               </item>
                              </widget>
@@ -1890,7 +1973,7 @@
                        <x>0</x>
                        <y>0</y>
                        <width>958</width>
-                       <height>574</height>
+                       <height>509</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_10">
@@ -3287,50 +3370,80 @@
                             <property name="text">
                              <string>Nombre</string>
                             </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
+                            </property>
                            </column>
                            <column>
                             <property name="text">
                              <string>Inicio</string>
+                            </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
                             </property>
                            </column>
                            <column>
                             <property name="text">
                              <string>Fin</string>
                             </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
+                            </property>
                            </column>
                            <column>
                             <property name="text">
                              <string>N° Repeticiones</string>
+                            </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
                             </property>
                            </column>
                            <column>
                             <property name="text">
                              <string>°P Inicial</string>
                             </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
+                            </property>
                            </column>
                            <column>
                             <property name="text">
                              <string>°P Actual</string>
+                            </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
                             </property>
                            </column>
                            <column>
                             <property name="text">
                              <string>°P Final</string>
                             </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
+                            </property>
                            </column>
                            <column>
                             <property name="text">
                              <string>°S Inicial</string>
+                            </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
                             </property>
                            </column>
                            <column>
                             <property name="text">
                              <string>°S Actual</string>
                             </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
+                            </property>
                            </column>
                            <column>
                             <property name="text">
                              <string>°S Final</string>
+                            </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
                             </property>
                            </column>
                            <item>
@@ -3413,7 +3526,7 @@
                      <property name="geometry">
                       <rect>
                        <x>0</x>
-                       <y>0</y>
+                       <y>-238</y>
                        <width>941</width>
                        <height>747</height>
                       </rect>
@@ -4974,7 +5087,7 @@
                    <x>0</x>
                    <y>0</y>
                    <width>976</width>
-                   <height>592</height>
+                   <height>527</height>
                   </rect>
                  </property>
                  <property name="sizePolicy">
@@ -5966,7 +6079,7 @@
    </property>
    <property name="windowIcon">
     <iconset>
-     <normaloff>icons/prosthetic.png</normaloff>icons/prosthetic.png</iconset>
+     <normaloff>../../../.designer/backup/icons/prosthetic.png</normaloff>../../../.designer/backup/icons/prosthetic.png</iconset>
    </property>
    <property name="allowedAreas">
     <set>Qt::BottomDockWidgetArea|Qt::RightDockWidgetArea</set>

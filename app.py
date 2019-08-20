@@ -2261,7 +2261,7 @@ class Ui_MainWindow(object):
         self.plainTextEdit.appendPlainText("Iniciando comunicación")
 
         self.dateEdit.setDateTime(QtCore.QDateTime.currentDateTime())
-        self.dateEdit_2.setDateTime(QtCore.QDateTime.currentDateTime())
+        # self.dateEdit_2.setDateTime(QtCore.QDateTime.currentDateTime())
         self.dateEdit_3.setDateTime(QtCore.QDateTime.currentDateTime())
         self.dateEdit_4.setDateTime(QtCore.QDateTime.currentDateTime())
         self.dateEdit_5.setDateTime(QtCore.QDateTime.currentDateTime())
@@ -2597,12 +2597,7 @@ class Ui_MainWindow(object):
             MainWindow.lineEdit_5.setValidator(MainWindow.onlyStr)
 
     def ir_a_perfil(MainWindow):
-        item = MainWindow.treeWidget_2.selectedItems()[0]
-        index = MainWindow.treeWidget_2.indexFromItem(item).row()
-        data = MainWindow.treeWidget_2.topLevelItem(index).text(3)
-        MainWindow.lineEdit_5.clear()
-        MainWindow.treeWidget_2.clear()
-        MainWindow.stackedWidget.setCurrentIndex(2)
+        Paciente.ir_a_perfil(MainWindow)
 
     def list_all(MainWindow):
         Paciente.list_all(MainWindow)
