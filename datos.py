@@ -8,6 +8,7 @@ from sqlite3 import *
 from sqlite3 import Error
 from datetime import date, datetime
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QMessageBox
 
 class Paciente(object):
     def nuevo_paciente(MainWindow):
@@ -38,6 +39,7 @@ class Paciente(object):
             MainWindow.lineEdit_7.clear()
             MainWindow.lineEdit_8.clear()
             MainWindow.plainTextEdit_2.clear()
+            MainWindow.list_all()
 
         except sqlite3.IntegrityError:
             MainWindow.plainTextEdit.appendPlainText("Ya existe un perfil con este id")
@@ -151,3 +153,37 @@ class Paciente(object):
         except Error:
             MainWindow.plainTextEdit.appendPlainText("Error buscando pacientes")
             print("Error buscando pacientes")
+
+    def eliminar_paciente(MainWindow):
+        print('Eliminar paciente')
+        msgBox = QMessageBox()
+        msgBox.setIcon(QMessageBox.Warning)
+        msgBox.setText("Esta seguro de eliminar este registro")
+        msgBox.setWindowTitle("Eliminar regsitro del paciente")
+        msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+
+        returnValue = msgBox.exec()
+
+        if returnValue == QMessageBox.Yes:
+            try:
+                con = sqlite3.connect('pacientes')
+                cursor = con.cursor()
+                value = MainWindow.lineEdit_9.text()
+                cursor.execute('DELETE FROM pacientes WHERE Id=?', (value,))
+                con.commit()
+                con.close()
+                MainWindow.list_all()
+                MainWindow.stackedWidget.setCurrentIndex(0)
+                MainWindow.lineEdit_9.clear()
+                MainWindow.lineEdit_10.clear()
+                MainWindow.lineEdit_11.clear()
+                MainWindow.plainTextEdit_3.clear()
+                MainWindow.treeWidget.clear()
+                MainWindow.plainTextEdit.appendPlainText("Se ha eliminado la entrada satisfactoriamente")
+                print("Se ha eliminado la entrada satisfactoriamente")
+            except Error:
+                MainWindow.plainTextEdit.appendPlainText("Error eliminando entrada")
+                print("Error eliminando entrada")
+
+        elif returnValue == QMessageBox.No:
+            pass

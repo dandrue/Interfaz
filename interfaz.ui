@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1366</width>
-    <height>648</height>
+    <width>1364</width>
+    <height>713</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -557,7 +557,7 @@
              </palette>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="tab">
              <attribute name="title">
@@ -590,8 +590,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>958</width>
-                       <height>509</height>
+                       <width>960</width>
+                       <height>566</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_6">
@@ -742,13 +742,13 @@
                             <bool>false</bool>
                            </property>
                            <property name="headerHidden">
-                            <bool>false</bool>
+                            <bool>true</bool>
                            </property>
                            <property name="columnCount">
                             <number>5</number>
                            </property>
                            <attribute name="headerVisible">
-                            <bool>true</bool>
+                            <bool>false</bool>
                            </attribute>
                            <attribute name="headerCascadingSectionResizes">
                             <bool>false</bool>
@@ -952,8 +952,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>958</width>
-                       <height>509</height>
+                       <width>960</width>
+                       <height>566</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_9">
@@ -1363,8 +1363,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>956</width>
-                       <height>647</height>
+                       <width>960</width>
+                       <height>696</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_37">
@@ -1972,8 +1972,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>958</width>
-                       <height>509</height>
+                       <width>960</width>
+                       <height>566</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_10">
@@ -2747,8 +2747,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>941</width>
-                       <height>578</height>
+                       <width>946</width>
+                       <height>647</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_41">
@@ -3526,9 +3526,9 @@
                      <property name="geometry">
                       <rect>
                        <x>0</x>
-                       <y>-238</y>
-                       <width>941</width>
-                       <height>747</height>
+                       <y>-334</y>
+                       <width>946</width>
+                       <height>900</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_40">
@@ -4036,7 +4036,7 @@
                              </widget>
                             </item>
                             <item row="0" column="1">
-                             <widget class="QwtCounter" name="Counter_3" native="true">
+                             <widget class="QwtCounter" name="Counter_3">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                                 <horstretch>0</horstretch>
@@ -4049,10 +4049,10 @@
                                 <height>16777215</height>
                                </size>
                               </property>
-                              <property name="maximum" stdset="0">
+                              <property name="maximum">
                                <double>60.000000000000000</double>
                               </property>
-                              <property name="singleStep" stdset="0">
+                              <property name="singleStep">
                                <double>1.000000000000000</double>
                               </property>
                              </widget>
@@ -4425,7 +4425,7 @@
                              </widget>
                             </item>
                             <item row="0" column="1" alignment="Qt::AlignHCenter">
-                             <widget class="QwtCounter" name="Counter_4" native="true">
+                             <widget class="QwtCounter" name="Counter_4">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                                 <horstretch>0</horstretch>
@@ -4438,13 +4438,13 @@
                                 <height>16777215</height>
                                </size>
                               </property>
-                              <property name="maximum" stdset="0">
+                              <property name="maximum">
                                <double>60.000000000000000</double>
                               </property>
-                              <property name="singleStep" stdset="0">
+                              <property name="singleStep">
                                <double>1.000000000000000</double>
                               </property>
-                              <property name="numButtons" stdset="0">
+                              <property name="numButtons">
                                <number>1</number>
                               </property>
                              </widget>
@@ -5086,8 +5086,8 @@
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>976</width>
-                   <height>527</height>
+                   <width>978</width>
+                   <height>584</height>
                   </rect>
                  </property>
                  <property name="sizePolicy">
@@ -6149,8 +6149,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1366</width>
-     <height>21</height>
+     <width>1364</width>
+     <height>22</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -6162,10 +6162,10 @@
    <widget class="QMenu" name="menuPacientes">
     <property name="geometry">
      <rect>
-      <x>13</x>
-      <y>70</y>
-      <width>150</width>
-      <height>191</height>
+      <x>294</x>
+      <y>199</y>
+      <width>178</width>
+      <height>202</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -6289,6 +6289,122 @@
    <header>qwt_counter.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>scrollArea_4</tabstop>
+  <tabstop>comboBox</tabstop>
+  <tabstop>lineEdit_5</tabstop>
+  <tabstop>pushButton_32</tabstop>
+  <tabstop>treeWidget_2</tabstop>
+  <tabstop>pushButton_30</tabstop>
+  <tabstop>scrollArea_5</tabstop>
+  <tabstop>lineEdit_6</tabstop>
+  <tabstop>lineEdit_7</tabstop>
+  <tabstop>comboBox_2</tabstop>
+  <tabstop>lineEdit_8</tabstop>
+  <tabstop>dateEdit</tabstop>
+  <tabstop>plainTextEdit_2</tabstop>
+  <tabstop>pushButton_13</tabstop>
+  <tabstop>scrollArea_2</tabstop>
+  <tabstop>lineEdit_11</tabstop>
+  <tabstop>lineEdit_10</tabstop>
+  <tabstop>comboBox_3</tabstop>
+  <tabstop>lineEdit_9</tabstop>
+  <tabstop>dateEdit_2</tabstop>
+  <tabstop>plainTextEdit_3</tabstop>
+  <tabstop>pushButton_5</tabstop>
+  <tabstop>pushButton_12</tabstop>
+  <tabstop>pushButton_4</tabstop>
+  <tabstop>treeWidget</tabstop>
+  <tabstop>pushButton_35</tabstop>
+  <tabstop>pushButton_25</tabstop>
+  <tabstop>pushButton_14</tabstop>
+  <tabstop>scrollArea_6</tabstop>
+  <tabstop>lineEdit_12</tabstop>
+  <tabstop>lineEdit_49</tabstop>
+  <tabstop>lineEdit_50</tabstop>
+  <tabstop>lineEdit_13</tabstop>
+  <tabstop>dateEdit_3</tabstop>
+  <tabstop>dateEdit_4</tabstop>
+  <tabstop>plainTextEdit_4</tabstop>
+  <tabstop>pushButton_19</tabstop>
+  <tabstop>lineEdit_14</tabstop>
+  <tabstop>pushButton_15</tabstop>
+  <tabstop>lineEdit_15</tabstop>
+  <tabstop>pushButton_16</tabstop>
+  <tabstop>pushButton_20</tabstop>
+  <tabstop>scrollArea_7</tabstop>
+  <tabstop>lineEdit_20</tabstop>
+  <tabstop>lineEdit_21</tabstop>
+  <tabstop>lineEdit_51</tabstop>
+  <tabstop>lineEdit_52</tabstop>
+  <tabstop>dateEdit_5</tabstop>
+  <tabstop>dateEdit_6</tabstop>
+  <tabstop>lineEdit_27</tabstop>
+  <tabstop>lineEdit_23</tabstop>
+  <tabstop>lineEdit_24</tabstop>
+  <tabstop>lineEdit_25</tabstop>
+  <tabstop>lineEdit_26</tabstop>
+  <tabstop>lineEdit_22</tabstop>
+  <tabstop>treeWidget_3</tabstop>
+  <tabstop>pushButton_33</tabstop>
+  <tabstop>pushButton_24</tabstop>
+  <tabstop>pushButton_23</tabstop>
+  <tabstop>scrollArea_3</tabstop>
+  <tabstop>lineEdit_45</tabstop>
+  <tabstop>lineEdit_28</tabstop>
+  <tabstop>lineEdit_46</tabstop>
+  <tabstop>dateEdit_7</tabstop>
+  <tabstop>timeEdit</tabstop>
+  <tabstop>timeEdit_2</tabstop>
+  <tabstop>lineEdit_29</tabstop>
+  <tabstop>lineEdit_30</tabstop>
+  <tabstop>Counter_3</tabstop>
+  <tabstop>lineEdit_39</tabstop>
+  <tabstop>lineEdit_31</tabstop>
+  <tabstop>pushButton_28</tabstop>
+  <tabstop>lineEdit_37</tabstop>
+  <tabstop>pushButton_26</tabstop>
+  <tabstop>lineEdit_41</tabstop>
+  <tabstop>lineEdit_32</tabstop>
+  <tabstop>lineEdit_40</tabstop>
+  <tabstop>lineEdit_33</tabstop>
+  <tabstop>lineEdit_47</tabstop>
+  <tabstop>Counter_4</tabstop>
+  <tabstop>lineEdit_42</tabstop>
+  <tabstop>lineEdit_34</tabstop>
+  <tabstop>pushButton_29</tabstop>
+  <tabstop>lineEdit_38</tabstop>
+  <tabstop>pushButton_27</tabstop>
+  <tabstop>lineEdit_44</tabstop>
+  <tabstop>lineEdit_36</tabstop>
+  <tabstop>lineEdit_43</tabstop>
+  <tabstop>lineEdit_35</tabstop>
+  <tabstop>lineEdit_48</tabstop>
+  <tabstop>pushButton_22</tabstop>
+  <tabstop>pushButton_21</tabstop>
+  <tabstop>scrollArea</tabstop>
+  <tabstop>lineEdit</tabstop>
+  <tabstop>pushButton_7</tabstop>
+  <tabstop>lineEdit_4</tabstop>
+  <tabstop>pushButton_9</tabstop>
+  <tabstop>lineEdit_2</tabstop>
+  <tabstop>pushButton_8</tabstop>
+  <tabstop>pushButton_10</tabstop>
+  <tabstop>pushButton_11</tabstop>
+  <tabstop>pushButton_6</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>pushButton_2</tabstop>
+  <tabstop>lineEdit_3</tabstop>
+  <tabstop>pushButton_3</tabstop>
+  <tabstop>lineEdit_17</tabstop>
+  <tabstop>pushButton_18</tabstop>
+  <tabstop>lineEdit_19</tabstop>
+  <tabstop>pushButton_17</tabstop>
+  <tabstop>lineEdit_16</tabstop>
+  <tabstop>lineEdit_18</tabstop>
+  <tabstop>plainTextEdit</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
