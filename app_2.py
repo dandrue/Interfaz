@@ -2607,7 +2607,7 @@ class Ui_MainWindow(object):
         self.pushButton_30.clicked.connect(self.ir_a_perfil)
 
         # self.Counter.valueChange(self.vel_control)
-        self.list_all()
+        self.list_all(MainWindow)
 
 
     def retranslateUi(self, MainWindow):
@@ -2836,88 +2836,83 @@ class Ui_MainWindow(object):
         self.actionSesion.setText(_translate("MainWindow", "Sesion"))
         self.actionConfiguraci_n.setText(_translate("MainWindow", "Configuración"))
 
+        my_drive = "odrv0"
 
-    my_drive = "odrv0"
+    def buscar(self,MainWindow):
+        self.list_all(MainWindow)
+        self.stackedWidget.setCurrentIndex(0)
 
-    def buscar(MainWindow):
-        MainWindow.list_all()
-        MainWindow.stackedWidget.setCurrentIndex(0)
+    def nuevo(self,MainWindow):
+        self.stackedWidget.setCurrentIndex(1)
 
+    def perfil(self,MainWindow):
+        self.stackedWidget.setCurrentIndex(2)
 
-    def nuevo(MainWindow):
-        MainWindow.stackedWidget.setCurrentIndex(1)
+    def nuevo_programa(self,MainWindow):
+        self.stackedWidget.setCurrentIndex(3)
 
-    def perfil(MainWindow):
-        MainWindow.stackedWidget.setCurrentIndex(2)
+    def detalles(self,MainWindow):
+        self.stackedWidget.setCurrentIndex(4)
 
-    def nuevo_programa(MainWindow):
-        MainWindow.stackedWidget.setCurrentIndex(3)
+    def sesion(self,MainWindow):
+        self.stackedWidget.setCurrentIndex(5)
 
-    def detalles(MainWindow):
-        MainWindow.stackedWidget.setCurrentIndex(4)
+    def set_vel(self,MainWindow, my_drive):
+        Configuration.set_vel(self,MainWindow, my_drive)
 
-    def sesion(MainWindow):
-        MainWindow.stackedWidget.setCurrentIndex(5)
+    def set_current(self,MainWindow, my_drive):
+        Configuration.set_current(self,MainWindow, my_drive)
 
-    def set_vel(MainWindow, my_drive):
-        Configuration.set_vel(MainWindow, my_drive)
+    def set_calibration_current(self,MainWindow, my_drive):
+        Configuration.set_calibration_current(self,MainWindow, my_drive)
 
-    def set_current(MainWindow, my_drive):
-        Configuration.set_current(MainWindow, my_drive)
+    def initial_calibration(self,MainWindow, my_drive):
+        Configuration.initial_calibration(self,MainWindow, my_drive)
 
-    def set_calibration_current(MainWindow, my_drive):
-        Configuration.set_calibration_current(MainWindow, my_drive)
+    def closed_loop(self,MainWindow, my_drive):
+        Configuration.closed_loop(self,MainWindow, my_drive)
 
-    def initial_calibration(MainWindow, my_drive):
-        Configuration.initial_calibration(MainWindow, my_drive)
+    def set_point(self,MainWindow, my_drive):
+        Configuration.set_point(self,MainWindow, my_drive)
 
-    def closed_loop(MainWindow, my_drive):
-        Configuration.closed_loop(MainWindow, my_drive)
+    def errors(self,MainWindow, my_drive):
+        Configuration.errors(self,MainWindow, my_drive)
 
-    def set_point(MainWindow, my_drive):
-        Configuration.set_point(MainWindow, my_drive)
+    def save_config(self,MainWindow, my_drive):
+        Configuration.save_config(self,MainWindow, my_drive)
 
-    def errors(MainWindow, my_drive):
-        Configuration.errors(MainWindow, my_drive)
+    def reboot(self,MainWindow, my_drive):
+        Configuration.reboot(self,MainWindow, my_drive)
 
-    def save_config(MainWindow, my_drive):
-        Configuration.save_config(MainWindow, my_drive)
+    def vel_control(self,MainWindow, my_drive):
+        Configuration.vel_control(self,MainWindow, my_drive)
 
-    def reboot(MainWindow, my_drive):
-        Configuration.reboot(MainWindow, my_drive)
+    def nuevo_paciente(self,MainWindow):
+        Paciente.nuevo_paciente(self,MainWindow)
 
-    def vel_control(MainWindow, my_drive):
-        Configuration.vel_control(MainWindow, my_drive)
+    def buscar_perfiles(self,MainWindow):
+        Paciente.buscar(self,MainWindow)
 
-    def nuevo_paciente(MainWindow):
-        Paciente.nuevo_paciente(MainWindow)
-
-    def buscar_perfiles(MainWindow):
-        Paciente.buscar(MainWindow)
-
-    def validator(MainWindow):
-        MainWindow.lineEdit_5.clear()
-        if MainWindow.comboBox.currentText() == "Id":
-            MainWindow.onlyInt = QtGui.QIntValidator()
-            MainWindow.lineEdit_5.setValidator(MainWindow.onlyInt)
+    def validator(self,MainWindow):
+        self.lineEdit_5.clear()
+        if self.comboBox.currentText() == "Id":
+            self.onlyInt = QtGui.QIntValidator()
+            self.lineEdit_5.setValidator(self.onlyInt)
         else:
-            MainWindow.onlyStr = QtGui.QRegExpValidator()
-            MainWindow.lineEdit_5.setValidator(MainWindow.onlyStr)
+            self.onlyStr = QtGui.QRegExpValidator()
+            self.lineEdit_5.setValidator(self.onlyStr)
 
-    def ir_a_perfil(MainWindow):
-        data = Paciente.ir_a_perfil(MainWindow)
-        return data
+    def ir_a_perfil(self,MainWindow):
+        Paciente.ir_a_perfil(self,MainWindow)
 
-    def list_all(MainWindow):
-        Paciente.list_all(MainWindow)
+    def list_all(self,MainWindow):
+        Paciente.list_all(self,MainWindow)
 
-    def eliminar_paciente(MainWindow):
-        Paciente.eliminar_paciente(MainWindow)
+    def eliminar_paciente(self,MainWindow):
+        Paciente.eliminar_paciente(self,MainWindow)
 
-    def modificar_perfil(MainWindow):
-        Paciente.modificar_perfil(MainWindow)
-
-
+    def modificar_perfil(self,MainWindow):
+        Paciente.modificar_perfil(self,MainWindow)
 
 if __name__ == "__main__":
     import sys
