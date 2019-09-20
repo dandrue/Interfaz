@@ -11,6 +11,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 
 class Paciente(object):
+    def __init__(self, temp_id):
+        self.temp_id = None
+
     def nuevo_paciente(MainWindow):
         nombre = MainWindow.lineEdit_6.text().upper()
         apellido = MainWindow.lineEdit_7.text().upper()
@@ -96,6 +99,7 @@ class Paciente(object):
         index = MainWindow.treeWidget_2.indexFromItem(item).row()
         data = MainWindow.treeWidget_2.topLevelItem(index).text(3)
 
+
         con = sqlite3.connect('pacientes')
         cursor = con.cursor()
         cursor.execute('SELECT * FROM pacientes WHERE Id = ?', (data,))
@@ -124,6 +128,7 @@ class Paciente(object):
         MainWindow.lineEdit_5.clear()
         MainWindow.treeWidget_2.clear()
         MainWindow.stackedWidget.setCurrentIndex(2)
+        temp_id = id
 
     def list_all(MainWindow):
         try:
@@ -187,3 +192,32 @@ class Paciente(object):
 
         elif returnValue == QMessageBox.No:
             pass
+
+    def modificar_perfil(MainWindow):
+
+        msgBox = QMessageBox()
+        msgBox.setIcon(QMessageBox.Warning)
+        msgBox.setText("Esta seguro de modificar la información del paciente?")
+        msgBox.setWindowTitle("Modificar entrada")
+        msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        returnValue = msgBox.exec()
+
+        if returnValue == QMessageBox.Yes:
+            nombre = MainWindow.lineEdit_11.text().upper()
+            apellido = MainWindow.lineEdit_10.text().upper()
+            id = MainWindow.lineEdit_9.text()
+            fecha = MainWindow.dateEdit_2.date()
+            fecha = datetime.strftime(fecha.toPyDate(), '%d/%m/%y')
+            tipoid = MainWindow.comboBox_3.currentText()
+            comentarios = MainWindow.plainTextEdit_3.toPlainText().upper()
+            # try:
+            con = sqlite3.connect('pacientes')
+            cursor = con.cursor()
+            cursor.execute('UPDATE pacientes SET Nombre = ?, Apellido = ?, TipoId = ?, Id = ?, FechaIngreso = ?,Comentarios = ? WHERE id = ?', (nombre, apellido, tipoid, id, fecha, comentarios,temp_id))
+            con.commit()
+            con.close()
+            print("Modificando perfil del paciente")
+
+            # except sqlite3.IntegrityError:
+            #     MainWindow.plainTextEdit.appendPlainText("Error modificando el perfil")
+            #     print("Error modificando el perfil")
