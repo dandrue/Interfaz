@@ -2585,7 +2585,7 @@ class Ui_MainWindow(object):
         self.lineEdit_30.setValidator(self.onlyInt)
 
         # Señales desde widgets
-        self.lineEdit_5.editingFinished.connect(self.buscar_perfiles)
+        #self.lineEdit_5.editingFinished.connect(self.buscar_perfiles())
 
         self.comboBox.currentIndexChanged.connect(self.validator)
 
@@ -2603,6 +2603,10 @@ class Ui_MainWindow(object):
         self.pushButton_11.clicked.connect(self.reboot)
         self.pushButton_12.clicked.connect(self.eliminar_paciente)
         self.pushButton_13.clicked.connect(self.nuevo_paciente)
+        self.pushButton_14.clicked.connect(self.ver_detalles)
+        self.pushButton_19.clicked.connect(self.perfil)
+        self.pushButton_20.clicked.connect(self.guardar_nuevo_programa)
+        self.pushButton_25.clicked.connect(self.nuevo_prog)
         self.pushButton_32.clicked.connect(self.buscar_perfiles)
         self.pushButton_30.clicked.connect(self.ir_a_perfil)
 
@@ -2903,7 +2907,23 @@ class Ui_MainWindow(object):
             self.lineEdit_5.setValidator(self.onlyStr)
 
     def ir_a_perfil(self,MainWindow):
-        Paciente.ir_a_perfil(self,MainWindow)
+        self.treeWidget.clear()
+        item = self.treeWidget_2.selectedItems()[0]
+        index = self.treeWidget_2.indexFromItem(item).row()
+        data = self.treeWidget_2.topLevelItem(index).text(3)
+        try:
+            Paciente.ir_a_perfil(self,MainWindow, data)
+        except IndexError:
+            self.plainTextEdit.appendPlainText("Ninguna entrada seleccionada")
+            print("Ninguna entrada seleccionada")
+
+    def ver_detalles(self, MainWindow):
+        self.detalles(MainWindow)
+        item = self.treeWidget.selectedItems()[0]
+        index = self.treeWidget.indexFromItem(item).row()
+        data = self.treeWidget.topLevelItem(index).text(0)
+        print(data)
+        Programa.ver_detalles(self, MainWindow, data)
 
     def list_all(self,MainWindow):
         Paciente.list_all(self,MainWindow)
@@ -2913,6 +2933,14 @@ class Ui_MainWindow(object):
 
     def modificar_perfil(self,MainWindow):
         Paciente.modificar_perfil(self,MainWindow)
+
+    def nuevo_prog(self, MainWindow):
+        self.stackedWidget.setCurrentIndex(3)
+        Programa.nuevo_programa(self, MainWindow)
+
+    def guardar_nuevo_programa(self, MainWindow):
+        Programa.guardar_nuevo_programa(self, MainWindow)
+
 
 if __name__ == "__main__":
     import sys

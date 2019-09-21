@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1364</width>
-    <height>713</height>
+    <width>1380</width>
+    <height>752</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -573,7 +573,7 @@
                  </sizepolicy>
                 </property>
                 <property name="currentIndex">
-                 <number>0</number>
+                 <number>4</number>
                 </property>
                 <widget class="QWidget" name="page">
                  <layout class="QGridLayout" name="gridLayout_14">
@@ -590,8 +590,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>960</width>
-                       <height>566</height>
+                       <width>958</width>
+                       <height>613</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_6">
@@ -952,8 +952,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>960</width>
-                       <height>566</height>
+                       <width>958</width>
+                       <height>613</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_9">
@@ -1363,8 +1363,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>960</width>
-                       <height>696</height>
+                       <width>956</width>
+                       <height>647</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_37">
@@ -1749,7 +1749,23 @@
                               </property>
                               <column>
                                <property name="text">
-                                <string>Nombre</string>
+                                <string>IdPrograma</string>
+                               </property>
+                               <property name="textAlignment">
+                                <set>AlignCenter</set>
+                               </property>
+                              </column>
+                              <column>
+                               <property name="text">
+                                <string>IdPaciente</string>
+                               </property>
+                               <property name="textAlignment">
+                                <set>AlignCenter</set>
+                               </property>
+                              </column>
+                              <column>
+                               <property name="text">
+                                <string>Prog</string>
                                </property>
                                <property name="textAlignment">
                                 <set>AlignCenter</set>
@@ -1781,7 +1797,7 @@
                               </column>
                               <column>
                                <property name="text">
-                                <string>N° Sesiones</string>
+                                <string>#Sesiones</string>
                                </property>
                                <property name="textAlignment">
                                 <set>AlignCenter</set>
@@ -1835,74 +1851,6 @@
                                 <set>AlignCenter</set>
                                </property>
                               </column>
-                              <item>
-                               <property name="text">
-                                <string>Programa 0</string>
-                               </property>
-                               <property name="textAlignment">
-                                <set>AlignCenter</set>
-                               </property>
-                               <property name="text">
-                                <string>Activo</string>
-                               </property>
-                               <property name="textAlignment">
-                                <set>AlignCenter</set>
-                               </property>
-                               <property name="text">
-                                <string>02/09/19</string>
-                               </property>
-                               <property name="textAlignment">
-                                <set>AlignCenter</set>
-                               </property>
-                               <property name="text">
-                                <string>10/12/20</string>
-                               </property>
-                               <property name="textAlignment">
-                                <set>AlignCenter</set>
-                               </property>
-                               <property name="text">
-                                <string>4</string>
-                               </property>
-                               <property name="textAlignment">
-                                <set>AlignCenter</set>
-                               </property>
-                               <property name="text">
-                                <string>60</string>
-                               </property>
-                               <property name="textAlignment">
-                                <set>AlignCenter</set>
-                               </property>
-                               <property name="text">
-                                <string>60</string>
-                               </property>
-                               <property name="textAlignment">
-                                <set>AlignCenter</set>
-                               </property>
-                               <property name="text">
-                                <string>60</string>
-                               </property>
-                               <property name="textAlignment">
-                                <set>AlignCenter</set>
-                               </property>
-                               <property name="text">
-                                <string>40</string>
-                               </property>
-                               <property name="textAlignment">
-                                <set>AlignCenter</set>
-                               </property>
-                               <property name="text">
-                                <string>40</string>
-                               </property>
-                               <property name="textAlignment">
-                                <set>AlignCenter</set>
-                               </property>
-                               <property name="text">
-                                <string>40</string>
-                               </property>
-                               <property name="textAlignment">
-                                <set>AlignCenter</set>
-                               </property>
-                              </item>
                              </widget>
                             </item>
                             <item row="1" column="0" colspan="2">
@@ -1972,8 +1920,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>960</width>
-                       <height>566</height>
+                       <width>958</width>
+                       <height>613</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_10">
@@ -2747,8 +2695,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>946</width>
-                       <height>647</height>
+                       <width>958</width>
+                       <height>613</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_41">
@@ -3349,7 +3297,72 @@
                          <string>Sesiones</string>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_27">
-                         <item row="0" column="1" rowspan="5" colspan="3">
+                         <item row="6" column="3">
+                          <spacer name="verticalSpacer_21">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>40</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item row="5" column="4" alignment="Qt::AlignHCenter">
+                          <widget class="QPushButton" name="pushButton_33">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="text">
+                            <string>Balance</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="5" column="3" alignment="Qt::AlignHCenter">
+                          <widget class="QPushButton" name="pushButton_36">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="text">
+                            <string>Volver</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="5" column="5" alignment="Qt::AlignHCenter">
+                          <widget class="QPushButton" name="pushButton_24">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="text">
+                            <string>Eliminar Sesion</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="5" column="6" alignment="Qt::AlignHCenter">
+                          <widget class="QPushButton" name="pushButton_23">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="text">
+                            <string>Nueva Sesión</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="0" column="3" rowspan="5" colspan="4">
                           <widget class="QTreeWidget" name="treeWidget_3">
                            <property name="minimumSize">
                             <size>
@@ -3453,40 +3466,6 @@
                            </item>
                           </widget>
                          </item>
-                         <item row="5" column="3" alignment="Qt::AlignHCenter">
-                          <widget class="QPushButton" name="pushButton_23">
-                           <property name="text">
-                            <string>Nueva Sesión</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="6" column="1">
-                          <spacer name="verticalSpacer_21">
-                           <property name="orientation">
-                            <enum>Qt::Vertical</enum>
-                           </property>
-                           <property name="sizeHint" stdset="0">
-                            <size>
-                             <width>20</width>
-                             <height>40</height>
-                            </size>
-                           </property>
-                          </spacer>
-                         </item>
-                         <item row="5" column="2" alignment="Qt::AlignHCenter">
-                          <widget class="QPushButton" name="pushButton_24">
-                           <property name="text">
-                            <string>Eliminar Sesion</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="5" column="1" alignment="Qt::AlignHCenter">
-                          <widget class="QPushButton" name="pushButton_33">
-                           <property name="text">
-                            <string>Balance</string>
-                           </property>
-                          </widget>
-                         </item>
                         </layout>
                        </widget>
                       </item>
@@ -3527,8 +3506,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>946</width>
-                       <height>900</height>
+                       <width>625</width>
+                       <height>747</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_40">
@@ -4050,7 +4029,7 @@
                              </widget>
                             </item>
                             <item row="0" column="1">
-                             <widget class="QwtCounter" name="Counter_3">
+                             <widget class="QwtCounter" name="Counter_3" native="true">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                                 <horstretch>0</horstretch>
@@ -4063,10 +4042,10 @@
                                 <height>16777215</height>
                                </size>
                               </property>
-                              <property name="maximum">
+                              <property name="maximum" stdset="0">
                                <double>60.000000000000000</double>
                               </property>
-                              <property name="singleStep">
+                              <property name="singleStep" stdset="0">
                                <double>1.000000000000000</double>
                               </property>
                              </widget>
@@ -4444,7 +4423,7 @@
                              </widget>
                             </item>
                             <item row="0" column="1" alignment="Qt::AlignHCenter">
-                             <widget class="QwtCounter" name="Counter_4">
+                             <widget class="QwtCounter" name="Counter_4" native="true">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                                 <horstretch>0</horstretch>
@@ -4457,13 +4436,13 @@
                                 <height>16777215</height>
                                </size>
                               </property>
-                              <property name="maximum">
+                              <property name="maximum" stdset="0">
                                <double>60.000000000000000</double>
                               </property>
-                              <property name="singleStep">
+                              <property name="singleStep" stdset="0">
                                <double>1.000000000000000</double>
                               </property>
-                              <property name="numButtons">
+                              <property name="numButtons" stdset="0">
                                <number>1</number>
                               </property>
                              </widget>
@@ -5124,8 +5103,8 @@
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>978</width>
-                   <height>584</height>
+                   <width>976</width>
+                   <height>631</height>
                   </rect>
                  </property>
                  <property name="sizePolicy">
@@ -6187,8 +6166,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1364</width>
-     <height>22</height>
+     <width>1380</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -6202,8 +6181,8 @@
      <rect>
       <x>294</x>
       <y>199</y>
-      <width>178</width>
-      <height>202</height>
+      <width>150</width>
+      <height>191</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -6385,9 +6364,6 @@
   <tabstop>lineEdit_26</tabstop>
   <tabstop>lineEdit_22</tabstop>
   <tabstop>treeWidget_3</tabstop>
-  <tabstop>pushButton_33</tabstop>
-  <tabstop>pushButton_24</tabstop>
-  <tabstop>pushButton_23</tabstop>
   <tabstop>scrollArea_3</tabstop>
   <tabstop>lineEdit_45</tabstop>
   <tabstop>lineEdit_28</tabstop>

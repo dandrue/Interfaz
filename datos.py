@@ -23,9 +23,6 @@ class Paciente(object):
         fechaingreso = self.dateEdit.date()
         fechaingreso = datetime.strftime(fechaingreso.toPyDate(), '%d/%m/%y')
         comentarios = self.plainTextEdit_2.toPlainText().upper()
-
-
-
         data_paciente = (nombre, apellido, tipoid, int(id), fechaingreso,comentarios)
         print(data_paciente)
 
@@ -53,7 +50,6 @@ class Paciente(object):
     def buscar(self,MainWindow):
         criterio = self.comboBox.currentText()
         value = self.lineEdit_5.text()
-
         try:
             con = sqlite3.connect("pacientes")
             cursor = con.cursor()
@@ -91,17 +87,12 @@ class Paciente(object):
             self.plainTextEdit.appendPlainText("Pacientes listados")
             print("Pacientes listados")
 
-        except Error:
+        except TypeError:
             self.plainTextEdit.appendPlainText("Error buscando pacientes")
             print("Error buscando pacientes")
 
 
-    def ir_a_perfil(self,MainWindow):
-        item = self.treeWidget_2.selectedItems()[0]
-        index = self.treeWidget_2.indexFromItem(item).row()
-        data = self.treeWidget_2.topLevelItem(index).text(3)
-
-
+    def ir_a_perfil(self,MainWindow, data):
         con = sqlite3.connect('pacientes')
         cursor = con.cursor()
         cursor.execute('SELECT * FROM pacientes WHERE Id = ?', (data,))
@@ -131,6 +122,19 @@ class Paciente(object):
         self.treeWidget_2.clear()
         self.stackedWidget.setCurrentIndex(2)
         self.temp_id = id
+
+        con = sqlite3.connect('pacientes')
+        cursor = con.cursor()
+        cursor.execute('SELECT * FROM Programas WHERE IdPaciente = ?', (self.temp_id,))
+        data = cursor.fetchall()
+        number = len(data)
+        for i in range(number):
+            item = "item_" + str(i)
+            item = QtWidgets.QTreeWidgetItem(self.treeWidget)
+        for i in range(number):
+            for j in range(13):
+                self.treeWidget.topLevelItem(i).setText(j, str(data[i][j]))
+
 
     def list_all(self,MainWindow):
         try:
@@ -223,3 +227,83 @@ class Paciente(object):
             except sqlite3.IntegrityError:
                 self.plainTextEdit.appendPlainText("Error modificando el perfil")
                 print("Error modificando el perfil")
+
+class Programa(object):
+    def nuevo_programa(self, MainWindow):
+        items = self.treeWidget.topLevelItemCount()
+        programa = "Programa_" + str(items + 1)
+
+        try:
+            con = sqlite3.connect('pacientes')
+            cursor = con.cursor()
+            cursor.execute('SELECT * FROM programas')
+            total_programas = cursor.fetchall()
+            id_programa = len(total_programas) + 1
+        except sqlite3.IntegrityError:
+            print("Sucedio un error")
+        # id_programa = int(0000) + items + 1
+        self.lineEdit_12.setText(programa)
+        self.lineEdit_49.setDisabled(True)
+        self.lineEdit_49.setText(str(id_programa))
+        self.lineEdit_50.setText(str(self.temp_id))
+
+    def guardar_nuevo_programa(self, MainWindow):
+        nombreprograma = self.lineEdit_12.text()
+        id_programa = self.lineEdit_49.text()
+        sesiones = self.lineEdit_13.text()
+        inicio = self.dateEdit_3.date()
+        inicio = datetime.strftime(inicio.toPyDate(), '%d/%m/%y')
+        fin = self.dateEdit_4.date()
+        fin = datetime.strftime(fin.toPyDate(), '%d/%m/%y')
+        comentarios = self.plainTextEdit_4.toPlainText().upper()
+        pron_init_angle = str(Programa.get_pron_init())
+        pron_actual_angle = str(30)
+        pron_fin_angle = pron_actual_angle
+        sup_init_angle = str(Programa.get_sup_init())
+        sup_actual_angle = str(25)
+        sup_fin_angle = sup_actual_angle
+        status = 'Activo'
+        data_programa = [id_programa, self.temp_id, nombreprograma, status, inicio, fin, sesiones, pron_init_angle, pron_actual_angle, pron_fin_angle, sup_init_angle, sup_actual_angle, sup_fin_angle]
+
+        try:
+            con = sqlite3.connect('pacientes')
+            cursor = con.cursor()
+            cursor.execute('INSERT INTO Programas(IdPrograma, IdPaciente, NombrePrograma, status, FechaInicio,FechaFin, NumeroSesiones, AngPronInicial, AngPronActual, AngPronFinal, AngSupInicial, AngSupActual, AngSupFinal) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)', data_programa)
+            con.commit()
+            con.close()
+
+        except sqlite3.IntegrityError:
+            self.plainTextEdit.appendPlainText("Error al generar nuevo programa, programa ya existe")
+            print("Error al generar nuevo programa")
+
+        Paciente.ir_a_perfil(self, MainWindow,self.temp_id)
+        self.lineEdit_12.clear()
+        self.lineEdit_49.clear()
+        self.lineEdit_13.clear()
+        # self.dateEdit_3.clear()
+        # self.dateEdit_4.clear()
+        self.plainTextEdit_4.clear()
+
+    def get_pron_init():
+        pron_init_angle = 25
+        return pron_init_angle
+
+    def get_sup_init():
+        sup_init_angle = 14
+        return sup_init_angle
+
+    def ver_detalles(self, MainWindow, IdProgram):
+        try:
+            con = sqlite3.connect('pacientes')
+            cursor = con.cursor()
+            cursor.execute('SELECT * FROM programas WHERE IdPrograma = ?', (IdProgram,))
+            data = cursor.fetchall()
+            print(data)
+
+
+        except sqlite3.IntegrityError:
+            print("Ocurrió un error")
+
+        self.lineEdit_20.setText(data[0][2])
+        self.lineEdit_21.setText(str(IdProgram))
+        self.lineEdit_51.setText(str(data[0][6]))
