@@ -573,7 +573,7 @@
                  </sizepolicy>
                 </property>
                 <property name="currentIndex">
-                 <number>4</number>
+                 <number>0</number>
                 </property>
                 <widget class="QWidget" name="page">
                  <layout class="QGridLayout" name="gridLayout_14">
@@ -640,13 +640,6 @@
                          <string>Buscar</string>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_15">
-                         <item row="5" column="6" alignment="Qt::AlignHCenter">
-                          <widget class="QPushButton" name="pushButton_30">
-                           <property name="text">
-                            <string>Ir a perfil</string>
-                           </property>
-                          </widget>
-                         </item>
                          <item row="2" column="1" alignment="Qt::AlignLeft">
                           <widget class="QLabel" name="label_8">
                            <property name="text">
@@ -690,6 +683,12 @@
                              <height>700</height>
                             </size>
                            </property>
+                           <property name="frameShape">
+                            <enum>QFrame::StyledPanel</enum>
+                           </property>
+                           <property name="frameShadow">
+                            <enum>QFrame::Sunken</enum>
+                           </property>
                            <property name="sizeAdjustPolicy">
                             <enum>QAbstractScrollArea::AdjustToContents</enum>
                            </property>
@@ -700,7 +699,7 @@
                             <bool>true</bool>
                            </property>
                            <property name="alternatingRowColors">
-                            <bool>false</bool>
+                            <bool>true</bool>
                            </property>
                            <property name="selectionMode">
                             <enum>QAbstractItemView::SingleSelection</enum>
@@ -742,13 +741,13 @@
                             <bool>false</bool>
                            </property>
                            <property name="headerHidden">
-                            <bool>true</bool>
+                            <bool>false</bool>
                            </property>
                            <property name="columnCount">
                             <number>5</number>
                            </property>
                            <attribute name="headerVisible">
-                            <bool>false</bool>
+                            <bool>true</bool>
                            </attribute>
                            <attribute name="headerCascadingSectionResizes">
                             <bool>false</bool>
@@ -912,6 +911,26 @@
                            </property>
                            <property name="text">
                             <string>Buscar</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="5" column="6">
+                          <widget class="QPushButton" name="pushButton_30">
+                           <property name="maximumSize">
+                            <size>
+                             <width>150</width>
+                             <height>16777215</height>
+                            </size>
+                           </property>
+                           <property name="text">
+                            <string>Ir a perfil</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="5" column="4">
+                          <widget class="QPushButton" name="pushButton_37">
+                           <property name="text">
+                            <string>Agregar Paciente</string>
                            </property>
                           </widget>
                          </item>
@@ -1362,7 +1381,7 @@
                      <property name="geometry">
                       <rect>
                        <x>0</x>
-                       <y>0</y>
+                       <y>-51</y>
                        <width>956</width>
                        <height>647</height>
                       </rect>
@@ -3459,11 +3478,6 @@
                              <set>AlignCenter</set>
                             </property>
                            </column>
-                           <item>
-                            <property name="text">
-                             <string>Sesion 1</string>
-                            </property>
-                           </item>
                           </widget>
                          </item>
                         </layout>
@@ -3506,7 +3520,7 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>625</width>
+                       <width>941</width>
                        <height>747</height>
                       </rect>
                      </property>
@@ -3552,25 +3566,6 @@
                            </property>
                           </widget>
                          </item>
-                         <item row="1" column="4" alignment="Qt::AlignRight">
-                          <widget class="QLabel" name="label_57">
-                           <property name="sizePolicy">
-                            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                             <horstretch>0</horstretch>
-                             <verstretch>0</verstretch>
-                            </sizepolicy>
-                           </property>
-                           <property name="maximumSize">
-                            <size>
-                             <width>150</width>
-                             <height>16777215</height>
-                            </size>
-                           </property>
-                           <property name="text">
-                            <string>Fecha</string>
-                           </property>
-                          </widget>
-                         </item>
                          <item row="3" column="2">
                           <widget class="QLineEdit" name="lineEdit_29">
                            <property name="sizePolicy">
@@ -3587,13 +3582,6 @@
                            </property>
                            <property name="alignment">
                             <set>Qt::AlignCenter</set>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="2" column="4" alignment="Qt::AlignRight">
-                          <widget class="QLabel" name="label_71">
-                           <property name="text">
-                            <string>Hora Fin</string>
                            </property>
                           </widget>
                          </item>
@@ -3615,9 +3603,6 @@
                             <set>Qt::AlignCenter</set>
                            </property>
                           </widget>
-                         </item>
-                         <item row="2" column="5" alignment="Qt::AlignHCenter">
-                          <widget class="QTimeEdit" name="timeEdit_2"/>
                          </item>
                          <item row="2" column="3">
                           <spacer name="horizontalSpacer_26">
@@ -3658,35 +3643,6 @@
                            </property>
                           </spacer>
                          </item>
-                         <item row="2" column="1" alignment="Qt::AlignRight">
-                          <widget class="QLabel" name="label_70">
-                           <property name="text">
-                            <string>Hora Inicio</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="1" column="5">
-                          <widget class="QDateEdit" name="dateEdit_7">
-                           <property name="enabled">
-                            <bool>true</bool>
-                           </property>
-                           <property name="sizePolicy">
-                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                             <horstretch>0</horstretch>
-                             <verstretch>0</verstretch>
-                            </sizepolicy>
-                           </property>
-                           <property name="maximumSize">
-                            <size>
-                             <width>150</width>
-                             <height>16777215</height>
-                            </size>
-                           </property>
-                           <property name="alignment">
-                            <set>Qt::AlignCenter</set>
-                           </property>
-                          </widget>
-                         </item>
                          <item row="3" column="4" alignment="Qt::AlignRight">
                           <widget class="QLabel" name="label_59">
                            <property name="sizePolicy">
@@ -3706,18 +3662,22 @@
                            </property>
                           </widget>
                          </item>
-                         <item row="2" column="2" alignment="Qt::AlignHCenter">
-                          <widget class="QTimeEdit" name="timeEdit"/>
-                         </item>
                          <item row="0" column="1" alignment="Qt::AlignRight">
                           <widget class="QLabel" name="label_83">
                            <property name="text">
-                            <string>Id</string>
+                            <string>IdPaciente</string>
                            </property>
                           </widget>
                          </item>
                          <item row="0" column="2" alignment="Qt::AlignHCenter">
-                          <widget class="QLineEdit" name="lineEdit_45"/>
+                          <widget class="QLineEdit" name="lineEdit_45">
+                           <property name="enabled">
+                            <bool>false</bool>
+                           </property>
+                           <property name="alignment">
+                            <set>Qt::AlignCenter</set>
+                           </property>
+                          </widget>
                          </item>
                          <item row="0" column="4" alignment="Qt::AlignRight">
                           <widget class="QLabel" name="label_56">
@@ -3741,7 +3701,7 @@
                          <item row="0" column="5">
                           <widget class="QLineEdit" name="lineEdit_28">
                            <property name="enabled">
-                            <bool>true</bool>
+                            <bool>false</bool>
                            </property>
                            <property name="sizePolicy">
                             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -3760,15 +3720,117 @@
                            </property>
                           </widget>
                          </item>
-                         <item row="1" column="1" alignment="Qt::AlignRight">
+                         <item row="2" column="1">
                           <widget class="QLabel" name="label_84">
                            <property name="text">
                             <string>Sesion N°</string>
                            </property>
                           </widget>
                          </item>
-                         <item row="1" column="2">
+                         <item row="2" column="2">
                           <widget class="QLineEdit" name="lineEdit_46">
+                           <property name="enabled">
+                            <bool>false</bool>
+                           </property>
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>150</width>
+                             <height>16777215</height>
+                            </size>
+                           </property>
+                           <property name="alignment">
+                            <set>Qt::AlignCenter</set>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="2" column="4">
+                          <widget class="QLabel" name="label_57">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>150</width>
+                             <height>16777215</height>
+                            </size>
+                           </property>
+                           <property name="text">
+                            <string>Fecha</string>
+                           </property>
+                           <property name="alignment">
+                            <set>Qt::AlignCenter</set>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="2" column="5">
+                          <widget class="QDateEdit" name="dateEdit_7">
+                           <property name="enabled">
+                            <bool>false</bool>
+                           </property>
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>150</width>
+                             <height>16777215</height>
+                            </size>
+                           </property>
+                           <property name="alignment">
+                            <set>Qt::AlignCenter</set>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="1" column="1">
+                          <widget class="QLabel" name="label_70">
+                           <property name="text">
+                            <string>IdSesion</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="1" column="4">
+                          <widget class="QLabel" name="label_71">
+                           <property name="text">
+                            <string>NombreSesion</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="1" column="2">
+                          <widget class="QLineEdit" name="lineEdit_53">
+                           <property name="enabled">
+                            <bool>false</bool>
+                           </property>
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>150</width>
+                             <height>16777215</height>
+                            </size>
+                           </property>
+                           <property name="alignment">
+                            <set>Qt::AlignCenter</set>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="1" column="5">
+                          <widget class="QLineEdit" name="lineEdit_54">
                            <property name="sizePolicy">
                             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                              <horstretch>0</horstretch>
@@ -6313,7 +6375,6 @@
   <tabstop>lineEdit_5</tabstop>
   <tabstop>pushButton_32</tabstop>
   <tabstop>treeWidget_2</tabstop>
-  <tabstop>pushButton_30</tabstop>
   <tabstop>scrollArea_5</tabstop>
   <tabstop>lineEdit_6</tabstop>
   <tabstop>lineEdit_7</tabstop>
@@ -6367,10 +6428,6 @@
   <tabstop>scrollArea_3</tabstop>
   <tabstop>lineEdit_45</tabstop>
   <tabstop>lineEdit_28</tabstop>
-  <tabstop>lineEdit_46</tabstop>
-  <tabstop>dateEdit_7</tabstop>
-  <tabstop>timeEdit</tabstop>
-  <tabstop>timeEdit_2</tabstop>
   <tabstop>lineEdit_29</tabstop>
   <tabstop>lineEdit_30</tabstop>
   <tabstop>Counter_3</tabstop>

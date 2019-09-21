@@ -93,7 +93,7 @@ class Paciente(object):
 
 
     def ir_a_perfil(self,MainWindow, data):
-        con = sqlite3.connect('pacientes')
+        con = sqlite3.connect('pacientes.db')
         cursor = con.cursor()
         cursor.execute('SELECT * FROM pacientes WHERE Id = ?', (data,))
         row = cursor.fetchone()
@@ -123,7 +123,7 @@ class Paciente(object):
         self.stackedWidget.setCurrentIndex(2)
         self.temp_id = id
 
-        con = sqlite3.connect('pacientes')
+        con = sqlite3.connect('pacientes.db')
         cursor = con.cursor()
         cursor.execute('SELECT * FROM Programas WHERE IdPaciente = ?', (self.temp_id,))
         data = cursor.fetchall()
@@ -138,7 +138,7 @@ class Paciente(object):
 
     def list_all(self,MainWindow):
         try:
-            con = sqlite3.connect('pacientes')
+            con = sqlite3.connect('pacientes.db')
             cursor = con.cursor()
             cursor.execute("SELECT * FROM pacientes ORDER BY Apellido ASC")
             rows = cursor.fetchall()
@@ -177,7 +177,7 @@ class Paciente(object):
 
         if returnValue == QMessageBox.Yes:
             try:
-                con = sqlite3.connect('pacientes')
+                con = sqlite3.connect('pacientes.db')
                 cursor = con.cursor()
                 value = self.lineEdit_9.text()
                 cursor.execute('DELETE FROM pacientes WHERE Id=?', (value,))
@@ -217,7 +217,7 @@ class Paciente(object):
             tipoid = self.comboBox_3.currentText()
             comentarios = self.plainTextEdit_3.toPlainText().upper()
             try:
-                con = sqlite3.connect('pacientes')
+                con = sqlite3.connect('pacientes.db')
                 cursor = con.cursor()
                 cursor.execute('UPDATE pacientes SET Nombre = ?, Apellido = ?, TipoId = ?, Id = ?, FechaIngreso = ?,Comentarios = ? WHERE id = ?', (nombre, apellido, tipoid, id, fecha, comentarios,self.temp_id))
                 con.commit()
@@ -234,7 +234,7 @@ class Programa(object):
         programa = "Programa_" + str(items + 1)
 
         try:
-            con = sqlite3.connect('pacientes')
+            con = sqlite3.connect('pacientes.db')
             cursor = con.cursor()
             cursor.execute('SELECT * FROM programas')
             total_programas = cursor.fetchall()
@@ -266,7 +266,7 @@ class Programa(object):
         data_programa = [id_programa, self.temp_id, nombreprograma, status, inicio, fin, sesiones, pron_init_angle, pron_actual_angle, pron_fin_angle, sup_init_angle, sup_actual_angle, sup_fin_angle]
 
         try:
-            con = sqlite3.connect('pacientes')
+            con = sqlite3.connect('pacientes.db')
             cursor = con.cursor()
             cursor.execute('INSERT INTO Programas(IdPrograma, IdPaciente, NombrePrograma, status, FechaInicio,FechaFin, NumeroSesiones, AngPronInicial, AngPronActual, AngPronFinal, AngSupInicial, AngSupActual, AngSupFinal) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)', data_programa)
             con.commit()
@@ -294,16 +294,60 @@ class Programa(object):
 
     def ver_detalles(self, MainWindow, IdProgram):
         try:
-            con = sqlite3.connect('pacientes')
+            con = sqlite3.connect('pacientes.db')
             cursor = con.cursor()
             cursor.execute('SELECT * FROM programas WHERE IdPrograma = ?', (IdProgram,))
             data = cursor.fetchall()
             print(data)
 
-
         except sqlite3.IntegrityError:
             print("Ocurrió un error")
+
+        sesionesrealizadas = self.treeWidget_3.topLevelItemCount()
+        inicio = datetime.strptime(data[0][4], '%d/%m/%y')
+        fin = datetime.strptime(data[0][5], '%d/%m/%y')
 
         self.lineEdit_20.setText(data[0][2])
         self.lineEdit_21.setText(str(IdProgram))
         self.lineEdit_51.setText(str(data[0][6]))
+        self.lineEdit_27.setText(str(data[0][7]))
+        self.lineEdit_23.setText(str(data[0][8]))
+        self.lineEdit_24.setText(str(data[0][9]))
+        self.lineEdit_25.setText(str(data[0][10]))
+        self.lineEdit_26.setText(str(data[0][11]))
+        self.lineEdit_22.setText(str(data[0][12]))
+        self.lineEdit_52.setText(str(sesionesrealizadas))
+        self.dateEdit_5.setDateTime(QtCore.QDateTime(inicio))
+        self.dateEdit_6.setDateTime(QtCore.QDateTime(fin))
+
+    def eliminar_programa(self, MainWindow,IdProgram, IdPaciente):
+        msgBox = QMessageBox()
+        msgBox.setIcon(QMessageBox.Warning)
+        msgBox.setText("Esta seguro de modificar la información del paciente?")
+        msgBox.setWindowTitle("Modificar entrada")
+        msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        returnValue = msgBox.exec()
+
+        if returnValue == QMessageBox.Yes:
+            print("Eliminando programa {}".format(IdProgram))
+            con = sqlite3.connect('pacientes.db')
+            cursor = con.cursor()
+            cursor.execute('DELETE FROM programas WHERE IdPrograma = ?', (int(IdProgram),))
+            self.treeWidget.clear()
+            cursor.execute('SELECT * FROM programas WHERE IdPaciente = ?', (IdPaciente,))
+            rows = cursor.fetchall()
+            for i in range(len(rows)):
+                item = "item_" + str(i)
+                item = QtWidgets.QTreeWidgetItem(self.treeWidget)
+            for i in range(len(rows)):
+                for j in range(12):
+                    self.treeWidget.topLevelItem(i).setText(j, str(rows[i][j]))
+            self.plainTextEdit.appendPlainText("Pacientes listados")
+            print("Pacientes listados")
+            con.commit()
+            con.close()
+
+    def nueva_sesion(self, MainWindow):
+        items = self.treeWidget_3.topLevelItemCount()
+        programa = "Programa_" + str(items + 1)
+        pass

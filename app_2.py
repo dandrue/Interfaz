@@ -2606,9 +2606,12 @@ class Ui_MainWindow(object):
         self.pushButton_14.clicked.connect(self.ver_detalles)
         self.pushButton_19.clicked.connect(self.perfil)
         self.pushButton_20.clicked.connect(self.guardar_nuevo_programa)
+        self.pushButton_22.clicked.connect(self.detalles)
+        self.pushButton_23.clicked.connect(self.nuevasesion)
         self.pushButton_25.clicked.connect(self.nuevo_prog)
         self.pushButton_32.clicked.connect(self.buscar_perfiles)
         self.pushButton_30.clicked.connect(self.ir_a_perfil)
+        self.pushButton_35.clicked.connect(self.eliminar_programa)
 
         # self.Counter.valueChange(self.vel_control)
         self.list_all(MainWindow)
@@ -2908,22 +2911,26 @@ class Ui_MainWindow(object):
 
     def ir_a_perfil(self,MainWindow):
         self.treeWidget.clear()
-        item = self.treeWidget_2.selectedItems()[0]
-        index = self.treeWidget_2.indexFromItem(item).row()
-        data = self.treeWidget_2.topLevelItem(index).text(3)
+
         try:
+            item = self.treeWidget_2.selectedItems()[0]
+            index = self.treeWidget_2.indexFromItem(item).row()
+            data = self.treeWidget_2.topLevelItem(index).text(3)
             Paciente.ir_a_perfil(self,MainWindow, data)
         except IndexError:
             self.plainTextEdit.appendPlainText("Ninguna entrada seleccionada")
             print("Ninguna entrada seleccionada")
 
     def ver_detalles(self, MainWindow):
-        self.detalles(MainWindow)
-        item = self.treeWidget.selectedItems()[0]
-        index = self.treeWidget.indexFromItem(item).row()
-        data = self.treeWidget.topLevelItem(index).text(0)
-        print(data)
-        Programa.ver_detalles(self, MainWindow, data)
+        try:
+            item = self.treeWidget.selectedItems()[0]
+            index = self.treeWidget.indexFromItem(item).row()
+            data = self.treeWidget.topLevelItem(index).text(0)
+            Programa.ver_detalles(self, MainWindow, data)
+            self.detalles(MainWindow)
+        except IndexError:
+            self.plainTextEdit.appendPlainText("Ninguna entrada seleccionada")
+            print("Ninguna entrada seleccionada")
 
     def list_all(self,MainWindow):
         Paciente.list_all(self,MainWindow)
@@ -2941,6 +2948,19 @@ class Ui_MainWindow(object):
     def guardar_nuevo_programa(self, MainWindow):
         Programa.guardar_nuevo_programa(self, MainWindow)
 
+    def eliminar_programa(self, MainWindow):
+        try:
+            item = self.treeWidget.selectedItems()[0]
+            index = self.treeWidget.indexFromItem(item).row()
+            data = self.treeWidget.topLevelItem(index).text(0)
+            id = self.treeWidget.topLevelItem(index).text(1)
+            Programa.eliminar_programa(self, MainWindow, data, id)
+        except IndexError:
+            self.plainTextEdit.appendPlainText("Ninguna entrada seleccionada")
+            print("Ninguna entrada seleccionada")
+
+    def nuevasesion(self, MainWindow):
+        self.sesion(MainWindow)
 
 if __name__ == "__main__":
     import sys
