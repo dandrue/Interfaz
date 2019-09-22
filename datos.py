@@ -27,7 +27,7 @@ class Paciente(object):
         print(data_paciente)
 
         try:
-            con = sqlite3.connect("pacientes")
+            con = sqlite3.connect("pacientes.db")
             cursor = con.cursor()
             print("Creando perfil del paciente con id {}".format(str(id)))
             self.plainTextEdit.appendPlainText("Creando perfil del paciente con id {}".format(str(id)))
@@ -51,7 +51,7 @@ class Paciente(object):
         criterio = self.comboBox.currentText()
         value = self.lineEdit_5.text()
         try:
-            con = sqlite3.connect("pacientes")
+            con = sqlite3.connect("pacientes.db")
             cursor = con.cursor()
             if criterio == "Nombre":
                 value = value.upper()
@@ -134,6 +134,7 @@ class Paciente(object):
         for i in range(number):
             for j in range(13):
                 self.treeWidget.topLevelItem(i).setText(j, str(data[i][j]))
+                self.treeWidget.topLevelItem(i).setTextAlignment(j, QtCore.Qt.AlignCenter)
 
 
     def list_all(self,MainWindow):
@@ -158,6 +159,7 @@ class Paciente(object):
             for i in range(len(rows)):
                 for j in range(5):
                     self.treeWidget_2.topLevelItem(i).setText(j, str(rows[i][j]))
+                    self.treeWidget_2.topLevelItem(i).setTextAlignment(j, QtCore.Qt.AlignCenter)
             self.plainTextEdit.appendPlainText("Pacientes listados")
             print("Pacientes listados")
 
@@ -169,6 +171,7 @@ class Paciente(object):
         print('Eliminar paciente')
         msgBox = QMessageBox()
         msgBox.setIcon(QMessageBox.Warning)
+        msgBox.setWindowIcon(QtGui.QIcon("icons/prosthetic.png"))
         msgBox.setText("Esta seguro de eliminar este registro")
         msgBox.setWindowTitle("Eliminar regsitro del paciente")
         msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
@@ -190,8 +193,13 @@ class Paciente(object):
                 self.lineEdit_11.clear()
                 self.plainTextEdit_3.clear()
                 self.treeWidget.clear()
+                con = sqlite3.connect('pacientes.db')
+                cursor = con.cursor()
+                cursor.execute('DELETE FROM Programas WHERE IdPaciente = ?', (self.temp_id,))
                 self.plainTextEdit.appendPlainText("Se ha eliminado la entrada satisfactoriamente")
                 print("Se ha eliminado la entrada satisfactoriamente")
+                con.commit()
+                con.close()
             except Error:
                 self.plainTextEdit.appendPlainText("Error eliminando entrada")
                 print("Error eliminando entrada")
@@ -203,6 +211,7 @@ class Paciente(object):
 
         msgBox = QMessageBox()
         msgBox.setIcon(QMessageBox.Warning)
+        msgBox.setWindowIcon(QtGui.QIcon("icons/prosthetic.png"))
         msgBox.setText("Esta seguro de modificar la información del paciente?")
         msgBox.setWindowTitle("Modificar entrada")
         msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
@@ -263,12 +272,12 @@ class Programa(object):
         sup_actual_angle = str(25)
         sup_fin_angle = sup_actual_angle
         status = 'Activo'
-        data_programa = [id_programa, self.temp_id, nombreprograma, status, inicio, fin, sesiones, pron_init_angle, pron_actual_angle, pron_fin_angle, sup_init_angle, sup_actual_angle, sup_fin_angle]
+        data_programa = [id_programa, self.temp_id, nombreprograma, status, inicio, fin, sesiones, pron_init_angle, pron_actual_angle, pron_fin_angle, sup_init_angle, sup_actual_angle, sup_fin_angle, comentarios]
 
         try:
             con = sqlite3.connect('pacientes.db')
             cursor = con.cursor()
-            cursor.execute('INSERT INTO Programas(IdPrograma, IdPaciente, NombrePrograma, status, FechaInicio,FechaFin, NumeroSesiones, AngPronInicial, AngPronActual, AngPronFinal, AngSupInicial, AngSupActual, AngSupFinal) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)', data_programa)
+            cursor.execute('INSERT INTO Programas(IdPrograma, IdPaciente, NombrePrograma, status, FechaInicio,FechaFin, NumeroSesiones, AngPronInicial, AngPronActual, AngPronFinal, AngSupInicial, AngSupActual, AngSupFinal, Comentarios) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)', data_programa)
             con.commit()
             con.close()
 
@@ -298,7 +307,6 @@ class Programa(object):
             cursor = con.cursor()
             cursor.execute('SELECT * FROM programas WHERE IdPrograma = ?', (IdProgram,))
             data = cursor.fetchall()
-            print(data)
 
         except sqlite3.IntegrityError:
             print("Ocurrió un error")
@@ -319,10 +327,12 @@ class Programa(object):
         self.lineEdit_52.setText(str(sesionesrealizadas))
         self.dateEdit_5.setDateTime(QtCore.QDateTime(inicio))
         self.dateEdit_6.setDateTime(QtCore.QDateTime(fin))
+        self.plainTextEdit_5.setPlainText(data[0][13])
 
     def eliminar_programa(self, MainWindow,IdProgram, IdPaciente):
         msgBox = QMessageBox()
         msgBox.setIcon(QMessageBox.Warning)
+        msgBox.setWindowIcon(QtGui.QIcon("icons/prosthetic.png"))
         msgBox.setText("Esta seguro de modificar la información del paciente?")
         msgBox.setWindowTitle("Modificar entrada")
         msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
@@ -342,6 +352,7 @@ class Programa(object):
             for i in range(len(rows)):
                 for j in range(12):
                     self.treeWidget.topLevelItem(i).setText(j, str(rows[i][j]))
+                    self.treeWidget.topLevelItem(i).setTextAlignment(j, QtCore.Qt.AlignCenter)
             self.plainTextEdit.appendPlainText("Pacientes listados")
             print("Pacientes listados")
             con.commit()
@@ -349,5 +360,4 @@ class Programa(object):
 
     def nueva_sesion(self, MainWindow):
         items = self.treeWidget_3.topLevelItemCount()
-        programa = "Programa_" + str(items + 1)
-        pass
+        nombresesion = "sesion" + str(items)
