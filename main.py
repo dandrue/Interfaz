@@ -13,7 +13,12 @@ import math
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_MainWindow(object):
+    def __init__(self):
+        print("Conectando con el prototipo ...")
+        self.my_drive = odrive.find_any()
+
     def setupUi(self, MainWindow):
+
         MainWindow.setObjectName("MainWindow")
         MainWindow.setWindowModality(QtCore.Qt.WindowModal)
         MainWindow.resize(1380, 752)
@@ -2721,6 +2726,7 @@ class Ui_MainWindow(object):
         self.list_all(MainWindow)
 
 
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Interfaz de Usuario"))
@@ -2935,7 +2941,7 @@ class Ui_MainWindow(object):
         self.actionSesion.setText(_translate("MainWindow", "Sesion"))
         self.actionConfiguraci_n.setText(_translate("MainWindow", "Configuración"))
 
-        my_drive = "odrv0"
+
 
     def buscar(self,MainWindow):
         self.treeWidget_2.clear()
@@ -2958,34 +2964,44 @@ class Ui_MainWindow(object):
     def sesion(self,MainWindow):
         self.stackedWidget.setCurrentIndex(5)
 
-    def set_vel(self,MainWindow, my_drive):
+    def set_vel(self,MainWindow):
+        my_drive = self.my_drive
         Configuration.set_vel(self,MainWindow, my_drive)
 
-    def set_current(self,MainWindow, my_drive):
-        Configuration.set_current(self,MainWindow, my_drive)
+    def set_current(self,MainWindow):
+        my_drive = self.my_drive
+        Configuration.set_current(self,MainWindow,my_drive)
 
-    def set_calibration_current(self,MainWindow, my_drive):
+    def set_calibration_current(self,MainWindow):
+        my_drive = self.my_drive
         Configuration.set_calibration_current(self,MainWindow, my_drive)
 
-    def initial_calibration(self,MainWindow, my_drive):
+    def initial_calibration(self,MainWindow):
+        my_drive = self.my_drive
         Configuration.initial_calibration(self,MainWindow, my_drive)
 
-    def closed_loop(self,MainWindow, my_drive):
+    def closed_loop(self,MainWindow):
+        my_drive = self.my_drive
         Configuration.closed_loop(self,MainWindow, my_drive)
 
-    def set_point(self,MainWindow, my_drive):
-        Configuration.set_point(self,MainWindow, my_drive)
+    def set_point(self,MainWindow):
+        my_drive = self.my_drive
+        Configuration.set_point(self,MainWindow,my_drive)
 
-    def errors(self,MainWindow, my_drive):
-        Configuration.errors(self,MainWindow, my_drive)
+    def errors(self,MainWindow):
+        my_drive = self.my_drive
+        Configuration.errors(self,MainWindow,my_drive)
 
-    def save_config(self,MainWindow, my_drive):
+    def save_config(self,MainWindow):
+        my_drive = self.my_drive
         Configuration.save_config(self,MainWindow, my_drive)
 
-    def reboot(self,MainWindow, my_drive):
+    def reboot(self,MainWindow):
+        my_drive = self.my_drive
         Configuration.reboot(self,MainWindow, my_drive)
 
-    def vel_control(self,MainWindow, my_drive):
+    def vel_control(self,MainWindow):
+        my_drive = self.my_drive
         Configuration.vel_control(self,MainWindow, my_drive)
 
     def nuevo_paciente(self,MainWindow):
