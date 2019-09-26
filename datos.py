@@ -9,6 +9,9 @@ from sqlite3 import Error
 from datetime import date, datetime
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
+import odrive
+from odrive.enums import *
+from odrive import shell
 
 class Paciente(object):
 
@@ -265,19 +268,20 @@ class Programa(object):
         fin = self.dateEdit_4.date()
         fin = datetime.strftime(fin.toPyDate(), '%d/%m/%y')
         comentarios = self.plainTextEdit_4.toPlainText().upper()
-        pron_init_angle = str(Programa.get_pron_init())
+        my_drive = self.my_drive
+        pron_init_angle = str(self.lineEdit_14.text())
         pron_actual_angle = str(30)
         pron_fin_angle = pron_actual_angle
-        sup_init_angle = str(Programa.get_sup_init())
+        sup_init_angle = str(self.lineEdit_15.text())
         sup_actual_angle = str(25)
         sup_fin_angle = sup_actual_angle
         status = 'Activo'
-        data_programa = [id_programa, self.temp_id, nombreprograma, status, inicio, fin, sesiones, pron_init_angle, pron_actual_angle, pron_fin_angle, sup_init_angle, sup_actual_angle, sup_fin_angle, comentarios]
+        data_programa = [id_programa, self.temp_id, nombreprograma, status, inicio, fin, sesiones, 0,pron_init_angle, pron_actual_angle, pron_fin_angle, sup_init_angle, sup_actual_angle, sup_fin_angle, comentarios]
 
         try:
             con = sqlite3.connect('pacientes.db')
             cursor = con.cursor()
-            cursor.execute('INSERT INTO Programas(IdPrograma, IdPaciente, NombrePrograma, status, FechaInicio,FechaFin, NumeroSesiones, AngPronInicial, AngPronActual, AngPronFinal, AngSupInicial, AngSupActual, AngSupFinal, Comentarios) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)', data_programa)
+            cursor.execute('INSERT INTO Programas(IdPrograma, IdPaciente, NombrePrograma, status, FechaInicio,FechaFin, NumeroSesiones, SesionesRealizadas ,AngPronInicial, AngPronActual, AngPronFinal, AngSupInicial, AngSupActual, AngSupFinal, Comentarios) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', data_programa)
             con.commit()
             con.close()
 
@@ -293,13 +297,13 @@ class Programa(object):
         # self.dateEdit_4.clear()
         self.plainTextEdit_4.clear()
 
-    def get_pron_init():
-        pron_init_angle = 25
-        return pron_init_angle
-
-    def get_sup_init():
-        sup_init_angle = 14
-        return sup_init_angle
+    # def get_pron_init():
+    #     pron_init_angle = 25
+    #     return pron_init_angle
+    #
+    # def get_sup_init():
+    #     sup_init_angle = 14
+    #     return sup_init_angle
 
     def ver_detalles(self, MainWindow, IdProgram):
         try:
@@ -318,16 +322,16 @@ class Programa(object):
         self.lineEdit_20.setText(data[0][2])
         self.lineEdit_21.setText(str(IdProgram))
         self.lineEdit_51.setText(str(data[0][6]))
-        self.lineEdit_27.setText(str(data[0][7]))
-        self.lineEdit_23.setText(str(data[0][8]))
-        self.lineEdit_24.setText(str(data[0][9]))
-        self.lineEdit_25.setText(str(data[0][10]))
-        self.lineEdit_26.setText(str(data[0][11]))
-        self.lineEdit_22.setText(str(data[0][12]))
+        self.lineEdit_27.setText(str(data[0][8]))
+        self.lineEdit_23.setText(str(data[0][9]))
+        self.lineEdit_24.setText(str(data[0][10]))
+        self.lineEdit_25.setText(str(data[0][11]))
+        self.lineEdit_26.setText(str(data[0][12]))
+        self.lineEdit_22.setText(str(data[0][13]))
         self.lineEdit_52.setText(str(sesionesrealizadas))
         self.dateEdit_5.setDateTime(QtCore.QDateTime(inicio))
         self.dateEdit_6.setDateTime(QtCore.QDateTime(fin))
-        self.plainTextEdit_5.setPlainText(data[0][13])
+        self.plainTextEdit_5.setPlainText(data[0][14])
 
     def eliminar_programa(self, MainWindow,IdProgram, IdPaciente):
         msgBox = QMessageBox()
@@ -361,3 +365,51 @@ class Programa(object):
     def nueva_sesion(self, MainWindow):
         items = self.treeWidget_3.topLevelItemCount()
         nombresesion = "sesion" + str(items)
+
+    def get_pron_init(self, MainWindow, my_drive):
+        print(self.lineEdit_14.text())
+        my_drive.axis0.requested_state = AXIS_STATE_IDLE
+        pron_init_pulses = my_drive.axis0.encoder.pos_estimate
+        pron_init_angle = pron_init_pulses / 66.67
+        print(round(pron_init_angle,0))
+        self.lineEdit_14.setText(str(round(pron_init_angle,1)))
+        return pron_init_angle
+
+    def get_sup_init(self, MainWindow, my_drive):
+        my_drive.axis0.requested_state = AXIS_STATE_IDLE
+        sup_init_pulses = my_drive.axis0.encoder.pos_estimate
+        sup_init_angle = sup_init_pulses / 66.67
+        print(round(sup_init_angle,0))
+        self.lineEdit_15.setText(str(round(sup_init_angle,1)))
+        return sup_init_angle
+
+    def nueva_sesion(self, MainWindow):
+        idpaciente = self.temp_id
+        self.lineEdit_45.setText(str(idpaciente))
+        program_id = int(self.lineEdit_21.text())
+
+        try:
+            con = sqlite3.connect('pacientes.db')
+            cursor = con.cursor()
+            cursor.execute("SELECT * FROM Programas WHERE IdPrograma = ?", (program_id,))
+            data = cursor.fetchall()
+
+        except sqlite3.IntegrityError:
+            print("Ocurrió un error")
+
+        idpaciente = data[0][1]
+        pron_actual = data[0][9]
+        sup_actual = data[0][12]
+        self.lineEdit_45.setText(str(idpaciente))
+        self.lineEdit_28.setText(str(program_id))
+        self.lineEdit_29.setText(str(pron_actual))
+        self.lineEdit_30.setText(str(sup_actual))
+
+class Sesion(object):
+    def pronacion(self, MainWindow, my_drive):
+        current = self.Counter_3.value()
+        ganancia = float(self.lineEdit_39.text())
+        position = float(self.lineEdit_31.text())
+        my_drive.axis0.motor.config.current_lim = current
+        # my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
+        my_drive.axis0.controller.pos_setpoint = position*66.67

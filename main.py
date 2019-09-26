@@ -16,6 +16,7 @@ class Ui_MainWindow(object):
     def __init__(self):
         print("Conectando con el prototipo ...")
         self.my_drive = odrive.find_any()
+        print("Prototipo encontrado")
 
     def setupUi(self, MainWindow):
 
@@ -2710,17 +2711,22 @@ class Ui_MainWindow(object):
         self.pushButton_12.clicked.connect(self.eliminar_paciente)
         self.pushButton_13.clicked.connect(self.nuevo_paciente)
         self.pushButton_14.clicked.connect(self.ver_detalles)
+        self.pushButton_15.clicked.connect(self.get_pron_init)
+        self.pushButton_16.clicked.connect(self.get_sup_init)
         self.pushButton_19.clicked.connect(self.perfil)
         self.pushButton_20.clicked.connect(self.guardar_nuevo_programa)
         self.pushButton_22.clicked.connect(self.detalles)
-        self.pushButton_23.clicked.connect(self.nuevasesion)
+        self.pushButton_23.clicked.connect(self.nueva_sesion)
         self.pushButton_25.clicked.connect(self.nuevo_prog)
+        self.pushButton_28.clicked.connect(self.pronacion)
         self.pushButton_32.clicked.connect(self.buscar_perfiles)
         self.pushButton_30.clicked.connect(self.ir_a_perfil)
         self.pushButton_35.clicked.connect(self.eliminar_programa)
         self.pushButton_36.clicked.connect(self.perfil)
         self.pushButton_37.clicked.connect(self.nuevo)
         self.pushButton_38.clicked.connect(self.buscar)
+
+        self.Counter_3.valueChanged.connect(self.pronacion)
 
         # self.Counter.valueChange(self.vel_control)
         self.list_all(MainWindow)
@@ -2918,7 +2924,7 @@ class Ui_MainWindow(object):
         self.pushButton.setText(_translate("MainWindow", "Iniciar"))
         self.groupBox_4.setTitle(_translate("MainWindow", "Posición"))
         self.pushButton_3.setText(_translate("MainWindow", "Enviar"))
-        self.label_5.setText(_translate("MainWindow", "Set point"))
+        self.label_5.setText(_translate("MainWindow", "Set point [°]"))
         self.groupBox_5.setTitle(_translate("MainWindow", "Control de lazo cerrado"))
         self.label_4.setText(_translate("MainWindow", "Iniciar control de lazo cerrado"))
         self.pushButton_2.setText(_translate("MainWindow", "Iniciar"))
@@ -3069,8 +3075,21 @@ class Ui_MainWindow(object):
             self.plainTextEdit.appendPlainText("Ninguna entrada seleccionada")
             print("Ninguna entrada seleccionada")
 
-    def nuevasesion(self, MainWindow):
+    def get_pron_init(self, MainWindow):
+        my_drive = self.my_drive
+        Programa.get_pron_init(self, MainWindow, my_drive)
+
+    def get_sup_init(self, MainWindow):
+        my_drive = self.my_drive
+        Programa.get_sup_init(self, MainWindow, my_drive)
+
+    def nueva_sesion(self, MainWindow):
         self.sesion(MainWindow)
+        Programa.nueva_sesion(self, MainWindow)
+
+    def pronacion(self, MainWindow):
+        my_drive = self.my_drive
+        sesion.pronacion(self, MainWindow, my_drive)
 
 if __name__ == "__main__":
     import sys

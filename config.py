@@ -11,8 +11,9 @@ import time
 class Configuration(object):
     def set_vel(self,MainWindow, my_drive):
         get_vel = self.lineEdit.text()
-        my_drive.axis0.controller.config.vel_limit = int(get_vel)
-        print("Velocidad cambiada a {}".format(get_vel))
+        vel_counts = int(get_vel) * (2400/60)
+        my_drive.axis0.controller.config.vel_limit = int(vel_counts)
+        print("Velocidad cambiada a {}".format(vel_counts))
         self.plainTextEdit.appendPlainText("Velocidad cambiada a :{} [RPM]".format(get_vel))
 
     def set_current(self,MainWindow, my_drive):
@@ -42,9 +43,13 @@ class Configuration(object):
         my_drive.axis0.controller.pos_setpoint = 0
 
     def set_point(self,MainWindow, my_drive):
-
+        # Angulo deseado
         set_point = int(self.lineEdit_3.text())
-        print("Buscando set_point = {}".format(str(set_point)))
+        # Counts_degree es el equivalente en pulsos de 1°
+        counts_degree = 66.67
+        # Set_point para el control de lazo cerrado en pulsos
+        set_point = set_point * counts_degree
+        print("Buscando set_point = {}".format(str(round(set_point,0))))
         self.plainTextEdit.appendPlainText("Buscando set_point = {}".format(str(set_point)))
         my_drive.axis0.controller.pos_setpoint = set_point
 
@@ -57,9 +62,10 @@ class Configuration(object):
     def errors(self,MainWindow, my_drive):
 
         errores = shell.dump_errors(my_drive)
-        print(errores)
+        self.plainTextEdit.appendPlainText(shell.dump_errors(my_drive))
+        print(type(errores))
         shell.dump_errors(my_drive,True)
-        self.plainTextEdit.appendPlainText(str(errores))
+
 
     def save_config(self,MainWindow, my_drive):
 
