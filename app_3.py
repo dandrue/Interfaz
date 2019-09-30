@@ -16,32 +16,24 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class FunctionThread(QThread):
     signal = pyqtSignal('PyQt_PyObject')
 
-    def __init__(self, my_drive, value, seconds):
+    def __init__(self, my_drive, value):
         QThread.__init__(self)
         self.my_drive = my_drive
         self.value = value
-        self.seconds = seconds
 
     def run(self):
-        counter = 0
-        seconds = self.seconds
         value = self.value
-        while value == True and counter < seconds:
+        while value == True:
             my_drive = self.my_drive
             torque = (8.27/270) * my_drive.axis0.motor.current_control.Iq_measured
-            enc_position = my_drive.axis0.encoder.pos_estimate
-            enc_position = enc_position / 66.67
-            data = [round(torque,2), round(enc_position,2), seconds - counter - 0.5]
-            self.signal.emit(data)
-            counter = counter +  0.5
+            self.signal.emit(round(torque,2))
             time.sleep(0.5)
-        else:
-            self.signal.emit('finish')
+
 
 class Ui_MainWindow(object):
+
     def __init__(self):
         print("Conectando con el prototipo ...")
-        # self.my_drive = ""
         self.my_drive = odrive.find_any()
         print("Prototipo encontrado")
         my_drive = self.my_drive
@@ -49,68 +41,17 @@ class Ui_MainWindow(object):
         my_drive.axis0.controller.config.vel_gain = 7.5/10000
         my_drive.axis0.controller.config.vel_integrator_gain = 100/10000
 
-    def supThread(self, MainWindow):
-        self.suprep += 1
-        if self.pushButton_27.isEnabled != True:
-            value = True
-        else:
-            value = False
-        self.seconds = float(self.lineEdit_38.text())
-        seconds = self.seconds
-        self.funthread = FunctionThread(self.my_drive, value, seconds)
-        Sesion.supinacion(self, MainWindow,self.my_drive)
-        self.pushButton_27.setDisabled(True)
-        self.plainTextEdit.appendPlainText("Iniciando recolección de datos")
-        self.funthread.start()
-        self.funthread.signal.connect(self.streamSupData)
-
-    def pronThread(self, MainWindow):
-        self.pronrep += 1
-        if self.pushButton_26.isEnabled != True:
-            value = True
-        else:
-            value = False
-        self.seconds = float(self.lineEdit_37.text())
-        seconds = self.seconds
-        self.funthread = FunctionThread(self.my_drive, value, seconds)
-        Sesion.pronacion(self, MainWindow,self.my_drive)
+    def fnthread(self, MainWindow):
         self.pushButton_26.setDisabled(True)
         self.plainTextEdit.appendPlainText("Iniciando recolección de datos")
         self.funthread.start()
-        self.funthread.signal.connect(self.streamPronData)
 
-    def pronFinish(self, MainWindow):
-        try:
-            self.lineEdit_37.setText(str(self.seconds))
-            self.pushButton_26.setEnabled(True)
-            self.plainTextEdit.appendPlainText("Finalizando recolección de datos")
-            self.funthread.terminate()
-            # self.my_drive.axis0.requested_state = AXIS_STATE_IDLE
-            self.lineEdit_41.setText(str(self.pronrep))
-            TMax = max(self.torque)
-            pronMax = max(self.pron)
-            self.lineEdit_47.setText(str(pronMax))
-            self.lineEdit_33.setText(str(TMax))
-            print(self.pron)
-            print(self.torque)
-        except ValueError:
-            self.plainTextEdit.appendPlainText("Cambie el tiempo de sostenimiento")
+    def finished(self, MainWindow):
+        self.pushButton_26.setEnabled(True)
+        self.plainTextEdit.appendPlainText("Finalizando recolección de datos")
+        self.funthread.terminate()
+        self.my_drive.axis0.requested_state = AXIS_STATE_IDLE
 
-    def supFinish(self, MainWindow):
-        try:
-            self.lineEdit_38.setText(str(self.seconds))
-            self.pushButton_27.setEnabled(True)
-            self.plainTextEdit.appendPlainText("Finalizando recolección de datos")
-            self.funthread.terminate()
-            # self.my_drive.axis0.requested_state = AXIS_STATE_IDLE
-            self.lineEdit_44.setText(str(self.suprep))
-            TMax = max(self.torqueSup)
-            supMax = max(self.sup)
-            self.lineEdit_48.setText(str(supMax))
-            self.lineEdit_35.setText(str(TMax))
-
-        except ValueError:
-            self.plainTextEdit.appendPlainText("Cambie el tiempo de sostenimiento")
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -476,7 +417,7 @@ class Ui_MainWindow(object):
         self.scrollArea_5.setWidgetResizable(True)
         self.scrollArea_5.setObjectName("scrollArea_5")
         self.scrollAreaWidgetContents_5 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_5.setGeometry(QtCore.QRect(0, 0, 481, 343))
+        self.scrollAreaWidgetContents_5.setGeometry(QtCore.QRect(0, 0, 958, 613))
         self.scrollAreaWidgetContents_5.setObjectName("scrollAreaWidgetContents_5")
         self.gridLayout_9 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents_5)
         self.gridLayout_9.setObjectName("gridLayout_9")
@@ -1717,7 +1658,6 @@ class Ui_MainWindow(object):
         self.gridLayout_32.addWidget(self.label_85, 4, 0, 1, 1)
         self.lineEdit_47 = QtWidgets.QLineEdit(self.groupBox_22)
         self.lineEdit_47.setMaximumSize(QtCore.QSize(75, 16777215))
-        self.lineEdit_47.setAlignment(QtCore.Qt.AlignCenter)
         self.lineEdit_47.setObjectName("lineEdit_47")
         self.gridLayout_32.addWidget(self.lineEdit_47, 4, 1, 1, 1, QtCore.Qt.AlignHCenter)
         self.gridLayout_30.addWidget(self.groupBox_22, 0, 5, 1, 1)
@@ -1794,8 +1734,6 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.doubleSpinBox.sizePolicy().hasHeightForWidth())
         self.doubleSpinBox.setSizePolicy(sizePolicy)
         self.doubleSpinBox.setMaximumSize(QtCore.QSize(150, 16777215))
-        self.doubleSpinBox.setMaximum(50.0)
-        self.doubleSpinBox.setProperty("value", 10.0)
         self.doubleSpinBox.setObjectName("doubleSpinBox")
         self.gridLayout_33.addWidget(self.doubleSpinBox, 0, 1, 1, 1, QtCore.Qt.AlignHCenter)
         self.doubleSpinBox_2 = QtWidgets.QDoubleSpinBox(self.groupBox_21)
@@ -1805,7 +1743,6 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.doubleSpinBox_2.sizePolicy().hasHeightForWidth())
         self.doubleSpinBox_2.setSizePolicy(sizePolicy)
         self.doubleSpinBox_2.setMaximumSize(QtCore.QSize(150, 16777215))
-        self.doubleSpinBox_2.setMaximum(10.0)
         self.doubleSpinBox_2.setObjectName("doubleSpinBox_2")
         self.gridLayout_33.addWidget(self.doubleSpinBox_2, 1, 1, 1, 1, QtCore.Qt.AlignHCenter)
         self.gridLayout_30.addWidget(self.groupBox_21, 0, 3, 1, 1)
@@ -1893,7 +1830,6 @@ class Ui_MainWindow(object):
         self.gridLayout_35.addWidget(self.label_86, 4, 0, 1, 1)
         self.lineEdit_48 = QtWidgets.QLineEdit(self.groupBox_24)
         self.lineEdit_48.setMaximumSize(QtCore.QSize(75, 16777215))
-        self.lineEdit_48.setAlignment(QtCore.Qt.AlignCenter)
         self.lineEdit_48.setObjectName("lineEdit_48")
         self.gridLayout_35.addWidget(self.lineEdit_48, 4, 1, 1, 1, QtCore.Qt.AlignHCenter)
         self.gridLayout_31.addWidget(self.groupBox_24, 0, 5, 1, 1)
@@ -1920,8 +1856,6 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.doubleSpinBox_3.sizePolicy().hasHeightForWidth())
         self.doubleSpinBox_3.setSizePolicy(sizePolicy)
         self.doubleSpinBox_3.setMaximumSize(QtCore.QSize(150, 16777215))
-        self.doubleSpinBox_3.setMaximum(50.0)
-        self.doubleSpinBox_3.setProperty("value", 10.0)
         self.doubleSpinBox_3.setObjectName("doubleSpinBox_3")
         self.gridLayout_34.addWidget(self.doubleSpinBox_3, 0, 1, 1, 1, QtCore.Qt.AlignHCenter)
         self.doubleSpinBox_4 = QtWidgets.QDoubleSpinBox(self.groupBox_23)
@@ -1931,9 +1865,6 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.doubleSpinBox_4.sizePolicy().hasHeightForWidth())
         self.doubleSpinBox_4.setSizePolicy(sizePolicy)
         self.doubleSpinBox_4.setMaximumSize(QtCore.QSize(150, 16777215))
-        self.doubleSpinBox_4.setMinimum(-10.0)
-        self.doubleSpinBox_4.setMaximum(0.0)
-        self.doubleSpinBox_4.setProperty("value", 0.0)
         self.doubleSpinBox_4.setObjectName("doubleSpinBox_4")
         self.gridLayout_34.addWidget(self.doubleSpinBox_4, 1, 1, 1, 1, QtCore.Qt.AlignHCenter)
         self.label_73 = QtWidgets.QLabel(self.groupBox_23)
@@ -2338,32 +2269,6 @@ class Ui_MainWindow(object):
         self.groupBox.setObjectName("groupBox")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.groupBox)
         self.gridLayout_3.setObjectName("gridLayout_3")
-        self.groupBox_7 = QtWidgets.QGroupBox(self.groupBox)
-        self.groupBox_7.setObjectName("groupBox_7")
-        self.gridLayout_11 = QtWidgets.QGridLayout(self.groupBox_7)
-        self.gridLayout_11.setObjectName("gridLayout_11")
-        self.pushButton_10 = QtWidgets.QPushButton(self.groupBox_7)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_10.sizePolicy().hasHeightForWidth())
-        self.pushButton_10.setSizePolicy(sizePolicy)
-        self.pushButton_10.setMaximumSize(QtCore.QSize(75, 16777215))
-        self.pushButton_10.setMouseTracking(False)
-        self.pushButton_10.setFocusPolicy(QtCore.Qt.StrongFocus)
-        self.pushButton_10.setShortcut("")
-        self.pushButton_10.setObjectName("pushButton_10")
-        self.gridLayout_11.addWidget(self.pushButton_10, 0, 0, 1, 1, QtCore.Qt.AlignHCenter)
-        self.pushButton_11 = QtWidgets.QPushButton(self.groupBox_7)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_11.sizePolicy().hasHeightForWidth())
-        self.pushButton_11.setSizePolicy(sizePolicy)
-        self.pushButton_11.setMaximumSize(QtCore.QSize(75, 16777215))
-        self.pushButton_11.setObjectName("pushButton_11")
-        self.gridLayout_11.addWidget(self.pushButton_11, 0, 1, 1, 1, QtCore.Qt.AlignHCenter)
-        self.gridLayout_3.addWidget(self.groupBox_7, 3, 1, 1, 1)
         self.groupBox_8 = QtWidgets.QGroupBox(self.groupBox)
         self.groupBox_8.setObjectName("groupBox_8")
         self.gridLayout_12 = QtWidgets.QGridLayout(self.groupBox_8)
@@ -2434,33 +2339,41 @@ class Ui_MainWindow(object):
         self.pushButton_8.setMaximumSize(QtCore.QSize(75, 16777215))
         self.pushButton_8.setObjectName("pushButton_8")
         self.gridLayout_12.addWidget(self.pushButton_8, 5, 2, 1, 1, QtCore.Qt.AlignHCenter)
-        self.gridLayout_3.addWidget(self.groupBox_8, 2, 1, 1, 1)
+        self.gridLayout_3.addWidget(self.groupBox_8, 1, 1, 1, 1)
         spacerItem63 = QtWidgets.QSpacerItem(80, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout_3.addItem(spacerItem63, 2, 2, 1, 1)
-        spacerItem64 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout_3.addItem(spacerItem64, 4, 1, 1, 1)
-        spacerItem65 = QtWidgets.QSpacerItem(80, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout_3.addItem(spacerItem65, 2, 0, 1, 1)
-        spacerItem66 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout_3.addItem(spacerItem66, 0, 1, 1, 1)
-        self.groupBox_6 = QtWidgets.QGroupBox(self.groupBox)
-        self.groupBox_6.setObjectName("groupBox_6")
-        self.gridLayout_51 = QtWidgets.QGridLayout(self.groupBox_6)
-        self.gridLayout_51.setObjectName("gridLayout_51")
-        self.label_93 = QtWidgets.QLabel(self.groupBox_6)
-        self.label_93.setObjectName("label_93")
-        self.gridLayout_51.addWidget(self.label_93, 0, 0, 1, 1, QtCore.Qt.AlignHCenter)
-        self.pushButton_40 = QtWidgets.QPushButton(self.groupBox_6)
+        self.gridLayout_3.addItem(spacerItem63, 1, 0, 1, 1)
+        self.groupBox_7 = QtWidgets.QGroupBox(self.groupBox)
+        self.groupBox_7.setObjectName("groupBox_7")
+        self.gridLayout_11 = QtWidgets.QGridLayout(self.groupBox_7)
+        self.gridLayout_11.setObjectName("gridLayout_11")
+        self.pushButton_10 = QtWidgets.QPushButton(self.groupBox_7)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_40.sizePolicy().hasHeightForWidth())
-        self.pushButton_40.setSizePolicy(sizePolicy)
-        self.pushButton_40.setMaximumSize(QtCore.QSize(75, 16777215))
-        self.pushButton_40.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.pushButton_40.setObjectName("pushButton_40")
-        self.gridLayout_51.addWidget(self.pushButton_40, 1, 0, 1, 1)
-        self.gridLayout_3.addWidget(self.groupBox_6, 1, 1, 1, 1)
+        sizePolicy.setHeightForWidth(self.pushButton_10.sizePolicy().hasHeightForWidth())
+        self.pushButton_10.setSizePolicy(sizePolicy)
+        self.pushButton_10.setMaximumSize(QtCore.QSize(75, 16777215))
+        self.pushButton_10.setMouseTracking(False)
+        self.pushButton_10.setFocusPolicy(QtCore.Qt.StrongFocus)
+        self.pushButton_10.setShortcut("")
+        self.pushButton_10.setObjectName("pushButton_10")
+        self.gridLayout_11.addWidget(self.pushButton_10, 0, 0, 1, 1, QtCore.Qt.AlignHCenter)
+        self.pushButton_11 = QtWidgets.QPushButton(self.groupBox_7)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton_11.sizePolicy().hasHeightForWidth())
+        self.pushButton_11.setSizePolicy(sizePolicy)
+        self.pushButton_11.setMaximumSize(QtCore.QSize(75, 16777215))
+        self.pushButton_11.setObjectName("pushButton_11")
+        self.gridLayout_11.addWidget(self.pushButton_11, 0, 1, 1, 1, QtCore.Qt.AlignHCenter)
+        self.gridLayout_3.addWidget(self.groupBox_7, 2, 1, 1, 1)
+        spacerItem64 = QtWidgets.QSpacerItem(80, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout_3.addItem(spacerItem64, 1, 2, 1, 1)
+        spacerItem65 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.gridLayout_3.addItem(spacerItem65, 3, 1, 1, 1)
+        spacerItem66 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.gridLayout_3.addItem(spacerItem66, 0, 1, 1, 1)
         self.gridLayout_2.addWidget(self.groupBox, 0, 1, 1, 1)
         self.groupBox_2 = QtWidgets.QGroupBox(self.widget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
@@ -2663,8 +2576,6 @@ class Ui_MainWindow(object):
         self.actionSesion.setObjectName("actionSesion")
         self.actionConfiguraci_n = QtWidgets.QAction(MainWindow)
         self.actionConfiguraci_n.setObjectName("actionConfiguraci_n")
-        self.actionDetectar_Prototipo = QtWidgets.QAction(MainWindow)
-        self.actionDetectar_Prototipo.setObjectName("actionDetectar_Prototipo")
         self.menuPacientes.addAction(self.actionBuscar)
         self.menuPacientes.addAction(self.actionNuevo)
         self.menuPacientes.addAction(self.actionPerfil)
@@ -2672,7 +2583,6 @@ class Ui_MainWindow(object):
         self.menuPacientes.addAction(self.actionNuevo_Programa_2)
         self.menuPacientes.addAction(self.actionDetalles)
         self.menuPacientes.addAction(self.actionSesion)
-        self.menuSistema.addAction(self.actionDetectar_Prototipo)
         self.menuSistema.addAction(self.actionConfiguraci_n)
         self.menuBar.addAction(self.menuPacientes.menuAction())
         self.menuBar.addAction(self.menuSistema.menuAction())
@@ -2850,7 +2760,6 @@ class Ui_MainWindow(object):
         self.pushButton_23.clicked.connect(self.nueva_sesion)
         self.pushButton_25.clicked.connect(self.nuevo_prog)
         self.pushButton_28.clicked.connect(self.pronacion)
-        self.pushButton_29.clicked.connect(self.supinacion)
         self.pushButton_32.clicked.connect(self.buscar_perfiles)
         self.pushButton_30.clicked.connect(self.ir_a_perfil)
         self.pushButton_35.clicked.connect(self.eliminar_programa)
@@ -2860,23 +2769,19 @@ class Ui_MainWindow(object):
 
         self.doubleSpinBox.valueChanged.connect(self.pronacion)
         self.doubleSpinBox_2.valueChanged.connect(self.ganancia)
-        self.doubleSpinBox_3.valueChanged.connect(self.supinacion)
-        self.doubleSpinBox_4.valueChanged.connect(self.gananciaSup)
 
         # self.Counter.valueChange(self.vel_control)
         self.list_all(MainWindow)
         self.lineEdit_31.setText("0")
-        self.pronrep = 0
-        self.suprep = 0
+        if self.pushButton_26.isEnabled != True:
+            value = True
+        else:
+            value = False
+        self.pushButton_26.clicked.connect(self.fnthread)
+        self.funthread = FunctionThread(self.my_drive, value)
+        self.funthread.signal.connect(self.streamdata)
+        self.pushButton_31.clicked.connect(self.finished)
 
-        self.pron = []
-        self.sup = []
-        self.torque = []
-        self.torqueSup = []
-        self.pushButton_26.clicked.connect(self.pronThread)
-        self.pushButton_31.clicked.connect(self.pronFinish)
-        self.pushButton_27.clicked.connect(self.supThread)
-        self.pushButton_34.clicked.connect(self.supFinish)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -3022,14 +2927,9 @@ class Ui_MainWindow(object):
         self.groupBox_22.setTitle(_translate("MainWindow", "Variables"))
         self.label_75.setText(_translate("MainWindow", "Delta [°]"))
         self.label_64.setText(_translate("MainWindow", "Posición [°]"))
-        self.lineEdit_33.setText(_translate("MainWindow", "0"))
-        self.lineEdit_32.setText(_translate("MainWindow", "0"))
         self.label_65.setText(_translate("MainWindow", "Fuerza"))
-        self.lineEdit_40.setText(_translate("MainWindow", "0"))
         self.label_77.setText(_translate("MainWindow", "Repetición"))
-        self.lineEdit_41.setText(_translate("MainWindow", "0"))
         self.label_85.setText(_translate("MainWindow", "PronMax [°]"))
-        self.lineEdit_47.setText(_translate("MainWindow", "0"))
         self.groupBox_21.setTitle(_translate("MainWindow", "Configuración del control"))
         self.pushButton_26.setText(_translate("MainWindow", "Iniciar"))
         self.label_63.setText(_translate("MainWindow", "Corriente [A]"))
@@ -3037,52 +2937,37 @@ class Ui_MainWindow(object):
         self.label_74.setText(_translate("MainWindow", "Ganancia [°]"))
         self.label_72.setText(_translate("MainWindow", "Tiempo [s]"))
         self.label_76.setText(_translate("MainWindow", "-----------------------------------------------------"))
-        self.lineEdit_37.setText(_translate("MainWindow", "0"))
-        self.lineEdit_31.setText(_translate("MainWindow", "0"))
         self.pushButton_31.setText(_translate("MainWindow", "Parar"))
         self.pushButton_28.setText(_translate("MainWindow", "Ir"))
         self.groupBox_20.setTitle(_translate("MainWindow", "Supinación"))
         self.groupBox_24.setTitle(_translate("MainWindow", "Variables"))
         self.label_80.setText(_translate("MainWindow", "Delta [°]"))
         self.label_68.setText(_translate("MainWindow", "Posición [°]"))
-        self.lineEdit_35.setText(_translate("MainWindow", "0"))
-        self.lineEdit_36.setText(_translate("MainWindow", "0"))
         self.label_69.setText(_translate("MainWindow", "Fuerza"))
-        self.lineEdit_43.setText(_translate("MainWindow", "0"))
         self.label_81.setText(_translate("MainWindow", "Repetición"))
-        self.lineEdit_44.setText(_translate("MainWindow", "0"))
         self.label_86.setText(_translate("MainWindow", "SupMax [°]"))
-        self.lineEdit_48.setText(_translate("MainWindow", "0"))
         self.groupBox_23.setTitle(_translate("MainWindow", "Configuración del control"))
         self.label_73.setText(_translate("MainWindow", "Tiempo [s]"))
         self.label_78.setText(_translate("MainWindow", "Ganancia [°]"))
         self.pushButton_27.setText(_translate("MainWindow", "Iniciar"))
         self.pushButton_29.setText(_translate("MainWindow", "Ir"))
         self.label_66.setText(_translate("MainWindow", "Corriente [A]"))
-        self.lineEdit_34.setText(_translate("MainWindow", "0"))
         self.label_67.setText(_translate("MainWindow", "Posición [°]"))
-        self.lineEdit_38.setText(_translate("MainWindow", "0"))
         self.pushButton_34.setText(_translate("MainWindow", "Parar"))
         self.label_79.setText(_translate("MainWindow", "-----------------------------------------------------"))
         self.label_55.setText(_translate("MainWindow", "NUEVA SESION"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Paciente"))
         self.groupBox.setTitle(_translate("MainWindow", "Configuración Inicial del Sistema"))
+        self.groupBox_8.setTitle(_translate("MainWindow", "Valores"))
+        self.label.setText(_translate("MainWindow", "velocidad límite [rpm]"))
+        self.pushButton_7.setText(_translate("MainWindow", "Setear"))
+        self.label_7.setText(_translate("MainWindow", "Corriente de calibraión [A]"))
+        self.pushButton_9.setText(_translate("MainWindow", "Setear"))
+        self.label_2.setText(_translate("MainWindow", "Corriente límite [A]"))
+        self.pushButton_8.setText(_translate("MainWindow", "Setear"))
         self.groupBox_7.setTitle(_translate("MainWindow", "Guardar - Reiniciar"))
         self.pushButton_10.setText(_translate("MainWindow", "Guardar"))
         self.pushButton_11.setText(_translate("MainWindow", "Reboot"))
-        self.groupBox_8.setTitle(_translate("MainWindow", "Valores"))
-        self.label.setText(_translate("MainWindow", "velocidad límite [rpm]"))
-        self.lineEdit.setText(_translate("MainWindow", "180"))
-        self.pushButton_7.setText(_translate("MainWindow", "Setear"))
-        self.label_7.setText(_translate("MainWindow", "Corriente de calibración [A]"))
-        self.lineEdit_4.setText(_translate("MainWindow", "10"))
-        self.pushButton_9.setText(_translate("MainWindow", "Setear"))
-        self.label_2.setText(_translate("MainWindow", "Corriente límite [A]"))
-        self.lineEdit_2.setText(_translate("MainWindow", "10"))
-        self.pushButton_8.setText(_translate("MainWindow", "Setear"))
-        self.groupBox_6.setTitle(_translate("MainWindow", "Detectar Prototipo"))
-        self.label_93.setText(_translate("MainWindow", "Detectar Prototipo"))
-        self.pushButton_40.setText(_translate("MainWindow", "Detectar"))
         self.groupBox_2.setTitle(_translate("MainWindow", "Calibración y control"))
         self.groupBox_3.setTitle(_translate("MainWindow", "Calibración Inicial"))
         self.pushButton_6.setText(_translate("MainWindow", "Revisar"))
@@ -3090,7 +2975,6 @@ class Ui_MainWindow(object):
         self.label_3.setText(_translate("MainWindow", "Sequencia de calibración"))
         self.pushButton.setText(_translate("MainWindow", "Iniciar"))
         self.groupBox_4.setTitle(_translate("MainWindow", "Posición"))
-        self.lineEdit_3.setText(_translate("MainWindow", "0"))
         self.pushButton_3.setText(_translate("MainWindow", "Enviar"))
         self.label_5.setText(_translate("MainWindow", "Set point [°]"))
         self.groupBox_5.setTitle(_translate("MainWindow", "Control de lazo cerrado"))
@@ -3114,7 +2998,6 @@ class Ui_MainWindow(object):
         self.actionDetalles.setText(_translate("MainWindow", "Detalles"))
         self.actionSesion.setText(_translate("MainWindow", "Sesion"))
         self.actionConfiguraci_n.setText(_translate("MainWindow", "Configuración"))
-        self.actionDetectar_Prototipo.setText(_translate("MainWindow", "Detectar Prototipo"))
 
     def buscar(self,MainWindow):
         self.treeWidget_2.clear()
@@ -3262,49 +3145,9 @@ class Ui_MainWindow(object):
         my_drive = self.my_drive
         Sesion.ganancia(self, MainWindow, my_drive)
 
-    def supinacion(self, MainWindow):
-        my_drive = self.my_drive
-        Sesion.supinacion(self, MainWindow, my_drive)
+    def streamdata(self, data):
+        self.lineEdit_33.setText(str(data))
 
-    def gananciaSup(self, MainWindow):
-        my_drive = self.my_drive
-        Sesion.gananciaSup(self, MainWindow, my_drive)
-
-    def streamPronData(self, data):
-
-        if type(data[0])!= str:
-            self.lineEdit_37.setText(str(data[2]))
-            torque = abs(data[0])
-            enc_position = data[1]
-            self.pron.append(enc_position)
-            self.torque.append(torque)
-            setpoint = float(self.lineEdit_31.text())
-            self.lineEdit_33.setText(str(round(torque,2)))
-            self.lineEdit_32.setText(str(round(enc_position,2)))
-            delta = abs(setpoint-enc_position)
-            self.lineEdit_40.setText(str(round(delta,2)))
-            return self.pron, self.torque
-
-        else:
-            self.pronFinish( MainWindow)
-
-    def streamSupData(self, data):
-
-        if type(data[0])!= str:
-            self.lineEdit_38.setText(str(data[2]))
-            torque = abs(data[0])
-            enc_position = data[1]
-            self.sup.append(enc_position)
-            self.torqueSup.append(torque)
-            setpoint = float(self.lineEdit_34.text())
-            self.lineEdit_35.setText(str(round(torque,2)))
-            self.lineEdit_36.setText(str(round(enc_position,2)))
-            delta = abs(setpoint-enc_position)
-            self.lineEdit_43.setText(str(round(delta,2)))
-            return self.sup, self.torqueSup
-
-        else:
-            self.supFinish( MainWindow)
 
 if __name__ == "__main__":
     import sys

@@ -36,11 +36,10 @@ class Configuration(object):
         my_drive.axis0.requested_state = AXIS_STATE_FULL_CALIBRATION_SEQUENCE
 
     def closed_loop(self,MainWindow, my_drive):
-
-        self.plainTextEdit.appendPlainText("Iniciando control de lazo cerrado")
+        # self.plainTextEdit.appendPlainText("Iniciando control de lazo cerrado")
         my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
-        self.plainTextEdit.appendPlainText("Cargando set point = 0")
-        my_drive.axis0.controller.pos_setpoint = 0
+        # self.plainTextEdit.appendPlainText("Cargando set point = 0")
+        # my_drive.axis0.controller.pos_setpoint = 0
 
     def set_point(self,MainWindow, my_drive):
         # Angulo deseado
@@ -60,7 +59,6 @@ class Configuration(object):
         my_drive.axis0.controller.config.vel_limit = value
 
     def errors(self,MainWindow, my_drive):
-
         errores = shell.dump_errors(my_drive)
         self.plainTextEdit.appendPlainText(shell.dump_errors(my_drive))
         print(type(errores))
@@ -68,9 +66,7 @@ class Configuration(object):
 
 
     def save_config(self,MainWindow, my_drive):
-
         my_drive.save_configuration()
 
     def reboot(self,MainWindow, my_drive):
-
         my_drive.reboot()

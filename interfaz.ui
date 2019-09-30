@@ -573,7 +573,7 @@
                  </sizepolicy>
                 </property>
                 <property name="currentIndex">
-                 <number>0</number>
+                 <number>5</number>
                 </property>
                 <widget class="QWidget" name="page">
                  <layout class="QGridLayout" name="gridLayout_14">
@@ -704,7 +704,7 @@
                             <number>5</number>
                            </property>
                            <attribute name="headerVisible">
-                            <bool>true</bool>
+                            <bool>false</bool>
                            </attribute>
                            <attribute name="headerCascadingSectionResizes">
                             <bool>false</bool>
@@ -1033,8 +1033,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>958</width>
-                       <height>613</height>
+                       <width>481</width>
+                       <height>343</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_9">
@@ -1474,7 +1474,7 @@
                      <property name="geometry">
                       <rect>
                        <x>0</x>
-                       <y>-51</y>
+                       <y>0</y>
                        <width>956</width>
                        <height>647</height>
                       </rect>
@@ -3722,9 +3722,9 @@
                      <property name="geometry">
                       <rect>
                        <x>0</x>
-                       <y>0</y>
+                       <y>-148</y>
                        <width>941</width>
-                       <height>747</height>
+                       <height>761</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_40">
@@ -4139,6 +4139,9 @@
                                 <height>16777215</height>
                                </size>
                               </property>
+                              <property name="text">
+                               <string>0</string>
+                              </property>
                               <property name="alignment">
                                <set>Qt::AlignCenter</set>
                               </property>
@@ -4158,6 +4161,9 @@
                                 <height>16777215</height>
                                </size>
                               </property>
+                              <property name="text">
+                               <string>0</string>
+                              </property>
                               <property name="alignment">
                                <set>Qt::AlignCenter</set>
                               </property>
@@ -4166,7 +4172,7 @@
                             <item row="3" column="0" alignment="Qt::AlignLeft">
                              <widget class="QLabel" name="label_65">
                               <property name="text">
-                               <string>Fuerza</string>
+                               <string>T_Max [Nm]</string>
                               </property>
                              </widget>
                             </item>
@@ -4183,6 +4189,9 @@
                                 <width>75</width>
                                 <height>16777215</height>
                                </size>
+                              </property>
+                              <property name="text">
+                               <string>0</string>
                               </property>
                               <property name="alignment">
                                <set>Qt::AlignCenter</set>
@@ -4210,6 +4219,9 @@
                                 <height>16777215</height>
                                </size>
                               </property>
+                              <property name="text">
+                               <string>0</string>
+                              </property>
                               <property name="alignment">
                                <set>Qt::AlignCenter</set>
                               </property>
@@ -4230,6 +4242,12 @@
                                 <height>16777215</height>
                                </size>
                               </property>
+                              <property name="text">
+                               <string>0</string>
+                              </property>
+                              <property name="alignment">
+                               <set>Qt::AlignCenter</set>
+                              </property>
                              </widget>
                             </item>
                            </layout>
@@ -4241,7 +4259,7 @@
                             <string>Configuración del control</string>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_33">
-                            <item row="7" column="1" alignment="Qt::AlignHCenter">
+                            <item row="8" column="1" alignment="Qt::AlignHCenter">
                              <widget class="QPushButton" name="pushButton_26">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -4260,8 +4278,43 @@
                               </property>
                              </widget>
                             </item>
-                            <item row="1" column="1" alignment="Qt::AlignHCenter">
-                             <widget class="QLineEdit" name="lineEdit_39">
+                            <item row="0" column="0">
+                             <widget class="QLabel" name="label_63">
+                              <property name="text">
+                               <string>Corriente [A]</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item row="4" column="0">
+                             <widget class="QLabel" name="label_62">
+                              <property name="text">
+                               <string>Posición [°]</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item row="1" column="0">
+                             <widget class="QLabel" name="label_74">
+                              <property name="text">
+                               <string>Ganancia [°]</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item row="6" column="0">
+                             <widget class="QLabel" name="label_72">
+                              <property name="text">
+                               <string>Tiempo [s]</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item row="3" column="0" colspan="2" alignment="Qt::AlignHCenter">
+                             <widget class="QLabel" name="label_76">
+                              <property name="text">
+                               <string>-----------------------------------------------------</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item row="6" column="1" alignment="Qt::AlignHCenter">
+                             <widget class="QLineEdit" name="lineEdit_37">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                                 <horstretch>0</horstretch>
@@ -4274,27 +4327,16 @@
                                 <height>16777215</height>
                                </size>
                               </property>
+                              <property name="text">
+                               <string>0</string>
+                              </property>
                               <property name="alignment">
                                <set>Qt::AlignCenter</set>
                               </property>
                              </widget>
                             </item>
-                            <item row="3" column="0">
-                             <widget class="QLabel" name="label_62">
-                              <property name="text">
-                               <string>Posición [°]</string>
-                              </property>
-                             </widget>
-                            </item>
-                            <item row="0" column="0">
-                             <widget class="QLabel" name="label_63">
-                              <property name="text">
-                               <string>Corriente [A]</string>
-                              </property>
-                             </widget>
-                            </item>
-                            <item row="0" column="1" alignment="Qt::AlignHCenter">
-                             <widget class="QwtCounter" name="Counter_3" native="true">
+                            <item row="4" column="1" alignment="Qt::AlignHCenter">
+                             <widget class="QLineEdit" name="lineEdit_31">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                                 <horstretch>0</horstretch>
@@ -4303,33 +4345,38 @@
                               </property>
                               <property name="maximumSize">
                                <size>
-                                <width>150</width>
+                                <width>75</width>
                                 <height>16777215</height>
                                </size>
                               </property>
-                              <property name="maximum" stdset="0">
-                               <double>60.000000000000000</double>
-                              </property>
-                              <property name="singleStep" stdset="0">
-                               <double>1.000000000000000</double>
-                              </property>
-                             </widget>
-                            </item>
-                            <item row="5" column="0">
-                             <widget class="QLabel" name="label_72">
                               <property name="text">
-                               <string>Tiempo [s]</string>
+                               <string>0</string>
+                              </property>
+                              <property name="alignment">
+                               <set>Qt::AlignCenter</set>
                               </property>
                              </widget>
                             </item>
-                            <item row="1" column="0">
-                             <widget class="QLabel" name="label_74">
+                            <item row="8" column="0">
+                             <widget class="QPushButton" name="pushButton_31">
+                              <property name="sizePolicy">
+                               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                               </sizepolicy>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>75</width>
+                                <height>16777215</height>
+                               </size>
+                              </property>
                               <property name="text">
-                               <string>Ganancia [°]</string>
+                               <string>Parar</string>
                               </property>
                              </widget>
                             </item>
-                            <item row="4" column="1" alignment="Qt::AlignHCenter">
+                            <item row="5" column="1" alignment="Qt::AlignHCenter">
                              <widget class="QPushButton" name="pushButton_28">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -4348,8 +4395,8 @@
                               </property>
                              </widget>
                             </item>
-                            <item row="3" column="1" alignment="Qt::AlignHCenter">
-                             <widget class="QLineEdit" name="lineEdit_31">
+                            <item row="0" column="1" alignment="Qt::AlignHCenter">
+                             <widget class="QDoubleSpinBox" name="doubleSpinBox">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                                 <horstretch>0</horstretch>
@@ -4358,24 +4405,20 @@
                               </property>
                               <property name="maximumSize">
                                <size>
-                                <width>75</width>
+                                <width>150</width>
                                 <height>16777215</height>
                                </size>
                               </property>
-                              <property name="alignment">
-                               <set>Qt::AlignCenter</set>
+                              <property name="maximum">
+                               <double>50.000000000000000</double>
+                              </property>
+                              <property name="value">
+                               <double>10.000000000000000</double>
                               </property>
                              </widget>
                             </item>
-                            <item row="2" column="0" colspan="2" alignment="Qt::AlignHCenter">
-                             <widget class="QLabel" name="label_76">
-                              <property name="text">
-                               <string>-----------------------------------------------------</string>
-                              </property>
-                             </widget>
-                            </item>
-                            <item row="5" column="1" alignment="Qt::AlignHCenter">
-                             <widget class="QLineEdit" name="lineEdit_37">
+                            <item row="1" column="1" alignment="Qt::AlignHCenter">
+                             <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                                 <horstretch>0</horstretch>
@@ -4384,31 +4427,12 @@
                               </property>
                               <property name="maximumSize">
                                <size>
-                                <width>75</width>
+                                <width>150</width>
                                 <height>16777215</height>
                                </size>
                               </property>
-                              <property name="alignment">
-                               <set>Qt::AlignCenter</set>
-                              </property>
-                             </widget>
-                            </item>
-                            <item row="7" column="0">
-                             <widget class="QPushButton" name="pushButton_31">
-                              <property name="sizePolicy">
-                               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                                <horstretch>0</horstretch>
-                                <verstretch>0</verstretch>
-                               </sizepolicy>
-                              </property>
-                              <property name="maximumSize">
-                               <size>
-                                <width>75</width>
-                                <height>16777215</height>
-                               </size>
-                              </property>
-                              <property name="text">
-                               <string>Parar</string>
+                              <property name="maximum">
+                               <double>10.000000000000000</double>
                               </property>
                              </widget>
                             </item>
@@ -4522,6 +4546,9 @@
                                 <height>16777215</height>
                                </size>
                               </property>
+                              <property name="text">
+                               <string>0</string>
+                              </property>
                               <property name="alignment">
                                <set>Qt::AlignCenter</set>
                               </property>
@@ -4541,6 +4568,9 @@
                                 <height>16777215</height>
                                </size>
                               </property>
+                              <property name="text">
+                               <string>0</string>
+                              </property>
                               <property name="alignment">
                                <set>Qt::AlignCenter</set>
                               </property>
@@ -4549,7 +4579,7 @@
                             <item row="3" column="0" alignment="Qt::AlignLeft">
                              <widget class="QLabel" name="label_69">
                               <property name="text">
-                               <string>Fuerza</string>
+                               <string>T_Max[Nm]</string>
                               </property>
                              </widget>
                             </item>
@@ -4566,6 +4596,9 @@
                                 <width>75</width>
                                 <height>16777215</height>
                                </size>
+                              </property>
+                              <property name="text">
+                               <string>0</string>
                               </property>
                               <property name="alignment">
                                <set>Qt::AlignCenter</set>
@@ -4593,6 +4626,9 @@
                                 <height>16777215</height>
                                </size>
                               </property>
+                              <property name="text">
+                               <string>0</string>
+                              </property>
                               <property name="alignment">
                                <set>Qt::AlignCenter</set>
                               </property>
@@ -4612,6 +4648,12 @@
                                 <width>75</width>
                                 <height>16777215</height>
                                </size>
+                              </property>
+                              <property name="text">
+                               <string>0</string>
+                              </property>
+                              <property name="alignment">
+                               <set>Qt::AlignCenter</set>
                               </property>
                              </widget>
                             </item>
@@ -4649,8 +4691,8 @@
                             <string>Configuración del control</string>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_34">
-                            <item row="1" column="1" alignment="Qt::AlignHCenter">
-                             <widget class="QLineEdit" name="lineEdit_42">
+                            <item row="0" column="1" alignment="Qt::AlignHCenter">
+                             <widget class="QDoubleSpinBox" name="doubleSpinBox_3">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                                 <horstretch>0</horstretch>
@@ -4659,12 +4701,54 @@
                               </property>
                               <property name="maximumSize">
                                <size>
-                                <width>75</width>
+                                <width>150</width>
                                 <height>16777215</height>
                                </size>
                               </property>
-                              <property name="alignment">
-                               <set>Qt::AlignCenter</set>
+                              <property name="maximum">
+                               <double>50.000000000000000</double>
+                              </property>
+                              <property name="value">
+                               <double>10.000000000000000</double>
+                              </property>
+                             </widget>
+                            </item>
+                            <item row="1" column="1" alignment="Qt::AlignHCenter">
+                             <widget class="QDoubleSpinBox" name="doubleSpinBox_4">
+                              <property name="sizePolicy">
+                               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                               </sizepolicy>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>150</width>
+                                <height>16777215</height>
+                               </size>
+                              </property>
+                              <property name="minimum">
+                               <double>-10.000000000000000</double>
+                              </property>
+                              <property name="maximum">
+                               <double>0.000000000000000</double>
+                              </property>
+                              <property name="value">
+                               <double>0.000000000000000</double>
+                              </property>
+                             </widget>
+                            </item>
+                            <item row="5" column="0">
+                             <widget class="QLabel" name="label_73">
+                              <property name="text">
+                               <string>Tiempo [s]</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item row="1" column="0">
+                             <widget class="QLabel" name="label_78">
+                              <property name="text">
+                               <string>Ganancia [°]</string>
                               </property>
                              </widget>
                             </item>
@@ -4687,97 +4771,6 @@
                               </property>
                              </widget>
                             </item>
-                            <item row="0" column="1" alignment="Qt::AlignHCenter">
-                             <widget class="QwtCounter" name="Counter_4" native="true">
-                              <property name="sizePolicy">
-                               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                                <horstretch>0</horstretch>
-                                <verstretch>0</verstretch>
-                               </sizepolicy>
-                              </property>
-                              <property name="maximumSize">
-                               <size>
-                                <width>150</width>
-                                <height>16777215</height>
-                               </size>
-                              </property>
-                              <property name="maximum" stdset="0">
-                               <double>60.000000000000000</double>
-                              </property>
-                              <property name="singleStep" stdset="0">
-                               <double>1.000000000000000</double>
-                              </property>
-                              <property name="numButtons" stdset="0">
-                               <number>0</number>
-                              </property>
-                             </widget>
-                            </item>
-                            <item row="5" column="0">
-                             <widget class="QLabel" name="label_73">
-                              <property name="text">
-                               <string>Tiempo [s]</string>
-                              </property>
-                             </widget>
-                            </item>
-                            <item row="1" column="0">
-                             <widget class="QLabel" name="label_78">
-                              <property name="text">
-                               <string>Ganancia [°]</string>
-                              </property>
-                             </widget>
-                            </item>
-                            <item row="0" column="0">
-                             <widget class="QLabel" name="label_66">
-                              <property name="text">
-                               <string>Corriente [A]</string>
-                              </property>
-                             </widget>
-                            </item>
-                            <item row="3" column="0">
-                             <widget class="QLabel" name="label_67">
-                              <property name="text">
-                               <string>Posición [°]</string>
-                              </property>
-                             </widget>
-                            </item>
-                            <item row="3" column="1" alignment="Qt::AlignHCenter">
-                             <widget class="QLineEdit" name="lineEdit_34">
-                              <property name="sizePolicy">
-                               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                                <horstretch>0</horstretch>
-                                <verstretch>0</verstretch>
-                               </sizepolicy>
-                              </property>
-                              <property name="maximumSize">
-                               <size>
-                                <width>75</width>
-                                <height>16777215</height>
-                               </size>
-                              </property>
-                              <property name="alignment">
-                               <set>Qt::AlignCenter</set>
-                              </property>
-                             </widget>
-                            </item>
-                            <item row="5" column="1" alignment="Qt::AlignHCenter">
-                             <widget class="QLineEdit" name="lineEdit_38">
-                              <property name="sizePolicy">
-                               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                                <horstretch>0</horstretch>
-                                <verstretch>0</verstretch>
-                               </sizepolicy>
-                              </property>
-                              <property name="maximumSize">
-                               <size>
-                                <width>75</width>
-                                <height>16777215</height>
-                               </size>
-                              </property>
-                              <property name="alignment">
-                               <set>Qt::AlignCenter</set>
-                              </property>
-                             </widget>
-                            </item>
                             <item row="4" column="1" alignment="Qt::AlignHCenter">
                              <widget class="QPushButton" name="pushButton_29">
                               <property name="sizePolicy">
@@ -4797,10 +4790,61 @@
                               </property>
                              </widget>
                             </item>
-                            <item row="2" column="0" colspan="2" alignment="Qt::AlignHCenter">
-                             <widget class="QLabel" name="label_79">
+                            <item row="0" column="0">
+                             <widget class="QLabel" name="label_66">
                               <property name="text">
-                               <string>-----------------------------------------------------</string>
+                               <string>Corriente [A]</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item row="3" column="1" alignment="Qt::AlignHCenter">
+                             <widget class="QLineEdit" name="lineEdit_34">
+                              <property name="sizePolicy">
+                               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                               </sizepolicy>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>75</width>
+                                <height>16777215</height>
+                               </size>
+                              </property>
+                              <property name="text">
+                               <string>0</string>
+                              </property>
+                              <property name="alignment">
+                               <set>Qt::AlignCenter</set>
+                              </property>
+                             </widget>
+                            </item>
+                            <item row="3" column="0">
+                             <widget class="QLabel" name="label_67">
+                              <property name="text">
+                               <string>Posición [°]</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item row="5" column="1" alignment="Qt::AlignHCenter">
+                             <widget class="QLineEdit" name="lineEdit_38">
+                              <property name="sizePolicy">
+                               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                               </sizepolicy>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>75</width>
+                                <height>16777215</height>
+                               </size>
+                              </property>
+                              <property name="text">
+                               <string>0</string>
+                              </property>
+                              <property name="alignment">
+                               <set>Qt::AlignCenter</set>
                               </property>
                              </widget>
                             </item>
@@ -4820,6 +4864,13 @@
                               </property>
                               <property name="text">
                                <string>Parar</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item row="2" column="0" colspan="2" alignment="Qt::AlignHCenter">
+                             <widget class="QLabel" name="label_79">
+                              <property name="text">
+                               <string>-----------------------------------------------------</string>
                               </property>
                              </widget>
                             </item>
@@ -5827,167 +5878,7 @@
                         <string>Configuración Inicial del Sistema</string>
                        </property>
                        <layout class="QGridLayout" name="gridLayout_3">
-                        <item row="1" column="1">
-                         <widget class="QGroupBox" name="groupBox_8">
-                          <property name="title">
-                           <string>Valores</string>
-                          </property>
-                          <layout class="QGridLayout" name="gridLayout_12">
-                           <item row="0" column="1">
-                            <widget class="QLabel" name="label">
-                             <property name="text">
-                              <string>velocidad límite [rpm]</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="1" column="1" alignment="Qt::AlignHCenter">
-                            <widget class="QLineEdit" name="lineEdit">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>75</width>
-                               <height>75</height>
-                              </size>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignCenter</set>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="1" column="2" alignment="Qt::AlignHCenter">
-                            <widget class="QPushButton" name="pushButton_7">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>75</width>
-                               <height>16777215</height>
-                              </size>
-                             </property>
-                             <property name="text">
-                              <string>Setear</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="2" column="1" colspan="2">
-                            <widget class="QLabel" name="label_7">
-                             <property name="text">
-                              <string>Corriente de calibraión [A]</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="3" column="1" alignment="Qt::AlignHCenter">
-                            <widget class="QLineEdit" name="lineEdit_4">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>75</width>
-                               <height>16777215</height>
-                              </size>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignCenter</set>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="3" column="2" alignment="Qt::AlignHCenter">
-                            <widget class="QPushButton" name="pushButton_9">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>75</width>
-                               <height>16777215</height>
-                              </size>
-                             </property>
-                             <property name="text">
-                              <string>Setear</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="4" column="1">
-                            <widget class="QLabel" name="label_2">
-                             <property name="text">
-                              <string>Corriente límite [A]</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="5" column="1" alignment="Qt::AlignHCenter">
-                            <widget class="QLineEdit" name="lineEdit_2">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>75</width>
-                               <height>16777215</height>
-                              </size>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignCenter</set>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="5" column="2" alignment="Qt::AlignHCenter">
-                            <widget class="QPushButton" name="pushButton_8">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>75</width>
-                               <height>16777215</height>
-                              </size>
-                             </property>
-                             <property name="text">
-                              <string>Setear</string>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </widget>
-                        </item>
-                        <item row="1" column="0">
-                         <spacer name="horizontalSpacer">
-                          <property name="orientation">
-                           <enum>Qt::Horizontal</enum>
-                          </property>
-                          <property name="sizeType">
-                           <enum>QSizePolicy::Fixed</enum>
-                          </property>
-                          <property name="sizeHint" stdset="0">
-                           <size>
-                            <width>80</width>
-                            <height>20</height>
-                           </size>
-                          </property>
-                         </spacer>
-                        </item>
-                        <item row="2" column="1">
+                        <item row="3" column="1">
                          <widget class="QGroupBox" name="groupBox_7">
                           <property name="title">
                            <string>Guardar - Reiniciar</string>
@@ -6043,7 +5934,160 @@
                           </layout>
                          </widget>
                         </item>
-                        <item row="1" column="2">
+                        <item row="2" column="1">
+                         <widget class="QGroupBox" name="groupBox_8">
+                          <property name="title">
+                           <string>Valores</string>
+                          </property>
+                          <layout class="QGridLayout" name="gridLayout_12">
+                           <item row="0" column="1">
+                            <widget class="QLabel" name="label">
+                             <property name="text">
+                              <string>velocidad límite [rpm]</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="1" column="1" alignment="Qt::AlignHCenter">
+                            <widget class="QLineEdit" name="lineEdit">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>75</width>
+                               <height>75</height>
+                              </size>
+                             </property>
+                             <property name="text">
+                              <string>180</string>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignCenter</set>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="1" column="2" alignment="Qt::AlignHCenter">
+                            <widget class="QPushButton" name="pushButton_7">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>75</width>
+                               <height>16777215</height>
+                              </size>
+                             </property>
+                             <property name="text">
+                              <string>Setear</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="2" column="1" colspan="2">
+                            <widget class="QLabel" name="label_7">
+                             <property name="text">
+                              <string>Corriente de calibración [A]</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="3" column="1" alignment="Qt::AlignHCenter">
+                            <widget class="QLineEdit" name="lineEdit_4">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>75</width>
+                               <height>16777215</height>
+                              </size>
+                             </property>
+                             <property name="text">
+                              <string>10</string>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignCenter</set>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="3" column="2" alignment="Qt::AlignHCenter">
+                            <widget class="QPushButton" name="pushButton_9">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>75</width>
+                               <height>16777215</height>
+                              </size>
+                             </property>
+                             <property name="text">
+                              <string>Setear</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="4" column="1">
+                            <widget class="QLabel" name="label_2">
+                             <property name="text">
+                              <string>Corriente límite [A]</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="5" column="1" alignment="Qt::AlignHCenter">
+                            <widget class="QLineEdit" name="lineEdit_2">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>75</width>
+                               <height>16777215</height>
+                              </size>
+                             </property>
+                             <property name="text">
+                              <string>10</string>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignCenter</set>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="5" column="2" alignment="Qt::AlignHCenter">
+                            <widget class="QPushButton" name="pushButton_8">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>75</width>
+                               <height>16777215</height>
+                              </size>
+                             </property>
+                             <property name="text">
+                              <string>Setear</string>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </widget>
+                        </item>
+                        <item row="2" column="2">
                          <spacer name="horizontalSpacer_3">
                           <property name="orientation">
                            <enum>Qt::Horizontal</enum>
@@ -6059,7 +6103,7 @@
                           </property>
                          </spacer>
                         </item>
-                        <item row="3" column="1">
+                        <item row="4" column="1">
                          <spacer name="verticalSpacer_3">
                           <property name="orientation">
                            <enum>Qt::Vertical</enum>
@@ -6068,6 +6112,22 @@
                            <size>
                             <width>20</width>
                             <height>40</height>
+                           </size>
+                          </property>
+                         </spacer>
+                        </item>
+                        <item row="2" column="0">
+                         <spacer name="horizontalSpacer">
+                          <property name="orientation">
+                           <enum>Qt::Horizontal</enum>
+                          </property>
+                          <property name="sizeType">
+                           <enum>QSizePolicy::Fixed</enum>
+                          </property>
+                          <property name="sizeHint" stdset="0">
+                           <size>
+                            <width>80</width>
+                            <height>20</height>
                            </size>
                           </property>
                          </spacer>
@@ -6084,6 +6144,44 @@
                            </size>
                           </property>
                          </spacer>
+                        </item>
+                        <item row="1" column="1">
+                         <widget class="QGroupBox" name="groupBox_6">
+                          <property name="title">
+                           <string>Detectar Prototipo</string>
+                          </property>
+                          <layout class="QGridLayout" name="gridLayout_51">
+                           <item row="0" column="0" alignment="Qt::AlignHCenter">
+                            <widget class="QLabel" name="label_93">
+                             <property name="text">
+                              <string>Detectar Prototipo</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="1" column="0">
+                            <widget class="QPushButton" name="pushButton_40">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>75</width>
+                               <height>16777215</height>
+                              </size>
+                             </property>
+                             <property name="layoutDirection">
+                              <enum>Qt::LeftToRight</enum>
+                             </property>
+                             <property name="text">
+                              <string>Detectar</string>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </widget>
                         </item>
                        </layout>
                       </widget>
@@ -6186,6 +6284,9 @@
                                <width>75</width>
                                <height>16777215</height>
                               </size>
+                             </property>
+                             <property name="text">
+                              <string>0</string>
                              </property>
                              <property name="alignment">
                               <set>Qt::AlignCenter</set>
@@ -6483,6 +6584,7 @@
     <property name="title">
      <string>Sistema</string>
     </property>
+    <addaction name="actionDetectar_Prototipo"/>
     <addaction name="actionConfiguraci_n"/>
    </widget>
    <addaction name="menuPacientes"/>
@@ -6563,14 +6665,12 @@
     <string>Configuración</string>
    </property>
   </action>
+  <action name="actionDetectar_Prototipo">
+   <property name="text">
+    <string>Detectar Prototipo</string>
+   </property>
+  </action>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>QwtCounter</class>
-   <extends>QWidget</extends>
-   <header>qwt_counter.h</header>
-  </customwidget>
- </customwidgets>
  <tabstops>
   <tabstop>tabWidget</tabstop>
   <tabstop>scrollArea_4</tabstop>
@@ -6627,8 +6727,6 @@
   <tabstop>lineEdit_28</tabstop>
   <tabstop>lineEdit_29</tabstop>
   <tabstop>lineEdit_30</tabstop>
-  <tabstop>Counter_3</tabstop>
-  <tabstop>lineEdit_39</tabstop>
   <tabstop>lineEdit_31</tabstop>
   <tabstop>pushButton_28</tabstop>
   <tabstop>lineEdit_37</tabstop>
@@ -6638,8 +6736,6 @@
   <tabstop>lineEdit_40</tabstop>
   <tabstop>lineEdit_33</tabstop>
   <tabstop>lineEdit_47</tabstop>
-  <tabstop>Counter_4</tabstop>
-  <tabstop>lineEdit_42</tabstop>
   <tabstop>lineEdit_34</tabstop>
   <tabstop>pushButton_29</tabstop>
   <tabstop>lineEdit_38</tabstop>

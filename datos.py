@@ -12,6 +12,7 @@ from PyQt5.QtWidgets import QMessageBox
 import odrive
 from odrive.enums import *
 from odrive import shell
+from config import *
 
 class Paciente(object):
 
@@ -135,7 +136,7 @@ class Paciente(object):
             item = "item_" + str(i)
             item = QtWidgets.QTreeWidgetItem(self.treeWidget)
         for i in range(number):
-            for j in range(13):
+            for j in range(15):
                 self.treeWidget.topLevelItem(i).setText(j, str(data[i][j]))
                 self.treeWidget.topLevelItem(i).setTextAlignment(j, QtCore.Qt.AlignCenter)
 
@@ -276,7 +277,7 @@ class Programa(object):
         sup_actual_angle = str(25)
         sup_fin_angle = sup_actual_angle
         status = 'Activo'
-        data_programa = [id_programa, self.temp_id, nombreprograma, status, inicio, fin, sesiones, 0,pron_init_angle, pron_actual_angle, pron_fin_angle, sup_init_angle, sup_actual_angle, sup_fin_angle, comentarios]
+        data_programa = [id_programa, self.temp_id, nombreprograma, status, inicio, fin, sesiones, 0,pron_init_angle, 0, 0, sup_init_angle, 0, 0, comentarios]
 
         try:
             con = sqlite3.connect('pacientes.db')
@@ -407,9 +408,35 @@ class Programa(object):
 
 class Sesion(object):
     def pronacion(self, MainWindow, my_drive):
-        current = self.Counter_3.value()
-        ganancia = float(self.lineEdit_39.text())
+        current = self.doubleSpinBox.value()
         position = float(self.lineEdit_31.text())
+        Configuration.closed_loop(self,MainWindow, my_drive)
         my_drive.axis0.motor.config.current_lim = current
-        # my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
+        my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
         my_drive.axis0.controller.pos_setpoint = position*66.67
+
+    def ganancia(self, MainWindow, my_drive):
+        position = float(self.lineEdit_31.text())
+        ganancia = self.doubleSpinBox_2.value()
+        total = position + ganancia
+        actual = float(self.lineEdit_47.text())
+        if actual < total:
+            self.lineEdit_47.setText(str(total))
+        my_drive.axis0.controller.move_to_pos(total * 66.67)
+
+    def supinacion(self, MainWindow, my_drive):
+        current = self.doubleSpinBox_3.value()
+        position = -float(self.lineEdit_34.text())
+        Configuration.closed_loop(self,MainWindow, my_drive)
+        my_drive.axis0.motor.config.current_lim = current
+        my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
+        my_drive.axis0.controller.pos_setpoint = position*66.67
+
+    def gananciaSup(self, MainWindow, my_drive):
+        position = -float(self.lineEdit_34.text())
+        ganancia = self.doubleSpinBox_4.value()
+        total = position + ganancia
+        actual = float(self.lineEdit_48.text())
+        if actual < total:
+            self.lineEdit_48.setText(str(total))
+        my_drive.axis0.controller.move_to_pos(total * 66.67)
