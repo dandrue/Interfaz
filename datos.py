@@ -277,7 +277,7 @@ class Programa(object):
         sup_actual_angle = str(25)
         sup_fin_angle = sup_actual_angle
         status = 'Activo'
-        data_programa = [id_programa, self.temp_id, nombreprograma, status, inicio, fin, sesiones, 0,pron_init_angle, 0, 0, sup_init_angle, 0, 0, comentarios]
+        data_programa = [id_programa, self.temp_id, nombreprograma, status, inicio, fin, sesiones, 0,pron_init_angle, pron_init_angle, 0, sup_init_angle, sup_init_angle, 0, comentarios]
 
         try:
             con = sqlite3.connect('pacientes.db')
@@ -316,7 +316,7 @@ class Programa(object):
         except sqlite3.IntegrityError:
             print("Ocurrió un error")
 
-        sesionesrealizadas = self.treeWidget_3.topLevelItemCount()
+
         inicio = datetime.strptime(data[0][4], '%d/%m/%y')
         fin = datetime.strptime(data[0][5], '%d/%m/%y')
 
@@ -329,10 +329,38 @@ class Programa(object):
         self.lineEdit_25.setText(str(data[0][11]))
         self.lineEdit_26.setText(str(data[0][12]))
         self.lineEdit_22.setText(str(data[0][13]))
-        self.lineEdit_52.setText(str(sesionesrealizadas))
+
         self.dateEdit_5.setDateTime(QtCore.QDateTime(inicio))
         self.dateEdit_6.setDateTime(QtCore.QDateTime(fin))
         self.plainTextEdit_5.setPlainText(data[0][14])
+
+        try:
+            con = sqlite3.connect('pacientes.db')
+            cursor = con.cursor()
+            cursor.execute("SELECT * FROM Sesiones")
+            rows = cursor.fetchall()
+            con.commit()
+            con.close()
+
+            self.treeWidget_3.clear()
+
+            for i in range(len(rows)):
+                item = "item_" + str(i)
+                item = QtWidgets.QTreeWidgetItem(self.treeWidget_3)
+            for i in range(len(rows)):
+                for j in range(13):
+                    self.treeWidget_3.topLevelItem(i).setText(j, str(rows[i][j]))
+                    self.treeWidget_3.topLevelItem(i).setTextAlignment(j, QtCore.Qt.AlignCenter)
+            self.plainTextEdit.appendPlainText("Sesiones listados")
+            print("Sesiones listados")
+
+        except Error:
+            self.plainTextEdit.appendPlainText("Error buscando sesiones")
+            print("Error buscando sesiones")
+
+        sesionesrealizadas = self.treeWidget_3.topLevelItemCount()
+
+        self.lineEdit_52.setText(str(sesionesrealizadas))
 
     def eliminar_programa(self, MainWindow,IdProgram, IdPaciente):
         msgBox = QMessageBox()
@@ -363,10 +391,6 @@ class Programa(object):
             con.commit()
             con.close()
 
-    def nueva_sesion(self, MainWindow):
-        items = self.treeWidget_3.topLevelItemCount()
-        nombresesion = "sesion" + str(items)
-
     def get_pron_init(self, MainWindow, my_drive):
         print(self.lineEdit_14.text())
         my_drive.axis0.requested_state = AXIS_STATE_IDLE
@@ -385,8 +409,12 @@ class Programa(object):
         return sup_init_angle
 
     def nueva_sesion(self, MainWindow):
+        items = self.treeWidget_3.topLevelItemCount() + 1
+        nombresesion = "Sesion_" + str(items)
+
         idpaciente = self.temp_id
-        self.lineEdit_45.setText(str(idpaciente))
+        idSesion = items
+
         program_id = int(self.lineEdit_21.text())
 
         try:
@@ -405,38 +433,85 @@ class Programa(object):
         self.lineEdit_28.setText(str(program_id))
         self.lineEdit_29.setText(str(pron_actual))
         self.lineEdit_30.setText(str(sup_actual))
+        self.lineEdit_54.setText(nombresesion)
+        self.lineEdit_53.setText(str(idSesion))
+        self.lineEdit_46.setText(str(items))
+        self.lineEdit_31.setText(str(pron_actual))
+        self.lineEdit_34.setText(str(sup_actual))
+
 
 class Sesion(object):
     def pronacion(self, MainWindow, my_drive):
-        current = self.doubleSpinBox.value()
-        position = float(self.lineEdit_31.text())
-        Configuration.closed_loop(self,MainWindow, my_drive)
-        my_drive.axis0.motor.config.current_lim = current
-        my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
-        my_drive.axis0.controller.pos_setpoint = position*66.67
+        try:
+            self.doubleSpinBox_2.setValue(0)
+            current = self.doubleSpinBox.value()
+            position = float(self.lineEdit_31.text())
+            self.lineEdit_47.setText(str(position))
+            Configuration.closed_loop(self,MainWindow, my_drive)
+            my_drive.axis0.motor.config.current_lim = current
+            my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
+            my_drive.axis0.controller.pos_setpoint = position*66.67
+        except ValueError:
+            self.plainTextEdit.appendPlainText("Error en el valor ingresado")
+
 
     def ganancia(self, MainWindow, my_drive):
         position = float(self.lineEdit_31.text())
         ganancia = self.doubleSpinBox_2.value()
         total = position + ganancia
         actual = float(self.lineEdit_47.text())
-        if actual < total:
-            self.lineEdit_47.setText(str(total))
+        # self.lineEdit_31.setText(str(total))
+        self.lineEdit_47.setText(str(total))
         my_drive.axis0.controller.move_to_pos(total * 66.67)
 
     def supinacion(self, MainWindow, my_drive):
-        current = self.doubleSpinBox_3.value()
-        position = -float(self.lineEdit_34.text())
-        Configuration.closed_loop(self,MainWindow, my_drive)
-        my_drive.axis0.motor.config.current_lim = current
-        my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
-        my_drive.axis0.controller.pos_setpoint = position*66.67
+        try:
+            self.doubleSpinBox_4.setValue(0)
+            current = self.doubleSpinBox_3.value()
+
+            position = float(self.lineEdit_34.text())
+            self.lineEdit_48.setText(str(position))
+            Configuration.closed_loop(self,MainWindow, my_drive)
+            my_drive.axis0.motor.config.current_lim = current
+            my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
+            my_drive.axis0.controller.pos_setpoint = position*66.67
+        except ValueError:
+            self.plainTextEdit.appendPlainText("Error en el valor ingresado")
 
     def gananciaSup(self, MainWindow, my_drive):
-        position = -float(self.lineEdit_34.text())
-        ganancia = self.doubleSpinBox_4.value()
+        position = float(self.lineEdit_34.text())
+        ganancia = -self.doubleSpinBox_4.value()
         total = position + ganancia
         actual = float(self.lineEdit_48.text())
-        if actual < total:
-            self.lineEdit_48.setText(str(total))
+        # self.lineEdit_34.setText(str(total))
+        self.lineEdit_48.setText(str(total))
         my_drive.axis0.controller.move_to_pos(total * 66.67)
+
+    def guardarSesion(self, MainWindow):
+        idsesion = int(self.lineEdit_53.text())
+        idprograma = int(self.lineEdit_28.text())
+        nombre = self.lineEdit_54.text()
+        sesionnumero = int(self.lineEdit_46.text())
+        fecha = self.dateEdit_7.date()
+        fecha = datetime.strftime(fecha.toPyDate(), '%d/%m/%y')
+        repeticionesp = int(self.lineEdit_41.text())
+        anginitp = float(self.lineEdit_29.text())
+        angfinp = float(self.lineEdit_47.text())
+        repeticioness = int(self.lineEdit_41.text())
+        anginits = float(self.lineEdit_30.text())
+        angfins = float(self.lineEdit_48.text())
+        torquep = float(self.lineEdit_33.text())
+        torques = float(self.lineEdit_35.text())
+
+        data = [idsesion, idprograma, sesionnumero, nombre,fecha, repeticionesp, anginitp, angfinp, repeticioness, anginits, angfins, torquep, torques]
+
+        try:
+            con = sqlite3.connect('pacientes.db')
+            cursor = con.cursor()
+            cursor.execute('INSERT INTO Sesiones(IDSesion, IDPrograma, SesionNumero, Nombre,Fecha, RepeticionesP, AngInitP, AngFinP, RepeticionesS ,AngIniS, AngFinS, TorqueMaxP, TorqueMaxS) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)', data)
+            con.commit()
+            con.close()
+
+        except sqlite3.IntegrityError:
+            self.plainTextEdit.appendPlainText("Error al generar nueva sesion")
+            print("Error al generar nueva sesión")

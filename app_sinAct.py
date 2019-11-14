@@ -41,13 +41,13 @@ class FunctionThread(QThread):
 class Ui_MainWindow(object):
     def __init__(self):
         print("Conectando con el prototipo ...")
-        # self.my_drive = ""
-        self.my_drive = odrive.find_any()
-        print("Prototipo encontrado")
-        my_drive = self.my_drive
-        my_drive.axis0.controller.config.pos_gain = 150
-        my_drive.axis0.controller.config.vel_gain = 7.5/10000
-        my_drive.axis0.controller.config.vel_integrator_gain = 100/10000
+        self.my_drive = ""
+        # self.my_drive = odrive.find_any()
+        # print("Prototipo encontrado")
+        # my_drive = self.my_drive
+        # my_drive.axis0.controller.config.pos_gain = 150
+        # my_drive.axis0.controller.config.vel_gain = 7.5/10000
+        # my_drive.axis0.controller.config.vel_integrator_gain = 100/10000
 
     def supThread(self, MainWindow):
         self.suprep += 1
@@ -1199,9 +1199,6 @@ class Ui_MainWindow(object):
         self.treeWidget_3.headerItem().setTextAlignment(7, QtCore.Qt.AlignCenter)
         self.treeWidget_3.headerItem().setTextAlignment(8, QtCore.Qt.AlignCenter)
         self.treeWidget_3.headerItem().setTextAlignment(9, QtCore.Qt.AlignCenter)
-        self.treeWidget_3.headerItem().setTextAlignment(10, QtCore.Qt.AlignCenter)
-        self.treeWidget_3.headerItem().setTextAlignment(11, QtCore.Qt.AlignCenter)
-        self.treeWidget_3.headerItem().setTextAlignment(12, QtCore.Qt.AlignCenter)
         self.gridLayout_27.addWidget(self.treeWidget_3, 0, 3, 5, 4)
         self.gridLayout_41.addWidget(self.groupBox_18, 7, 0, 1, 2)
         self.groupBox_16 = QtWidgets.QGroupBox(self.scrollAreaWidgetContents_7)
@@ -1475,7 +1472,7 @@ class Ui_MainWindow(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.scrollArea_3.setObjectName("scrollArea_3")
         self.scrollAreaWidgetContents_3 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 941, 761))
+        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, -81, 941, 761))
         self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
         self.gridLayout_40 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents_3)
         self.gridLayout_40.setObjectName("gridLayout_40")
@@ -2855,7 +2852,6 @@ class Ui_MainWindow(object):
         self.pushButton_27.clicked.connect(self.supThread)
         self.pushButton_34.clicked.connect(self.supFinish)
 
-
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Interfaz de Usuario"))
@@ -2951,19 +2947,16 @@ class Ui_MainWindow(object):
         self.groupBox_18.setTitle(_translate("MainWindow", "Sesiones"))
         self.pushButton_24.setText(_translate("MainWindow", "Eliminar Sesion"))
         self.pushButton_23.setText(_translate("MainWindow", "Nueva Sesión"))
-        self.treeWidget_3.headerItem().setText(0, _translate("MainWindow", "IdSesion"))
-        self.treeWidget_3.headerItem().setText(1, _translate("MainWindow", "IDPrograma"))
-        self.treeWidget_3.headerItem().setText(2, _translate("MainWindow", "N° Sesión"))
-        self.treeWidget_3.headerItem().setText(3, _translate("MainWindow", "Nombre"))
-        self.treeWidget_3.headerItem().setText(4, _translate("MainWindow", "Fecha"))
-        self.treeWidget_3.headerItem().setText(5, _translate("MainWindow", "RepPron"))
-        self.treeWidget_3.headerItem().setText(6, _translate("MainWindow", "°P Inicial"))
-        self.treeWidget_3.headerItem().setText(7, _translate("MainWindow", "°P Final"))
-        self.treeWidget_3.headerItem().setText(8, _translate("MainWindow", "RepSup"))
-        self.treeWidget_3.headerItem().setText(9, _translate("MainWindow", "°S Inicial"))
-        self.treeWidget_3.headerItem().setText(10, _translate("MainWindow", "°S Final"))
-        self.treeWidget_3.headerItem().setText(11, _translate("MainWindow", "TorqueMaxP"))
-        self.treeWidget_3.headerItem().setText(12, _translate("MainWindow", "TorqueMaxS"))
+        self.treeWidget_3.headerItem().setText(0, _translate("MainWindow", "Nombre"))
+        self.treeWidget_3.headerItem().setText(1, _translate("MainWindow", "Inicio"))
+        self.treeWidget_3.headerItem().setText(2, _translate("MainWindow", "Fin"))
+        self.treeWidget_3.headerItem().setText(3, _translate("MainWindow", "N° Repeticiones"))
+        self.treeWidget_3.headerItem().setText(4, _translate("MainWindow", "°P Inicial"))
+        self.treeWidget_3.headerItem().setText(5, _translate("MainWindow", "°P Actual"))
+        self.treeWidget_3.headerItem().setText(6, _translate("MainWindow", "°P Final"))
+        self.treeWidget_3.headerItem().setText(7, _translate("MainWindow", "°S Inicial"))
+        self.treeWidget_3.headerItem().setText(8, _translate("MainWindow", "°S Actual"))
+        self.treeWidget_3.headerItem().setText(9, _translate("MainWindow", "°S Final"))
         self.groupBox_16.setTitle(_translate("MainWindow", "Información"))
         self.label_40.setText(_translate("MainWindow", "Fecha de Inicio"))
         self.label_41.setText(_translate("MainWindow", "Fecha de fin"))

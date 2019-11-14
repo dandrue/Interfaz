@@ -39,7 +39,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>icons/prosthetic.png</normaloff>icons/prosthetic.png</iconset>
+    <normaloff>../../../.designer/backup/icons/prosthetic.png</normaloff>../../../.designer/backup/icons/prosthetic.png</iconset>
   </property>
   <property name="documentMode">
    <bool>false</bool>
@@ -2851,118 +2851,6 @@
                          <string>Sesiones</string>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_27">
-                         <item row="7" column="3">
-                          <spacer name="verticalSpacer_21">
-                           <property name="orientation">
-                            <enum>Qt::Vertical</enum>
-                           </property>
-                           <property name="sizeHint" stdset="0">
-                            <size>
-                             <width>20</width>
-                             <height>40</height>
-                            </size>
-                           </property>
-                          </spacer>
-                         </item>
-                         <item row="0" column="3" rowspan="5" colspan="4">
-                          <widget class="QTreeWidget" name="treeWidget_3">
-                           <property name="minimumSize">
-                            <size>
-                             <width>0</width>
-                             <height>200</height>
-                            </size>
-                           </property>
-                           <property name="maximumSize">
-                            <size>
-                             <width>1200</width>
-                             <height>600</height>
-                            </size>
-                           </property>
-                           <property name="sizeAdjustPolicy">
-                            <enum>QAbstractScrollArea::AdjustToContents</enum>
-                           </property>
-                           <column>
-                            <property name="text">
-                             <string>Nombre</string>
-                            </property>
-                            <property name="textAlignment">
-                             <set>AlignCenter</set>
-                            </property>
-                           </column>
-                           <column>
-                            <property name="text">
-                             <string>Inicio</string>
-                            </property>
-                            <property name="textAlignment">
-                             <set>AlignCenter</set>
-                            </property>
-                           </column>
-                           <column>
-                            <property name="text">
-                             <string>Fin</string>
-                            </property>
-                            <property name="textAlignment">
-                             <set>AlignCenter</set>
-                            </property>
-                           </column>
-                           <column>
-                            <property name="text">
-                             <string>N° Repeticiones</string>
-                            </property>
-                            <property name="textAlignment">
-                             <set>AlignCenter</set>
-                            </property>
-                           </column>
-                           <column>
-                            <property name="text">
-                             <string>°P Inicial</string>
-                            </property>
-                            <property name="textAlignment">
-                             <set>AlignCenter</set>
-                            </property>
-                           </column>
-                           <column>
-                            <property name="text">
-                             <string>°P Actual</string>
-                            </property>
-                            <property name="textAlignment">
-                             <set>AlignCenter</set>
-                            </property>
-                           </column>
-                           <column>
-                            <property name="text">
-                             <string>°P Final</string>
-                            </property>
-                            <property name="textAlignment">
-                             <set>AlignCenter</set>
-                            </property>
-                           </column>
-                           <column>
-                            <property name="text">
-                             <string>°S Inicial</string>
-                            </property>
-                            <property name="textAlignment">
-                             <set>AlignCenter</set>
-                            </property>
-                           </column>
-                           <column>
-                            <property name="text">
-                             <string>°S Actual</string>
-                            </property>
-                            <property name="textAlignment">
-                             <set>AlignCenter</set>
-                            </property>
-                           </column>
-                           <column>
-                            <property name="text">
-                             <string>°S Final</string>
-                            </property>
-                            <property name="textAlignment">
-                             <set>AlignCenter</set>
-                            </property>
-                           </column>
-                          </widget>
-                         </item>
                          <item row="5" column="5" colspan="2">
                           <widget class="QFrame" name="frame_7">
                            <property name="frameShape">
@@ -3011,6 +2899,142 @@
                              </widget>
                             </item>
                            </layout>
+                          </widget>
+                         </item>
+                         <item row="7" column="3">
+                          <spacer name="verticalSpacer_21">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>40</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item row="0" column="3" rowspan="5" colspan="4">
+                          <widget class="QTreeWidget" name="treeWidget_3">
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>200</height>
+                            </size>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>1200</width>
+                             <height>600</height>
+                            </size>
+                           </property>
+                           <property name="sizeAdjustPolicy">
+                            <enum>QAbstractScrollArea::AdjustToContents</enum>
+                           </property>
+                           <column>
+                            <property name="text">
+                             <string>IdSesion</string>
+                            </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
+                            </property>
+                           </column>
+                           <column>
+                            <property name="text">
+                             <string>IDPrograma</string>
+                            </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
+                            </property>
+                           </column>
+                           <column>
+                            <property name="text">
+                             <string>N° Sesión</string>
+                            </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
+                            </property>
+                           </column>
+                           <column>
+                            <property name="text">
+                             <string>Nombre</string>
+                            </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
+                            </property>
+                           </column>
+                           <column>
+                            <property name="text">
+                             <string>Fecha</string>
+                            </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
+                            </property>
+                           </column>
+                           <column>
+                            <property name="text">
+                             <string>RepPron</string>
+                            </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
+                            </property>
+                           </column>
+                           <column>
+                            <property name="text">
+                             <string>°P Inicial</string>
+                            </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
+                            </property>
+                           </column>
+                           <column>
+                            <property name="text">
+                             <string>°P Final</string>
+                            </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
+                            </property>
+                           </column>
+                           <column>
+                            <property name="text">
+                             <string>RepSup</string>
+                            </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
+                            </property>
+                           </column>
+                           <column>
+                            <property name="text">
+                             <string>°S Inicial</string>
+                            </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
+                            </property>
+                           </column>
+                           <column>
+                            <property name="text">
+                             <string>°S Final</string>
+                            </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
+                            </property>
+                           </column>
+                           <column>
+                            <property name="text">
+                             <string>TorqueMaxP</string>
+                            </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
+                            </property>
+                           </column>
+                           <column>
+                            <property name="text">
+                             <string>TorqueMaxS</string>
+                            </property>
+                            <property name="textAlignment">
+                             <set>AlignCenter</set>
+                            </property>
+                           </column>
                           </widget>
                          </item>
                         </layout>
@@ -3642,7 +3666,7 @@
                          <enum>QFrame::Raised</enum>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_46">
-                         <item row="0" column="1">
+                         <item row="0" column="0">
                           <widget class="QPushButton" name="pushButton_36">
                            <property name="sizePolicy">
                             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -3658,44 +3682,6 @@
                            </property>
                            <property name="text">
                             <string>Guardar y Volver</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="0" column="2">
-                          <widget class="QPushButton" name="pushButton_33">
-                           <property name="sizePolicy">
-                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                             <horstretch>0</horstretch>
-                             <verstretch>0</verstretch>
-                            </sizepolicy>
-                           </property>
-                           <property name="maximumSize">
-                            <size>
-                             <width>100</width>
-                             <height>16777215</height>
-                            </size>
-                           </property>
-                           <property name="text">
-                            <string>Balance</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="0" column="0">
-                          <widget class="QPushButton" name="pushButton_39">
-                           <property name="sizePolicy">
-                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                             <horstretch>0</horstretch>
-                             <verstretch>0</verstretch>
-                            </sizepolicy>
-                           </property>
-                           <property name="maximumSize">
-                            <size>
-                             <width>75</width>
-                             <height>16777215</height>
-                            </size>
-                           </property>
-                           <property name="text">
-                            <string>Volver</string>
                            </property>
                           </widget>
                          </item>
@@ -3722,7 +3708,7 @@
                      <property name="geometry">
                       <rect>
                        <x>0</x>
-                       <y>-148</y>
+                       <y>0</y>
                        <width>941</width>
                        <height>761</height>
                       </rect>
@@ -3876,6 +3862,18 @@
                           <widget class="QLineEdit" name="lineEdit_45">
                            <property name="enabled">
                             <bool>false</bool>
+                           </property>
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>150</width>
+                             <height>16777215</height>
+                            </size>
                            </property>
                            <property name="alignment">
                             <set>Qt::AlignCenter</set>
@@ -4059,6 +4057,12 @@
                         <layout class="QGridLayout" name="gridLayout_42">
                          <item row="0" column="1" alignment="Qt::AlignHCenter">
                           <widget class="QPushButton" name="pushButton_21">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
                            <property name="maximumSize">
                             <size>
                              <width>150</width>
@@ -4066,7 +4070,7 @@
                             </size>
                            </property>
                            <property name="text">
-                            <string>Finalizar</string>
+                            <string>Guardar Datos</string>
                            </property>
                           </widget>
                          </item>
@@ -4079,7 +4083,7 @@
                             </size>
                            </property>
                            <property name="text">
-                            <string>Volver</string>
+                            <string>Descartar</string>
                            </property>
                           </widget>
                          </item>
@@ -4357,7 +4361,7 @@
                               </property>
                              </widget>
                             </item>
-                            <item row="8" column="0">
+                            <item row="8" column="0" alignment="Qt::AlignRight">
                              <widget class="QPushButton" name="pushButton_31">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -4728,10 +4732,10 @@
                                </size>
                               </property>
                               <property name="minimum">
-                               <double>-10.000000000000000</double>
+                               <double>0.000000000000000</double>
                               </property>
                               <property name="maximum">
-                               <double>0.000000000000000</double>
+                               <double>10.000000000000000</double>
                               </property>
                               <property name="value">
                                <double>0.000000000000000</double>
@@ -5878,63 +5882,7 @@
                         <string>Configuración Inicial del Sistema</string>
                        </property>
                        <layout class="QGridLayout" name="gridLayout_3">
-                        <item row="3" column="1">
-                         <widget class="QGroupBox" name="groupBox_7">
-                          <property name="title">
-                           <string>Guardar - Reiniciar</string>
-                          </property>
-                          <layout class="QGridLayout" name="gridLayout_11">
-                           <item row="0" column="0" alignment="Qt::AlignHCenter">
-                            <widget class="QPushButton" name="pushButton_10">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>75</width>
-                               <height>16777215</height>
-                              </size>
-                             </property>
-                             <property name="mouseTracking">
-                              <bool>false</bool>
-                             </property>
-                             <property name="focusPolicy">
-                              <enum>Qt::StrongFocus</enum>
-                             </property>
-                             <property name="text">
-                              <string extracomment="Guardar configuración en la tarjeta">Guardar</string>
-                             </property>
-                             <property name="shortcut">
-                              <string/>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="0" column="1" alignment="Qt::AlignHCenter">
-                            <widget class="QPushButton" name="pushButton_11">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>75</width>
-                               <height>16777215</height>
-                              </size>
-                             </property>
-                             <property name="text">
-                              <string>Reboot</string>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </widget>
-                        </item>
-                        <item row="2" column="1">
+                        <item row="1" column="1">
                          <widget class="QGroupBox" name="groupBox_8">
                           <property name="title">
                            <string>Valores</string>
@@ -6087,23 +6035,7 @@
                           </layout>
                          </widget>
                         </item>
-                        <item row="2" column="2">
-                         <spacer name="horizontalSpacer_3">
-                          <property name="orientation">
-                           <enum>Qt::Horizontal</enum>
-                          </property>
-                          <property name="sizeType">
-                           <enum>QSizePolicy::Fixed</enum>
-                          </property>
-                          <property name="sizeHint" stdset="0">
-                           <size>
-                            <width>80</width>
-                            <height>20</height>
-                           </size>
-                          </property>
-                         </spacer>
-                        </item>
-                        <item row="4" column="1">
+                        <item row="3" column="1">
                          <spacer name="verticalSpacer_3">
                           <property name="orientation">
                            <enum>Qt::Vertical</enum>
@@ -6116,7 +6048,7 @@
                           </property>
                          </spacer>
                         </item>
-                        <item row="2" column="0">
+                        <item row="1" column="0">
                          <spacer name="horizontalSpacer">
                           <property name="orientation">
                            <enum>Qt::Horizontal</enum>
@@ -6145,21 +6077,30 @@
                           </property>
                          </spacer>
                         </item>
-                        <item row="1" column="1">
-                         <widget class="QGroupBox" name="groupBox_6">
-                          <property name="title">
-                           <string>Detectar Prototipo</string>
+                        <item row="1" column="2">
+                         <spacer name="horizontalSpacer_3">
+                          <property name="orientation">
+                           <enum>Qt::Horizontal</enum>
                           </property>
-                          <layout class="QGridLayout" name="gridLayout_51">
+                          <property name="sizeType">
+                           <enum>QSizePolicy::Fixed</enum>
+                          </property>
+                          <property name="sizeHint" stdset="0">
+                           <size>
+                            <width>80</width>
+                            <height>20</height>
+                           </size>
+                          </property>
+                         </spacer>
+                        </item>
+                        <item row="2" column="1">
+                         <widget class="QGroupBox" name="groupBox_7">
+                          <property name="title">
+                           <string>Guardar - Reiniciar</string>
+                          </property>
+                          <layout class="QGridLayout" name="gridLayout_11">
                            <item row="0" column="0" alignment="Qt::AlignHCenter">
-                            <widget class="QLabel" name="label_93">
-                             <property name="text">
-                              <string>Detectar Prototipo</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="1" column="0">
-                            <widget class="QPushButton" name="pushButton_40">
+                            <widget class="QPushButton" name="pushButton_10">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                                <horstretch>0</horstretch>
@@ -6172,11 +6113,36 @@
                                <height>16777215</height>
                               </size>
                              </property>
-                             <property name="layoutDirection">
-                              <enum>Qt::LeftToRight</enum>
+                             <property name="mouseTracking">
+                              <bool>false</bool>
+                             </property>
+                             <property name="focusPolicy">
+                              <enum>Qt::StrongFocus</enum>
                              </property>
                              <property name="text">
-                              <string>Detectar</string>
+                              <string extracomment="Guardar configuración en la tarjeta">Guardar</string>
+                             </property>
+                             <property name="shortcut">
+                              <string/>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="0" column="1" alignment="Qt::AlignHCenter">
+                            <widget class="QPushButton" name="pushButton_11">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>75</width>
+                               <height>16777215</height>
+                              </size>
+                             </property>
+                             <property name="text">
+                              <string>Reboot</string>
                              </property>
                             </widget>
                            </item>
@@ -6462,7 +6428,7 @@
    </property>
    <property name="windowIcon">
     <iconset>
-     <normaloff>../../../.designer/backup/icons/prosthetic.png</normaloff>../../../.designer/backup/icons/prosthetic.png</iconset>
+     <normaloff>../../../../.designer/backup/icons/prosthetic.png</normaloff>../../../../.designer/backup/icons/prosthetic.png</iconset>
    </property>
    <property name="allowedAreas">
     <set>Qt::BottomDockWidgetArea|Qt::RightDockWidgetArea</set>
@@ -6545,8 +6511,8 @@
    <widget class="QMenu" name="menuPacientes">
     <property name="geometry">
      <rect>
-      <x>294</x>
-      <y>199</y>
+      <x>-1293</x>
+      <y>125</y>
       <width>150</width>
       <height>191</height>
      </rect>
