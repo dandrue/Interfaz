@@ -249,9 +249,9 @@ class Programa(object):
         try:
             con = sqlite3.connect('pacientes.db')
             cursor = con.cursor()
-            cursor.execute('SELECT * FROM programas')
-            total_programas = cursor.fetchall()
-            id_programa = len(total_programas) + 1
+            cursor.execute('SELECT max(IdPrograma) FROM programas')
+            max_programa = cursor.fetchone()
+            id_programa = max_programa[0] + 1
         except sqlite3.IntegrityError:
             print("Sucedio un error")
         # id_programa = int(0000) + items + 1
@@ -337,7 +337,7 @@ class Programa(object):
         try:
             con = sqlite3.connect('pacientes.db')
             cursor = con.cursor()
-            cursor.execute("SELECT * FROM Sesiones")
+            cursor.execute("SELECT * FROM Sesiones WHERE IDPrograma = ?",(IdProgram,))
             rows = cursor.fetchall()
             con.commit()
             con.close()
@@ -413,13 +413,14 @@ class Programa(object):
         nombresesion = "Sesion_" + str(items)
 
         idpaciente = self.temp_id
-        idSesion = items
 
         program_id = int(self.lineEdit_21.text())
 
         try:
             con = sqlite3.connect('pacientes.db')
             cursor = con.cursor()
+            cursor.execute("SELECT MAX(IDSesion) FROM Sesiones")
+            idSesion = cursor.fetchone()[0]
             cursor.execute("SELECT * FROM Programas WHERE IdPrograma = ?", (program_id,))
             data = cursor.fetchall()
 
@@ -515,3 +516,33 @@ class Sesion(object):
         except sqlite3.IntegrityError:
             self.plainTextEdit.appendPlainText("Error al generar nueva sesion")
             print("Error al generar nueva sesión")
+
+
+    def eliminar_sesion(self, MainWindow,IdProgram, IdSesion):
+        msgBox = QMessageBox()
+        msgBox.setIcon(QMessageBox.Warning)
+        msgBox.setWindowIcon(QtGui.QIcon("icons/prosthetic.png"))
+        msgBox.setText("Esta seguro de modificar la información del paciente?")
+        msgBox.setWindowTitle("Modificar entrada")
+        msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        returnValue = msgBox.exec()
+
+        if returnValue == QMessageBox.Yes:
+            print("Eliminando sesion {}".format(IdSesion))
+            con = sqlite3.connect('pacientes.db')
+            cursor = con.cursor()
+            cursor.execute('DELETE FROM sesiones WHERE IDPrograma = ? AND IDSesion = ?', (int(IdProgram),int(IdSesion)))
+            self.treeWidget_3.clear()
+            cursor.execute('SELECT * FROM sesiones WHERE IDPrograma = ? AND IDSesion = ?', (IdProgram, IdSesion))
+            rows = cursor.fetchall()
+            for i in range(len(rows)):
+                item = "item_" + str(i)
+                item = QtWidgets.QTreeWidgetItem(self.treeWidget_3)
+            for i in range(len(rows)):
+                for j in range(12):
+                    self.treeWidget_3.topLevelItem(i).setText(j, str(rows[i][j]))
+                    self.treeWidget_3.topLevelItem(i).setTextAlignment(j, QtCore.Qt.AlignCenter)
+            self.plainTextEdit.appendPlainText("Pacientes listados")
+            print("Pacientes listados")
+            con.commit()
+            con.close()

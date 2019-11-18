@@ -50,7 +50,13 @@ class Configuration(object):
         set_point = set_point * counts_degree
         print("Buscando set_point = {}".format(str(round(set_point,0))))
         self.plainTextEdit.appendPlainText("Buscando set_point = {}".format(str(set_point)))
-        my_drive.axis0.controller.pos_setpoint = set_point
+        #my_drive.axis0.trap_traj.config.vel_limit = <Float>
+        #my_drive.axis0.trap_traj.config.accel_limit = <Float>
+        #my_drive.axis0.trap_traj.config.decel_limit = <Float>
+        #my_drive.axis0.trap_traj.config.A_per_css = <Float>
+
+        my_drive.axis0.controller.move_to_pos(set_point)
+
 
     def vel_control(self,MainWindow, my_drive):
 

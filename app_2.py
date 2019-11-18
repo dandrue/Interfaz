@@ -2825,6 +2825,7 @@ class Ui_MainWindow(object):
         self.pushButton_21.clicked.connect(self.guardarSesion)
         self.pushButton_22.clicked.connect(self.detalles)
         self.pushButton_23.clicked.connect(self.nueva_sesion)
+        self.pushButton_24.clicked.connect(self.eliminarSesion)
         self.pushButton_25.clicked.connect(self.nuevo_prog)
         self.pushButton_28.clicked.connect(self.pronacion)
         self.pushButton_29.clicked.connect(self.supinacion)
@@ -3309,6 +3310,18 @@ class Ui_MainWindow(object):
         Sesion.guardarSesion(self, MainWindow)
         self.ver_detalles(MainWindow)
         self.detalles(MainWindow)
+
+    def eliminarSesion(self, MainWindow):
+        try:
+            item = self.treeWidget_3.selectedItems()[0]
+            index = self.treeWidget_3.indexFromItem(item).row()
+            IdSesion = self.treeWidget_3.topLevelItem(index).text(0)
+            IdPrograma = self.treeWidget_3.topLevelItem(index).text(1)
+            Sesion.eliminar_sesion(self, MainWindow,IdPrograma,IdSesion)
+        except IndexError:
+            self.plainTextEdit.appendPlainText("Ninguna entrada seleccionada")
+            print("Ninguna entrada seleccionada")
+
 
 if __name__ == "__main__":
     import sys
