@@ -2832,7 +2832,7 @@ class Ui_MainWindow(object):
         self.pushButton_32.clicked.connect(self.buscar_perfiles)
         self.pushButton_30.clicked.connect(self.ir_a_perfil)
         self.pushButton_35.clicked.connect(self.eliminar_programa)
-        self.pushButton_36.clicked.connect(self.perfil)
+        self.pushButton_36.clicked.connect(self.perfil_2)
         self.pushButton_37.clicked.connect(self.nuevo)
         self.pushButton_38.clicked.connect(self.buscar)
 
@@ -3101,17 +3101,25 @@ class Ui_MainWindow(object):
     def nuevo(self,MainWindow):
         self.stackedWidget.setCurrentIndex(1)
 
-    def perfil(self,MainWindow):
+    def perfil(self, MainWindow):
         self.plainTextEdit_5.clear()
         self.treeWidget.clear()
-        self.lineEdit_21.setText(str(0))
-        IdProgram = int(self.lineEdit_21.text())
-        try:
+        self.stackedWidget.setCurrentIndex(2)
 
+    def perfil_2(self,MainWindow):
+        comentarios = self.plainTextEdit_5.toPlainText().upper()
+        self.plainTextEdit_5.clear()
+        self.treeWidget.clear()
+        IdProgram = int(self.lineEdit_21.text())
+
+        try:
             con = sqlite3.connect('pacientes.db')
             cursor = con.cursor()
+            cursor.execute("UPDATE Programas SET Comentarios = ? WHERE IdPrograma = ?",(comentarios,IdProgram,))
+            con.commit()
             cursor.execute('SELECT IdPaciente FROM Programas WHERE IdPrograma = ?',(IdProgram,))
             data = cursor.fetchone()[0]
+            con.close()
         except Error:
             self.plainTextEdit.appendPlainText("Error")
             print("Error")
@@ -3239,6 +3247,9 @@ class Ui_MainWindow(object):
         Paciente.modificar_perfil(self,MainWindow)
 
     def nuevo_prog(self, MainWindow):
+        self.lineEdit_13.setText('0')
+        self.lineEdit_14.setText('0.0')
+        self.lineEdit_15.setText('0.0')
         self.stackedWidget.setCurrentIndex(3)
         Programa.nuevo_programa(self, MainWindow)
 

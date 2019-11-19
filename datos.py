@@ -188,7 +188,6 @@ class Paciente(object):
                 value = self.lineEdit_9.text()
                 cursor.execute('DELETE FROM pacientes WHERE Id=?', (value,))
                 con.commit()
-                con.close()
                 self.list_all(MainWindow)
                 self.stackedWidget.setCurrentIndex(0)
                 self.lineEdit_9.clear()
@@ -196,9 +195,15 @@ class Paciente(object):
                 self.lineEdit_11.clear()
                 self.plainTextEdit_3.clear()
                 self.treeWidget.clear()
-                con = sqlite3.connect('pacientes.db')
-                cursor = con.cursor()
+                cursor.execute('SELECT IdPrograma FROM Programas WHERE IdPaciente = ?' , (self.temp_id,))
+                idProgramas = cursor.fetchall()
+                print(idProgramas,idProgramas[0])
                 cursor.execute('DELETE FROM Programas WHERE IdPaciente = ?', (self.temp_id,))
+                if idProgramas[0] != None:
+                    for i in idProgramas[0]:
+                        cursor.execute('DELETE FROM Sesiones WHERE IDPrograma = ?' , (i,))
+                else:
+                    print('No existen sesiones vinculadas al paciente')
                 self.plainTextEdit.appendPlainText("Se ha eliminado la entrada satisfactoriamente")
                 print("Se ha eliminado la entrada satisfactoriamente")
                 con.commit()
@@ -242,6 +247,7 @@ class Paciente(object):
 
 class Programa(object):
     def nuevo_programa(self, MainWindow):
+        self.plainTextEdit_4.clear()
         items = self.treeWidget.topLevelItemCount()
         programa = "Programa_" + str(items + 1)
 
@@ -249,8 +255,11 @@ class Programa(object):
             con = sqlite3.connect('pacientes.db')
             cursor = con.cursor()
             cursor.execute('SELECT max(IdPrograma) FROM programas')
-            max_programa = cursor.fetchone()
-            id_programa = max_programa[0] + 1
+            max_programa = cursor.fetchone()[0]
+            if max_programa != None:
+                id_programa = max_programa + 1
+            else:
+                id_programa = 1
         except sqlite3.IntegrityError:
             print("Sucedio un error")
         # id_programa = int(0000) + items + 1
@@ -275,13 +284,16 @@ class Programa(object):
         sup_init_angle = str(self.lineEdit_15.text())
         sup_actual_angle = str(25)
         sup_fin_angle = sup_actual_angle
-        status = 'Activo'
-        data_programa = [id_programa, self.temp_id, nombreprograma, status, inicio, fin, sesiones, 0,pron_init_angle, pron_init_angle, 0, sup_init_angle, sup_init_angle, 0, comentarios]
+        if self.radioButton.isChecked():
+            miembro = 'Derecho'
+        else:
+            miembro = 'Izquierdo'
+        data_programa = [id_programa, self.temp_id, nombreprograma, miembro, inicio, fin, sesiones, 0,pron_init_angle, pron_init_angle, 0, sup_init_angle, sup_init_angle, 0, comentarios]
 
         try:
             con = sqlite3.connect('pacientes.db')
             cursor = con.cursor()
-            cursor.execute('INSERT INTO Programas(IdPrograma, IdPaciente, NombrePrograma, status, FechaInicio,FechaFin, NumeroSesiones, SesionesRealizadas ,AngPronInicial, AngPronActual, AngPronFinal, AngSupInicial, AngSupActual, AngSupFinal, Comentarios) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', data_programa)
+            cursor.execute('INSERT INTO Programas(IdPrograma, IdPaciente, NombrePrograma, Miembro, FechaInicio,FechaFin, NumeroSesiones, SesionesRealizadas ,AngPronInicial, AngPronActual, TMaxP, AngSupInicial, AngSupActual, TMaxS, Comentarios) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', data_programa)
             con.commit()
             con.close()
 
@@ -342,7 +354,7 @@ class Programa(object):
                 for j in range(13):
                     self.treeWidget_3.topLevelItem(i).setText(j, str(rows[i][j]))
                     self.treeWidget_3.topLevelItem(i).setTextAlignment(j, QtCore.Qt.AlignCenter)
-            self.plainTextEdit.appendPlainText("Sesiones listados")
+            #self.plainTextEdit.appendPlainText("Sesiones listados")
             print("Sesiones listados")
 
         except Error:
@@ -376,6 +388,7 @@ class Programa(object):
             con = sqlite3.connect('pacientes.db')
             cursor = con.cursor()
             cursor.execute('DELETE FROM programas WHERE IdPrograma = ?', (int(IdProgram),))
+            cursor.execute('DELETE FROM Sesiones WHERE IDPrograma = ?',(IdProgram,))
             self.treeWidget.clear()
             cursor.execute('SELECT * FROM programas WHERE IdPaciente = ?', (IdPaciente,))
             rows = cursor.fetchall()
@@ -421,10 +434,12 @@ class Sesion(object):
             con = sqlite3.connect('pacientes.db')
             cursor = con.cursor()
             cursor.execute("SELECT MAX(IDSesion) FROM Sesiones")
-            if cursor.fetchone()[0] == None:
+            idSesion = cursor.fetchone()[0]
+            print(idSesion)
+            if idSesion == None:
                 idSesion = 1
             else:
-                idSesion = int(cursor.fetchone()[0])+1
+                idSesion = int(idSesion)+1
             cursor.execute("SELECT * FROM Programas WHERE IdPrograma = ?", (program_id,))
             data = cursor.fetchall()
 
@@ -506,20 +521,24 @@ class Sesion(object):
         torquep = float(self.lineEdit_33.text())
         torques = float(self.lineEdit_35.text())
 
-        data = [idsesion, idprograma, sesionnumero, nombre,fecha, repeticionesp, anginitp, angfinp, repeticioness, anginits, angfins, torquep, torques]
+        nsesiones = int(self.lineEdit_52.text()) + 1
 
-        print(data)
+
+        data = [idsesion, idprograma, sesionnumero, nombre,fecha, repeticionesp, anginitp, angfinp, repeticioness, anginits, angfins, torquep, torques]
+        data_2 = [nsesiones,angfinp, angfins,torquep, torques, idprograma]
 
         try:
             con = sqlite3.connect('pacientes.db')
             cursor = con.cursor()
             cursor.execute('INSERT INTO Sesiones(IDSesion, IDPrograma, SesionNumero, Nombre,Fecha, RepeticionesP, AngInitP, AngFinP, RepeticionesS ,AngIniS, AngFinS, TorqueMaxP, TorqueMaxS) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)', data)
+            cursor.execute('UPDATE Programas SET SesionesRealizadas=?, AngPronActual=? , AngSupActual=?,TMaxP=?,TMaxS =? WHERE IDPrograma = ?',data_2)
             con.commit()
             con.close()
 
         except sqlite3.IntegrityError:
             self.plainTextEdit.appendPlainText("Error al generar nueva sesion")
             print("Error al generar nueva sesión")
+
 
 
     def eliminar_sesion(self, MainWindow,IdProgram, IdSesion):
@@ -534,45 +553,63 @@ class Sesion(object):
         if returnValue == QMessageBox.Yes:
             print("Eliminando sesion {}".format(IdSesion))
 
-            #try:
-            con = sqlite3.connect('pacientes.db')
-            cursor = con.cursor()
-            cursor.execute('DELETE FROM Sesiones WHERE IDPrograma = ? AND IDSesion = ?', (IdProgram,IdSesion))
-            con.commit()
-            sesiones = int(self.lineEdit_52.text())
-            nsesiones = sesiones - 1
-            self.lineEdit_52.setText(str(nsesiones))
+            try:
+                con = sqlite3.connect('pacientes.db')
+                cursor = con.cursor()
+                cursor.execute('DELETE FROM Sesiones WHERE IDPrograma = ? AND IDSesion = ?', (IdProgram,IdSesion))
+                con.commit()
+                sesiones = int(self.lineEdit_52.text())
+                print('Sesiones ' + str(sesiones))
+                nsesiones = sesiones - 1
+                print('nsesiones ' + str(nsesiones))
+                self.lineEdit_52.setText(str(nsesiones))
 
-            cursor.execute("SELECT * FROM Sesiones WHERE IDPrograma = ?",(IdProgram,))
-            rows = cursor.fetchall()
+                cursor.execute("SELECT * FROM Sesiones WHERE IDPrograma = ?",(IdProgram,))
+                rows = cursor.fetchall()
 
-            self.treeWidget_3.clear()
+                self.treeWidget_3.clear()
 
-            for i in range(len(rows)):
-                item = "item_" + str(i)
-                item = QtWidgets.QTreeWidgetItem(self.treeWidget_3)
-            for i in range(len(rows)):
-                for j in range(13):
-                    self.treeWidget_3.topLevelItem(i).setText(j, str(rows[i][j]))
-                    self.treeWidget_3.topLevelItem(i).setTextAlignment(j, QtCore.Qt.AlignCenter)
-            self.plainTextEdit.appendPlainText("Sesiones listadas")
-            print("Sesiones listadas")
-            cursor.execute("SELECT MAX(IDSesion) FROM Sesiones WHERE IDPrograma=?", (IdProgram,))
-            idSesion = cursor.fetchall()
-            print(idSesion)
-            # cursor.execute('SELECT * FROM Sesiones WHERE IDSesion = (SELECT MAX(IDSesion) FROM Sesiones) AND IDPrograma = ?', (IdProgram,))
-            # rows = cursor.fetchone()
-            # print(rows)
-            # angFinP = rows[7]
-            # angFinS = rows[9]
-            # TMaxP =  rows[11]
-            # TMaxS = rows[12]
-            # data = [nsesiones, angFinP, angFinS, TMaxP, TMaxS]
-            # cursor.execute('UPDATE Programas SET (SesionesRealizadas, AngFinP, AngFinS , TorqueMaxP, TorqueMaxS) VALUES(?,?,?,?,?) WHERE IDPrograma = ?',(data, IdProgram,))
-            con.commit()
+                for i in range(len(rows)):
+                    item = "item_" + str(i)
+                    item = QtWidgets.QTreeWidgetItem(self.treeWidget_3)
+                for i in range(len(rows)):
+                    for j in range(13):
+                        self.treeWidget_3.topLevelItem(i).setText(j, str(rows[i][j]))
+                        self.treeWidget_3.topLevelItem(i).setTextAlignment(j, QtCore.Qt.AlignCenter)
+                #self.plainTextEdit.appendPlainText("Sesiones listadas")
+                print("Sesiones listadas")
+                cursor.execute("SELECT MAX(IDSesion) FROM Sesiones WHERE IDPrograma=?", (IdProgram,))
+                idSesion = cursor.fetchone()[0]
+                print(idSesion)
+                cursor.execute('SELECT * FROM Sesiones WHERE IDSesion = (SELECT MAX(IDSesion) FROM Sesiones) AND IDPrograma = ?', (IdProgram,))
+                rows = cursor.fetchone()
+                print(rows)
+                if rows!=None:
+                    angFinP = rows[7]
+                    angFinS = rows[10]
+                    TMaxP =  rows[11]
+                    TMaxS = rows[12]
+                    self.lineEdit_23.setText(str(angFinP))
+                    self.lineEdit_26.setText(str(angFinS))
+                    self.lineEdit_24.setText(str(TMaxP))
+                    self.lineEdit_22.setText(str(TMaxS))
+                    data = [nsesiones, angFinP, angFinS,TMaxP,TMaxS, IdProgram]
+                    print(data)
 
-            # except Error:
-            #     self.plainTextEdit.appendPlainText("Error buscando sesiones")
-            #     print("Error buscando sesiones")
+                else:
+                    cursor.execute("SELECT * FROM Programas WHERE IdPrograma = ?", (IdProgram,))
+                    datos = cursor.fetchone()
+                    pron = datos[8]
+                    sup = datos[11]
+                    self.lineEdit_23.setText(str(pron))
+                    self.lineEdit_26.setText(str(sup))
+                    self.lineEdit_24.setText(str(0.0))
+                    self.lineEdit_22.setText(str(0.0))
+                    data = [nsesiones, pron,sup,0,0,IdProgram]
+                cursor.execute('UPDATE Programas SET SesionesRealizadas=?, AngPronActual=? , AngSupActual=?,TMaxP=?,TMaxS =? WHERE IDPrograma = ?',data)
+                con.commit()
+                con.close()
 
-            con.close()
+            except Error:
+                self.plainTextEdit.appendPlainText("Error al eliminar la sesión")
+                print("Error al eliminar la sesión")
