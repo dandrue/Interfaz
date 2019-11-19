@@ -573,7 +573,7 @@
                  </sizepolicy>
                 </property>
                 <property name="currentIndex">
-                 <number>0</number>
+                 <number>4</number>
                 </property>
                 <widget class="QWidget" name="page">
                  <layout class="QGridLayout" name="gridLayout_14">
@@ -704,7 +704,7 @@
                             <number>5</number>
                            </property>
                            <attribute name="headerVisible">
-                            <bool>true</bool>
+                            <bool>false</bool>
                            </attribute>
                            <attribute name="headerCascadingSectionResizes">
                             <bool>false</bool>
@@ -2839,7 +2839,7 @@
                      <property name="geometry">
                       <rect>
                        <x>0</x>
-                       <y>0</y>
+                       <y>-130</y>
                        <width>941</width>
                        <height>743</height>
                       </rect>
@@ -3709,7 +3709,7 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>941</width>
+                       <width>625</width>
                        <height>761</height>
                       </rect>
                      </property>

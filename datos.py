@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python3.6
 
-# from nuevo import Ui_MainWindow
 import math, sys, os, time
 import sqlite3
 from sqlite3 import *
@@ -110,7 +109,7 @@ class Paciente(object):
         date = datetime.strptime(fechaingreso, '%d/%m/%y')
         self.lineEdit_11.setText(nombre)
         self.lineEdit_10.setText(apellido)
-        self.lineEdit_9.setText(id)
+        self.lineEdit_9.setText(str(id))
         self.dateEdit_2.setDateTime(QtCore.QDateTime(date))
 
         if tipoid == 'Cédula':
@@ -294,23 +293,15 @@ class Programa(object):
         self.lineEdit_12.clear()
         self.lineEdit_49.clear()
         self.lineEdit_13.clear()
-        # self.dateEdit_3.clear()
-        # self.dateEdit_4.clear()
         self.plainTextEdit_4.clear()
 
-    # def get_pron_init():
-    #     pron_init_angle = 25
-    #     return pron_init_angle
-    #
-    # def get_sup_init():
-    #     sup_init_angle = 14
-    #     return sup_init_angle
+
 
     def ver_detalles(self, MainWindow, IdProgram):
         try:
             con = sqlite3.connect('pacientes.db')
             cursor = con.cursor()
-            cursor.execute('SELECT * FROM programas WHERE IdPrograma = ?', (IdProgram,))
+            cursor.execute('SELECT * FROM Programas WHERE IdPrograma = ?', (IdProgram,))
             data = cursor.fetchall()
 
         except sqlite3.IntegrityError:
@@ -361,6 +352,15 @@ class Programa(object):
         sesionesrealizadas = self.treeWidget_3.topLevelItemCount()
 
         self.lineEdit_52.setText(str(sesionesrealizadas))
+        try:
+            con = sqlite3.connect('pacientes.db')
+            cursor = con.cursor()
+            cursor.execute('UPDATE Programas SET SesionesRealizadas = ? WHERE IdPrograma = ?', (sesionesrealizadas,IdProgram,))
+            con.commit()
+            con.close()
+        except Error:
+            self.plainTextEdit.appendPlainText("Error buscando sesiones")
+            print("Error buscando sesiones")
 
     def eliminar_programa(self, MainWindow,IdProgram, IdPaciente):
         msgBox = QMessageBox()
@@ -408,19 +408,23 @@ class Programa(object):
         self.lineEdit_15.setText(str(round(sup_init_angle,1)))
         return sup_init_angle
 
+
+
+class Sesion(object):
     def nueva_sesion(self, MainWindow):
         items = self.treeWidget_3.topLevelItemCount() + 1
         nombresesion = "Sesion_" + str(items)
-
         idpaciente = self.temp_id
-
         program_id = int(self.lineEdit_21.text())
 
         try:
             con = sqlite3.connect('pacientes.db')
             cursor = con.cursor()
             cursor.execute("SELECT MAX(IDSesion) FROM Sesiones")
-            idSesion = cursor.fetchone()[0]
+            if cursor.fetchone()[0] == None:
+                idSesion = 1
+            else:
+                idSesion = int(cursor.fetchone()[0])+1
             cursor.execute("SELECT * FROM Programas WHERE IdPrograma = ?", (program_id,))
             data = cursor.fetchall()
 
@@ -440,8 +444,6 @@ class Programa(object):
         self.lineEdit_31.setText(str(pron_actual))
         self.lineEdit_34.setText(str(sup_actual))
 
-
-class Sesion(object):
     def pronacion(self, MainWindow, my_drive):
         try:
             self.doubleSpinBox_2.setValue(0)
@@ -506,6 +508,8 @@ class Sesion(object):
 
         data = [idsesion, idprograma, sesionnumero, nombre,fecha, repeticionesp, anginitp, angfinp, repeticioness, anginits, angfins, torquep, torques]
 
+        print(data)
+
         try:
             con = sqlite3.connect('pacientes.db')
             cursor = con.cursor()
@@ -529,20 +533,46 @@ class Sesion(object):
 
         if returnValue == QMessageBox.Yes:
             print("Eliminando sesion {}".format(IdSesion))
+
+            #try:
             con = sqlite3.connect('pacientes.db')
             cursor = con.cursor()
-            cursor.execute('DELETE FROM sesiones WHERE IDPrograma = ? AND IDSesion = ?', (int(IdProgram),int(IdSesion)))
-            self.treeWidget_3.clear()
-            cursor.execute('SELECT * FROM sesiones WHERE IDPrograma = ? AND IDSesion = ?', (IdProgram, IdSesion))
+            cursor.execute('DELETE FROM Sesiones WHERE IDPrograma = ? AND IDSesion = ?', (IdProgram,IdSesion))
+            con.commit()
+            sesiones = int(self.lineEdit_52.text())
+            nsesiones = sesiones - 1
+            self.lineEdit_52.setText(str(nsesiones))
+
+            cursor.execute("SELECT * FROM Sesiones WHERE IDPrograma = ?",(IdProgram,))
             rows = cursor.fetchall()
+
+            self.treeWidget_3.clear()
+
             for i in range(len(rows)):
                 item = "item_" + str(i)
                 item = QtWidgets.QTreeWidgetItem(self.treeWidget_3)
             for i in range(len(rows)):
-                for j in range(12):
+                for j in range(13):
                     self.treeWidget_3.topLevelItem(i).setText(j, str(rows[i][j]))
                     self.treeWidget_3.topLevelItem(i).setTextAlignment(j, QtCore.Qt.AlignCenter)
-            self.plainTextEdit.appendPlainText("Pacientes listados")
-            print("Pacientes listados")
+            self.plainTextEdit.appendPlainText("Sesiones listadas")
+            print("Sesiones listadas")
+            cursor.execute("SELECT MAX(IDSesion) FROM Sesiones WHERE IDPrograma=?", (IdProgram,))
+            idSesion = cursor.fetchall()
+            print(idSesion)
+            # cursor.execute('SELECT * FROM Sesiones WHERE IDSesion = (SELECT MAX(IDSesion) FROM Sesiones) AND IDPrograma = ?', (IdProgram,))
+            # rows = cursor.fetchone()
+            # print(rows)
+            # angFinP = rows[7]
+            # angFinS = rows[9]
+            # TMaxP =  rows[11]
+            # TMaxS = rows[12]
+            # data = [nsesiones, angFinP, angFinS, TMaxP, TMaxS]
+            # cursor.execute('UPDATE Programas SET (SesionesRealizadas, AngFinP, AngFinS , TorqueMaxP, TorqueMaxS) VALUES(?,?,?,?,?) WHERE IDPrograma = ?',(data, IdProgram,))
             con.commit()
+
+            # except Error:
+            #     self.plainTextEdit.appendPlainText("Error buscando sesiones")
+            #     print("Error buscando sesiones")
+
             con.close()

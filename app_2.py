@@ -41,13 +41,13 @@ class FunctionThread(QThread):
 class Ui_MainWindow(object):
     def __init__(self):
         print("Conectando con el prototipo ...")
-        # self.my_drive = ""
-        self.my_drive = odrive.find_any()
+        self.my_drive = ""
+        #self.my_drive = odrive.find_any()
         print("Prototipo encontrado")
         my_drive = self.my_drive
-        my_drive.axis0.controller.config.pos_gain = 150
-        my_drive.axis0.controller.config.vel_gain = 7.5/10000
-        my_drive.axis0.controller.config.vel_integrator_gain = 100/10000
+        # my_drive.axis0.controller.config.pos_gain = 150
+        # my_drive.axis0.controller.config.vel_gain = 7.5/10000
+        # my_drive.axis0.controller.config.vel_integrator_gain = 100/10000
 
     def supThread(self, MainWindow):
         self.suprep += 1
@@ -3103,6 +3103,19 @@ class Ui_MainWindow(object):
 
     def perfil(self,MainWindow):
         self.plainTextEdit_5.clear()
+        self.treeWidget.clear()
+        self.lineEdit_21.setText(str(0))
+        IdProgram = int(self.lineEdit_21.text())
+        try:
+
+            con = sqlite3.connect('pacientes.db')
+            cursor = con.cursor()
+            cursor.execute('SELECT IdPaciente FROM Programas WHERE IdPrograma = ?',(IdProgram,))
+            data = cursor.fetchone()[0]
+        except Error:
+            self.plainTextEdit.appendPlainText("Error")
+            print("Error")
+        Paciente.ir_a_perfil(self, MainWindow, data)
         self.stackedWidget.setCurrentIndex(2)
 
     def nuevo_programa(self,MainWindow):
@@ -3253,7 +3266,7 @@ class Ui_MainWindow(object):
 
     def nueva_sesion(self, MainWindow):
         self.sesion(MainWindow)
-        Programa.nueva_sesion(self, MainWindow)
+        Sesion.nueva_sesion(self, MainWindow)
 
     def pronacion(self, MainWindow):
         my_drive = self.my_drive
@@ -3304,7 +3317,7 @@ class Ui_MainWindow(object):
             return self.sup, self.torqueSup
 
         else:
-            self.supFinish( MainWindow)
+            self.supFinish(MainWindow)
 
     def guardarSesion(self, MainWindow):
         Sesion.guardarSesion(self, MainWindow)
