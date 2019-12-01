@@ -557,7 +557,7 @@
              </palette>
             </property>
             <property name="currentIndex">
-             <number>1</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="tab">
              <attribute name="title">
@@ -1033,8 +1033,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>481</width>
-                       <height>343</height>
+                       <width>958</width>
+                       <height>613</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_9">
@@ -2043,8 +2043,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>568</width>
-                       <height>515</height>
+                       <width>958</width>
+                       <height>613</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_10">
@@ -2875,7 +2875,7 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>536</width>
+                       <width>941</width>
                        <height>791</height>
                       </rect>
                      </property>
