@@ -3,21 +3,37 @@
 
 import odrive
 from odrive.enums import *
+from PyQt5 import QtCore, QtGui, QtWidgets
 from odrive import shell
 import math
 import time
 
 class Configuration(object):
+    def find_odrive(self, MainWindow):
+        print("Conectando con el prototipo ...")
+        self.plainTextEdit_6.appendPlainText('Conectando con el prototipo ...')
+        self.my_drive = odrive.find_any()
+        print("Prototipo encontrado")
+        my_drive = self.my_drive
+        self.plainTextEdit_6.appendPlainText('Axis definido como: odrv0.axis0')
+        my_drive.axis0.controller.config.pos_gain = 150
+        my_drive.axis0.controller.config.vel_gain = 7.5/10000
+        my_drive.axis0.controller.config.vel_integrator_gain = 100/10000
+        conectado = True
+        data = [my_drive, conectado]
+
+        return data
+
     def set_vel(self,MainWindow, my_drive):
         get_vel = self.lineEdit.text()
-        vel_counts = int(get_vel) * (2400/60)
+        vel_counts = float(get_vel) * (2400/60)
         my_drive.axis0.controller.config.vel_limit = int(vel_counts)
         print("Velocidad cambiada a {}".format(vel_counts))
         self.plainTextEdit.appendPlainText("Velocidad cambiada a :{} [RPM]".format(get_vel))
 
     def set_current(self,MainWindow, my_drive):
         get_current = self.lineEdit_2.text()
-        my_drive.axis0.motor.config.current_lim = int(get_current)
+        my_drive.axis0.motor.config.current_lim = float(get_current)
         print("Corriente cambiada a: {} [A]".format(str(get_current)))
         self.plainTextEdit.appendPlainText("Corriente cambiada a : {} [A]".format(get_current))
 
@@ -29,20 +45,28 @@ class Configuration(object):
         self.plainTextEdit.appendPlainText("Corriente de calibración cambiada a : {} [A]".format(get_calibration_current))
 
     def initial_calibration(self,MainWindow, my_drive):
-
+        self.errors(my_drive)
+        self.set_vel(my_drive)
+        self.set_current(my_drive)
+        self.set_calibration_current(my_drive)
+        my_drive.config.brake_resistance = 0.5
+        my_drive.axis0.motor.config.pole_pairs = 7
+        my_drive.axis0.encoder.config.cpr = 2400
         print("Iniciando calibración inicial del sistema")
         self.plainTextEdit.appendPlainText("Iniciando calibración inicial del sistema")
         my_drive.axis0.requested_state = AXIS_STATE_FULL_CALIBRATION_SEQUENCE
 
     def closed_loop(self,MainWindow, my_drive):
-        # self.plainTextEdit.appendPlainText("Iniciando control de lazo cerrado")
+        self.errors(my_drive)
+        self.plainTextEdit.appendPlainText("Iniciando control de lazo cerrado")
         my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
         # self.plainTextEdit.appendPlainText("Cargando set point = 0")
         # my_drive.axis0.controller.pos_setpoint = 0
 
     def set_point(self,MainWindow, my_drive):
         # Angulo deseado
-        set_point = int(self.lineEdit_3.text())
+        self.errors(my_drive)
+        set_point = float(self.lineEdit_3.text())
         # Counts_degree es el equivalente en pulsos de 1°
         counts_degree = 66.67
         # Set_point para el control de lazo cerrado en pulsos
@@ -65,6 +89,7 @@ class Configuration(object):
 
     def errors(self,MainWindow, my_drive):
         errores = shell.dump_errors(my_drive)
+
         self.plainTextEdit.appendPlainText(shell.dump_errors(my_drive))
         print(type(errores))
         shell.dump_errors(my_drive,True)

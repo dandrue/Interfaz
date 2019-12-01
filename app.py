@@ -41,13 +41,13 @@ class FunctionThread(QThread):
 class Ui_MainWindow(object):
     def __init__(self):
         print("Conectando con el prototipo ...")
-        self.my_drive = ""
-        #self.my_drive = odrive.find_any()
+        # self.my_drive = ""
+        self.my_drive = odrive.find_any()
         print("Prototipo encontrado")
         my_drive = self.my_drive
-        # my_drive.axis0.controller.config.pos_gain = 150
-        # my_drive.axis0.controller.config.vel_gain = 7.5/10000
-        # my_drive.axis0.controller.config.vel_integrator_gain = 100/10000
+        my_drive.axis0.controller.config.pos_gain = 150
+        my_drive.axis0.controller.config.vel_gain = 7.5/10000
+        my_drive.axis0.controller.config.vel_integrator_gain = 100/10000
 
     def supThread(self, MainWindow):
         self.suprep += 1
@@ -3132,6 +3132,7 @@ class Ui_MainWindow(object):
         self.actionSesion.setText(_translate("MainWindow", "Sesion"))
         self.actionConfiguraci_n.setText(_translate("MainWindow", "Configuración"))
         self.actionDetectar_Prototipo.setText(_translate("MainWindow", "Detectar Prototipo"))
+
     def buscar(self,MainWindow):
         self.treeWidget_2.clear()
         self.list_all(MainWindow)
@@ -3142,7 +3143,7 @@ class Ui_MainWindow(object):
 
     def perfil(self, MainWindow):
         self.plainTextEdit_5.clear()
-        self.treeWidget.clear()
+        #self.treeWidget.clear()
         self.stackedWidget.setCurrentIndex(2)
 
     def perfil_2(self,MainWindow):

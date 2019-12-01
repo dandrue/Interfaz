@@ -322,6 +322,11 @@ class Programa(object):
 
         inicio = datetime.strptime(data[0][4], '%d/%m/%y')
         fin = datetime.strptime(data[0][5], '%d/%m/%y')
+        miembro = data[0][3]
+        if miembro == "Izquierdo":
+            self.radioButton_4.setChecked(True)
+        if miembro == "Derecho":
+            self.radioButton_3.setChecked(True)
 
         self.lineEdit_20.setText(data[0][2])
         self.lineEdit_21.setText(str(IdProgram))
@@ -404,21 +409,35 @@ class Programa(object):
             con.commit()
             con.close()
 
-    def get_pron_init(self, MainWindow, my_drive):
+    def get_pron_init(self, MainWindow, my_drive, miembro):
         print(self.lineEdit_14.text())
-        my_drive.axis0.requested_state = AXIS_STATE_IDLE
-        pron_init_pulses = my_drive.axis0.encoder.pos_estimate
-        pron_init_angle = pron_init_pulses / 66.67
-        print(round(pron_init_angle,0))
-        self.lineEdit_14.setText(str(round(pron_init_angle,1)))
+        if miembro:
+            my_drive.axis0.requested_state = AXIS_STATE_IDLE
+            pron_init_pulses = my_drive.axis0.encoder.pos_estimate
+            pron_init_angle = -pron_init_pulses / 66.67
+            print(round(pron_init_angle,0))
+            self.lineEdit_14.setText(str(round(pron_init_angle,1)))
+        else:
+            my_drive.axis0.requested_state = AXIS_STATE_IDLE
+            pron_init_pulses = my_drive.axis0.encoder.pos_estimate
+            pron_init_angle = pron_init_pulses / 66.67
+            print(round(pron_init_angle,0))
+            self.lineEdit_14.setText(str(round(pron_init_angle,1)))
         return pron_init_angle
 
-    def get_sup_init(self, MainWindow, my_drive):
-        my_drive.axis0.requested_state = AXIS_STATE_IDLE
-        sup_init_pulses = my_drive.axis0.encoder.pos_estimate
-        sup_init_angle = sup_init_pulses / 66.67
-        print(round(sup_init_angle,0))
-        self.lineEdit_15.setText(str(round(sup_init_angle,1)))
+    def get_sup_init(self, MainWindow, my_drive, miembro):
+        if miembro:
+            my_drive.axis0.requested_state = AXIS_STATE_IDLE
+            sup_init_pulses = my_drive.axis0.encoder.pos_estimate
+            sup_init_angle = -sup_init_pulses / 66.67
+            print(round(sup_init_angle,0))
+            self.lineEdit_15.setText(str(round(sup_init_angle,1)))
+        else:
+            my_drive.axis0.requested_state = AXIS_STATE_IDLE
+            sup_init_pulses = my_drive.axis0.encoder.pos_estimate
+            sup_init_angle = sup_init_pulses / 66.67
+            print(round(sup_init_angle,0))
+            self.lineEdit_15.setText(str(round(sup_init_angle,1)))
         return sup_init_angle
 
 
@@ -459,51 +478,88 @@ class Sesion(object):
         self.lineEdit_31.setText(str(pron_actual))
         self.lineEdit_34.setText(str(sup_actual))
 
-    def pronacion(self, MainWindow, my_drive):
+    def pronacion(self, MainWindow, my_drive, miembro):
         try:
-            self.doubleSpinBox_2.setValue(0)
-            current = self.doubleSpinBox.value()
+            if miembro:
+                self.doubleSpinBox_2.setValue(0)
+                current = self.doubleSpinBox.value()
+                position = float(self.lineEdit_31.text())
+                self.lineEdit_47.setText(str(position))
+                Configuration.closed_loop(self,MainWindow, my_drive)
+                my_drive.axis0.motor.config.current_lim = current
+                my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
+                my_drive.axis0.controller.move_to_pos(-position*66.67)
+            else:
+                self.doubleSpinBox_2.setValue(0)
+                current = self.doubleSpinBox.value()
+                position = float(self.lineEdit_31.text())
+                self.lineEdit_47.setText(str(position))
+                Configuration.closed_loop(self,MainWindow, my_drive)
+                my_drive.axis0.motor.config.current_lim = current
+                my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
+                my_drive.axis0.controller.move_to_pos(position*66.67)
+        except ValueError:
+            self.plainTextEdit.appendPlainText("Error en el valor ingresado")
+
+
+    def ganancia(self, MainWindow, my_drive, miembro):
+        if miembro:
             position = float(self.lineEdit_31.text())
-            self.lineEdit_47.setText(str(position))
-            Configuration.closed_loop(self,MainWindow, my_drive)
-            my_drive.axis0.motor.config.current_lim = current
-            my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
-            my_drive.axis0.controller.pos_setpoint = position*66.67
-        except ValueError:
-            self.plainTextEdit.appendPlainText("Error en el valor ingresado")
+            ganancia = self.doubleSpinBox_2.value()
+            total = position + ganancia
+            actual = float(self.lineEdit_47.text())
+            # self.lineEdit_31.setText(str(total))
+            self.lineEdit_47.setText(str(total))
+            my_drive.axis0.controller.move_to_pos(-total * 66.67)
+        else:
+            position = float(self.lineEdit_31.text())
+            ganancia = self.doubleSpinBox_2.value()
+            total = position + ganancia
+            actual = float(self.lineEdit_47.text())
+            # self.lineEdit_31.setText(str(total))
+            self.lineEdit_47.setText(str(total))
+            my_drive.axis0.controller.move_to_pos(total * 66.67)
 
-
-    def ganancia(self, MainWindow, my_drive):
-        position = float(self.lineEdit_31.text())
-        ganancia = self.doubleSpinBox_2.value()
-        total = position + ganancia
-        actual = float(self.lineEdit_47.text())
-        # self.lineEdit_31.setText(str(total))
-        self.lineEdit_47.setText(str(total))
-        my_drive.axis0.controller.move_to_pos(total * 66.67)
-
-    def supinacion(self, MainWindow, my_drive):
+    def supinacion(self, MainWindow, my_drive, miembro):
         try:
-            self.doubleSpinBox_4.setValue(0)
-            current = self.doubleSpinBox_3.value()
-
-            position = float(self.lineEdit_34.text())
-            self.lineEdit_48.setText(str(position))
-            Configuration.closed_loop(self,MainWindow, my_drive)
-            my_drive.axis0.motor.config.current_lim = current
-            my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
-            my_drive.axis0.controller.pos_setpoint = position*66.67
+            if miembro:
+                self.doubleSpinBox_4.setValue(0)
+                current = self.doubleSpinBox_3.value()
+                position = float(self.lineEdit_34.text())
+                self.lineEdit_48.setText(str(position))
+                Configuration.closed_loop(self,MainWindow, my_drive)
+                my_drive.axis0.motor.config.current_lim = current
+                my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
+                my_drive.axis0.controller.move_to_pos(-position*66.67)
+            else:
+                self.doubleSpinBox_4.setValue(0)
+                current = self.doubleSpinBox_3.value()
+                position = float(self.lineEdit_34.text())
+                self.lineEdit_48.setText(str(position))
+                Configuration.closed_loop(self,MainWindow, my_drive)
+                my_drive.axis0.motor.config.current_lim = current
+                my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
+                my_drive.axis0.controller.move_to_pos(position*66.67)
         except ValueError:
             self.plainTextEdit.appendPlainText("Error en el valor ingresado")
 
-    def gananciaSup(self, MainWindow, my_drive):
-        position = float(self.lineEdit_34.text())
-        ganancia = -self.doubleSpinBox_4.value()
-        total = position + ganancia
-        actual = float(self.lineEdit_48.text())
-        # self.lineEdit_34.setText(str(total))
-        self.lineEdit_48.setText(str(total))
-        my_drive.axis0.controller.move_to_pos(total * 66.67)
+    def gananciaSup(self, MainWindow, my_drive, miembro):
+        if miembro:
+            position = float(self.lineEdit_34.text())
+            ganancia = -self.doubleSpinBox_4.value()
+            total = position + ganancia
+            actual = float(self.lineEdit_48.text())
+            # self.lineEdit_34.setText(str(total))
+            self.lineEdit_48.setText(str(total))
+            my_drive.axis0.controller.move_to_pos(-total * 66.67)
+        else:
+            position = float(self.lineEdit_34.text())
+            ganancia = -self.doubleSpinBox_4.value()
+            total = position + ganancia
+            actual = float(self.lineEdit_48.text())
+            # self.lineEdit_34.setText(str(total))
+            self.lineEdit_48.setText(str(total))
+            my_drive.axis0.controller.move_to_pos(total * 66.67)
 
     def guardarSesion(self, MainWindow):
         idsesion = int(self.lineEdit_53.text())
