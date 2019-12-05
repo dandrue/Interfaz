@@ -9,21 +9,6 @@ import math
 import time
 
 class Configuration(object):
-    def find_odrive(self, MainWindow):
-        print("Conectando con el prototipo ...")
-        self.plainTextEdit_6.appendPlainText('Conectando con el prototipo ...')
-        self.my_drive = odrive.find_any()
-        print("Prototipo encontrado")
-        my_drive = self.my_drive
-        self.plainTextEdit_6.appendPlainText('Axis definido como: odrv0.axis0')
-        my_drive.axis0.controller.config.pos_gain = 150
-        my_drive.axis0.controller.config.vel_gain = 7.5/10000
-        my_drive.axis0.controller.config.vel_integrator_gain = 100/10000
-        conectado = True
-        data = [my_drive, conectado]
-
-        return data
-
     def set_vel(self,MainWindow, my_drive):
         get_vel = self.lineEdit.text()
         vel_counts = float(get_vel) * (2400/60)
@@ -67,18 +52,23 @@ class Configuration(object):
         # Angulo deseado
         self.errors(my_drive)
         set_point = float(self.lineEdit_3.text())
+        print(set_point)
+        if 80.0<set_point and set_point<80.0:
+            print("Dentro del if")
+            self.plainTextEdit.appendPlainText("Valor fuera de los parámetros del sistema")
         # Counts_degree es el equivalente en pulsos de 1°
-        counts_degree = 66.67
-        # Set_point para el control de lazo cerrado en pulsos
-        set_point = set_point * counts_degree
-        print("Buscando set_point = {}".format(str(round(set_point,0))))
-        self.plainTextEdit.appendPlainText("Buscando set_point = {}".format(str(set_point)))
-        #my_drive.axis0.trap_traj.config.vel_limit = <Float>
-        #my_drive.axis0.trap_traj.config.accel_limit = <Float>
-        #my_drive.axis0.trap_traj.config.decel_limit = <Float>
-        #my_drive.axis0.trap_traj.config.A_per_css = <Float>
+        else:
+            counts_degree = 66.67
+            # Set_point para el control de lazo cerrado en pulsos
+            set_point = set_point * counts_degree
+            print("Buscando set_point = {}".format(str(round(set_point,0))))
+            self.plainTextEdit.appendPlainText("Buscando set_point = {}".format(str(set_point)))
+            #my_drive.axis0.trap_traj.config.vel_limit = <Float>
+            #my_drive.axis0.trap_traj.config.accel_limit = <Float>
+            #my_drive.axis0.trap_traj.config.decel_limit = <Float>
+            #my_drive.axis0.trap_traj.config.A_per_css = <Float>
 
-        my_drive.axis0.controller.move_to_pos(set_point)
+            my_drive.axis0.controller.move_to_pos(set_point)
 
 
     def vel_control(self,MainWindow, my_drive):

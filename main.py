@@ -10,8 +10,41 @@ from sqlite3 import Error
 from odrive.enums import *
 import time
 import math
+import odrive
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+
+class TimeOut(QThread):
+    signal = pyqtSignal('PyQt_PyObject')
+
+    def __init__(self):
+        QThread.__init__(self)
+
+
+    def run(self):
+        counter = 0
+        seconds = 40
+        while counter < seconds:
+            counter = counter + 0.5
+            time.sleep(0.5)
+        else:
+            self.signal.emit("Finish")
+
+
+class FindOdriveThread(QThread):
+    signal = pyqtSignal('PyQt_PyObject')
+
+    def __init__(self):
+        QThread.__init__(self)
+
+    def run(self):
+
+        print("Buscando prototipo")
+        my_drive = odrive.find_any()
+        # my_drive = "Hola mundo"
+        self.signal.emit(my_drive)
+        self.signal.emit("Finish")
+
 
 class FunctionThread(QThread):
     signal = pyqtSignal('PyQt_PyObject')
@@ -29,6 +62,7 @@ class FunctionThread(QThread):
         while value == True and counter < seconds:
             my_drive = self.my_drive
             torque = (8.27/270) * my_drive.axis0.motor.current_control.Iq_measured
+            torque = 3*((torque * 2)/0.02)*(220/(4*101.25))*0.06
             enc_position = my_drive.axis0.encoder.pos_estimate
             enc_position = enc_position / 66.67
             data = [round(torque,2), round(enc_position,2), seconds - counter - 0.5]
@@ -46,6 +80,15 @@ class Ui_MainWindow(object):
         self.my_drive = ""
         my_drive = self.my_drive
 
+    def timeout(self, MainWindow):
+        self.funthread = TimeOut()
+        self.funthread.start()
+        self.funthread.signal.connect(self.timecompleted)
+
+    def findThread(self, MainWindow):
+        self.funthread = FindOdriveThread()
+        self.funthread.start()
+        self.funthread.signal.connect(self.find_odrive)
 
     def supThread(self, MainWindow):
         self.suprep += 1
@@ -56,7 +99,8 @@ class Ui_MainWindow(object):
         self.seconds = float(self.lineEdit_38.text())
         seconds = self.seconds
         self.funthread = FunctionThread(self.my_drive, value, seconds)
-        Sesion.supinacion(self, MainWindow,self.my_drive)
+        miembro = self.radioButton_3.isChecked()
+        Sesion.supinacion(self, MainWindow,self.my_drive, miembro)
         self.pushButton_27.setDisabled(True)
         self.plainTextEdit.appendPlainText("Iniciando recolección de datos")
         self.funthread.start()
@@ -71,7 +115,8 @@ class Ui_MainWindow(object):
         self.seconds = float(self.lineEdit_37.text())
         seconds = self.seconds
         self.funthread = FunctionThread(self.my_drive, value, seconds)
-        Sesion.pronacion(self, MainWindow,self.my_drive)
+        miembro = self.radioButton_3.isChecked()
+        Sesion.pronacion(self, MainWindow,self.my_drive, miembro)
         self.pushButton_26.setDisabled(True)
         self.plainTextEdit.appendPlainText("Iniciando recolección de datos")
         self.funthread.start()
@@ -2481,15 +2526,15 @@ class Ui_MainWindow(object):
         self.plainTextEdit_6.setMaximumSize(QtCore.QSize(300, 100))
         self.plainTextEdit_6.setObjectName("plainTextEdit_6")
         self.gridLayout_12.addWidget(self.plainTextEdit_6, 4, 0, 1, 2)
-        self.pushButton_7 = QtWidgets.QPushButton(self.groupBox_7)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_7.sizePolicy().hasHeightForWidth())
-        self.pushButton_7.setSizePolicy(sizePolicy)
-        self.pushButton_7.setMaximumSize(QtCore.QSize(75, 16777215))
-        self.pushButton_7.setObjectName("pushButton_7")
-        self.gridLayout_12.addWidget(self.pushButton_7, 2, 1, 1, 1, QtCore.Qt.AlignHCenter)
+        # self.pushButton_7 = QtWidgets.QPushButton(self.groupBox_7)
+        # sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
+        # sizePolicy.setHorizontalStretch(0)
+        # sizePolicy.setVerticalStretch(0)
+        # sizePolicy.setHeightForWidth(self.pushButton_7.sizePolicy().hasHeightForWidth())
+        # self.pushButton_7.setSizePolicy(sizePolicy)
+        # self.pushButton_7.setMaximumSize(QtCore.QSize(75, 16777215))
+        # self.pushButton_7.setObjectName("pushButton_7")
+        # self.gridLayout_12.addWidget(self.pushButton_7, 2, 1, 1, 1, QtCore.Qt.AlignHCenter)
         self.gridLayout_3.addWidget(self.groupBox_7, 2, 1, 1, 1)
         self.gridLayout_2.addWidget(self.groupBox, 0, 1, 1, 1)
         self.groupBox_2 = QtWidgets.QGroupBox(self.widget)
@@ -2569,7 +2614,7 @@ class Ui_MainWindow(object):
         self.label_4.setObjectName("label_4")
         self.gridLayout_5.addWidget(self.label_4, 0, 0, 1, 1, QtCore.Qt.AlignHCenter)
         self.pushButton_33 = QtWidgets.QPushButton(self.groupBox_5)
-        self.pushButton_33.setEnabled(False)
+        # self.pushButton_33.setEnabled(False)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -2849,6 +2894,7 @@ class Ui_MainWindow(object):
         self.pushButton_28.clicked.connect(self.pronacion)
         self.pushButton_29.clicked.connect(self.supinacion)
         self.pushButton_32.clicked.connect(self.buscar_perfiles)
+        self.pushButton_33.clicked.connect(self.openloop)
         self.pushButton_30.clicked.connect(self.ir_a_perfil)
         self.pushButton_35.clicked.connect(self.eliminar_programa)
         self.pushButton_36.clicked.connect(self.perfil_2)
@@ -2877,7 +2923,7 @@ class Ui_MainWindow(object):
         #self.plainTextEdit_6.setEnabled(False)
 
 
-        self.pushButton_7.setEnabled(False)
+        #self.pushButton_7.setEnabled(False)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -3086,7 +3132,7 @@ class Ui_MainWindow(object):
         self.groupBox_7.setTitle(_translate("MainWindow", "Conexión"))
         self.pushButton_6.setText(_translate("MainWindow", "Conectar"))
         self.label_93.setText(_translate("MainWindow", "Asegurece de que el la marca situada en el soporte de los rodillos esté alineada con la marca situada en la guía frontal, antes de conectar al prototipo."))
-        self.pushButton_7.setText(_translate("MainWindow", "Desconectar"))
+        #self.pushButton_7.setText(_translate("MainWindow", "Desconectar"))
         self.groupBox_2.setTitle(_translate("MainWindow", "Calibración y control"))
         self.groupBox_3.setTitle(_translate("MainWindow", "Calibración Inicial"))
         self.label_3.setText(_translate("MainWindow", "Sequencia de calibración"))
@@ -3116,6 +3162,11 @@ class Ui_MainWindow(object):
         self.actionSesion.setText(_translate("MainWindow", "Sesion"))
         self.actionConfiguraci_n.setText(_translate("MainWindow", "Configuración"))
         self.actionDetectar_Prototipo.setText(_translate("MainWindow", "Detectar Prototipo"))
+
+
+    def openloop(self, MainWindow):
+        my_drive = self.my_drive
+        my_drive.axis0.requested_state = AXIS_STATE_IDLE
 
 
     def buscar(self,MainWindow):
@@ -3296,12 +3347,12 @@ class Ui_MainWindow(object):
 
     def get_pron_init(self, MainWindow):
         my_drive = self.my_drive
-        miembro = self.radioButton_3.isChecked()
+        miembro = self.radioButton.isChecked()
         Programa.get_pron_init(self, MainWindow, my_drive, miembro)
 
     def get_sup_init(self, MainWindow):
         my_drive = self.my_drive
-        miembro = self.radioButton_3.isChecked()
+        miembro = self.radioButton.isChecked()
         Programa.get_sup_init(self, MainWindow, my_drive, miembro)
 
     def nueva_sesion(self, MainWindow):
@@ -3363,6 +3414,37 @@ class Ui_MainWindow(object):
         else:
             self.supFinish(MainWindow)
 
+    def timecompleted(self,data):
+        if data=="Finish" and self.my_drive == "":
+            print("timeout, tiempo limite de busqueda alcanzado")
+            print("Compruebe la conexión a la tarjeta")
+            self.plainTextEdit_6.appendPlainText("Timeout, tiempo de busqueda superado")
+            self.plainTextEdit_6.appendPlainText("Compruebe las conexiones de la tarjeta")
+            self.plainTextEdit.appendPlainText("Timeout, tiempo de busqueda superado")
+            self.plainTextEdit.appendPlainText("Compruebe las conexiones de la tarjeta")
+            self.funthread.terminate()
+            self.find_odrive("Finish")
+        else:
+            print("Tarjeta encontrada")
+            self.funthread.terminate()
+
+    def find_odrive(self, data):
+        if data!="Finish":
+            self.my_drive = data
+            my_drive = self.my_drive
+            my_drive.axis0.controller.config.pos_gain = 150
+            my_drive.axis0.controller.config.vel_gain = 7.5/10000
+            my_drive.axis0.controller.config.vel_integrator_gain = 100/10000
+            print("Prototipo encontrado")
+            self.plainTextEdit_6.appendPlainText('Prototipo encontrado ...')
+            self.plainTextEdit_6.appendPlainText('Axis definido como: odrv0.axis0')
+            self.plainTextEdit.appendPlainText('Prototipo encontrado ...')
+            print(self.my_drive)
+        else:
+            print("Terminando busqueda")
+            self.timecompleted(" ")
+            self.funthread.terminate()
+
     def guardarSesion(self, MainWindow):
         Sesion.guardarSesion(self, MainWindow)
         self.ver_detalles(MainWindow)
@@ -3381,11 +3463,12 @@ class Ui_MainWindow(object):
 
 
     def buscar_prototipo(self, MainWindow):
-        self.plainTextEdit_6.appendPlainText('Estableciendo conexión, por favor espere...')
-        data = Configuration.find_odrive(self,MainWindow)
-        self.conectado = data[1]
-        self.my_drive = data[0]
-        self.plainTextEdit_6.appendPlainText('Conexión establecida')
+        self.timeout(MainWindow)
+        print("Conectando con el prototipo ...")
+        self.plainTextEdit_6.appendPlainText('Conectando con el prototipo ...')
+        self.plainTextEdit.appendPlainText('Conectando con el prototipo ...')
+        self.findThread(MainWindow)
+
 
 
 if __name__ == "__main__":

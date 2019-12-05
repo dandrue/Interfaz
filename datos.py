@@ -197,13 +197,14 @@ class Paciente(object):
                 self.treeWidget.clear()
                 cursor.execute('SELECT IdPrograma FROM Programas WHERE IdPaciente = ?' , (self.temp_id,))
                 idProgramas = cursor.fetchall()
-                print(idProgramas,idProgramas[0])
+
                 cursor.execute('DELETE FROM Programas WHERE IdPaciente = ?', (self.temp_id,))
-                if idProgramas[0] != None:
-                    for i in idProgramas[0]:
-                        cursor.execute('DELETE FROM Sesiones WHERE IDPrograma = ?' , (i,))
-                else:
-                    print('No existen sesiones vinculadas al paciente')
+                if len(idProgramas) >0:
+                    if idProgramas[0] != None:
+                        for i in idProgramas[0]:
+                            cursor.execute('DELETE FROM Sesiones WHERE IDPrograma = ?' , (i,))
+                    else:
+                        print('No existen sesiones vinculadas al paciente')
                 self.plainTextEdit.appendPlainText("Se ha eliminado la entrada satisfactoriamente")
                 print("Se ha eliminado la entrada satisfactoriamente")
                 con.commit()
@@ -514,7 +515,7 @@ class Sesion(object):
         else:
             position = float(self.lineEdit_31.text())
             ganancia = self.doubleSpinBox_2.value()
-            total = position + ganancia
+            total = (position + ganancia)
             actual = float(self.lineEdit_47.text())
             # self.lineEdit_31.setText(str(total))
             self.lineEdit_47.setText(str(total))
@@ -547,15 +548,15 @@ class Sesion(object):
         if miembro:
             position = float(self.lineEdit_34.text())
             ganancia = -self.doubleSpinBox_4.value()
-            total = position + ganancia
+            total = (position + ganancia)
             actual = float(self.lineEdit_48.text())
             # self.lineEdit_34.setText(str(total))
             self.lineEdit_48.setText(str(total))
             my_drive.axis0.controller.move_to_pos(-total * 66.67)
         else:
             position = float(self.lineEdit_34.text())
-            ganancia = -self.doubleSpinBox_4.value()
-            total = position + ganancia
+            ganancia = self.doubleSpinBox_4.value()
+            total = position - ganancia
             actual = float(self.lineEdit_48.text())
             # self.lineEdit_34.setText(str(total))
             self.lineEdit_48.setText(str(total))
