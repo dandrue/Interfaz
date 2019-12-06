@@ -11,23 +11,46 @@ import time
 class Configuration(object):
     def set_vel(self,MainWindow, my_drive):
         get_vel = self.lineEdit.text()
-        vel_counts = float(get_vel) * (2400/60)
-        my_drive.axis0.controller.config.vel_limit = int(vel_counts)
-        print("Velocidad cambiada a {}".format(vel_counts))
-        self.plainTextEdit.appendPlainText("Velocidad cambiada a :{} [RPM]".format(get_vel))
+        if float(get_vel)>200 or float(get_vel)<120:
+            print("Velocidad fuera de rango")
+            self.lineEdit.setText("180")
+            self.plainTextEdit.appendPlainText("Velocidad fuera de rango de operación 120 < vel < 200")
+        else:
+            vel_counts = float(get_vel) * (2400/60)
+            my_drive.axis0.controller.config.vel_limit = int(vel_counts)
+            print("Velocidad cambiada a {}".format(vel_counts))
+            self.plainTextEdit.appendPlainText("Velocidad cambiada a :{} [RPM]".format(get_vel))
 
     def set_current(self,MainWindow, my_drive):
         get_current = self.lineEdit_2.text()
-        my_drive.axis0.motor.config.current_lim = float(get_current)
-        print("Corriente cambiada a: {} [A]".format(str(get_current)))
-        self.plainTextEdit.appendPlainText("Corriente cambiada a : {} [A]".format(get_current))
+        print(get_current, str(float(get_current)))
+        if float(get_current)>float(30):
+            print("Corriente fuera de rango")
+            self.lineEdit_2.setText("10")
+            self.plainTextEdit.appendPlainText("Máxima corriente permitida = 30A")
+        elif float(get_current)<float(0):
+            print("Corriente fuera de rango")
+            self.lineEdit_2.setText("10")
+            self.plainTextEdit.appendPlainText("La corriente debe ser positiva")
+        else:
+            my_drive.axis0.motor.config.current_lim = float(get_current)
+            print("Corriente cambiada a: {} [A]".format(str(get_current)))
+            self.plainTextEdit.appendPlainText("Corriente cambiada a : {} [A]".format(get_current))
 
     def set_calibration_current(self,MainWindow, my_drive):
-
         get_calibration_current = self.lineEdit_4.text()
-        my_drive.axis0.motor.config.calibration_current = int(get_calibration_current)
-        print("Corriente de calibración cambiada a: {} [A]".format(str(get_calibration_current)))
-        self.plainTextEdit.appendPlainText("Corriente de calibración cambiada a : {} [A]".format(get_calibration_current))
+        if float(get_calibration_current)>30:
+            print("Corriente fuera de rango")
+            self.lineEdit_4.setText("10")
+            self.plainTextEdit.appendPlainText("Máxima corriente permitida = 30A")
+        elif float(get_calibration_current)<0:
+            print("Corriente fuera de rango")
+            self.lineEdit_2.setText("10")
+            self.plainTextEdit.appendPlainText("La corriente debe ser positiva")
+        else:
+            my_drive.axis0.motor.config.calibration_current = int(get_calibration_current)
+            print("Corriente de calibración cambiada a: {} [A]".format(str(get_calibration_current)))
+            self.plainTextEdit.appendPlainText("Corriente de calibración cambiada a : {} [A]".format(get_calibration_current))
 
     def initial_calibration(self,MainWindow, my_drive):
         self.errors(my_drive)
@@ -50,14 +73,10 @@ class Configuration(object):
 
     def set_point(self,MainWindow, my_drive):
         # Angulo deseado
-        self.errors(my_drive)
+        #self.errors(my_drive)
         set_point = float(self.lineEdit_3.text())
         print(set_point)
-        if 80.0<set_point and set_point<80.0:
-            print("Dentro del if")
-            self.plainTextEdit.appendPlainText("Valor fuera de los parámetros del sistema")
-        # Counts_degree es el equivalente en pulsos de 1°
-        else:
+        if float(-80.0)<set_point<float(80.0):
             counts_degree = 66.67
             # Set_point para el control de lazo cerrado en pulsos
             set_point = set_point * counts_degree
@@ -69,6 +88,11 @@ class Configuration(object):
             #my_drive.axis0.trap_traj.config.A_per_css = <Float>
 
             my_drive.axis0.controller.move_to_pos(set_point)
+
+        # Counts_degree es el equivalente en pulsos de 1°
+        else:
+            self.lineEdit_3.setText("0")
+            self.plainTextEdit.appendPlainText("Valor fuera de rango -80<°<80")
 
 
     def vel_control(self,MainWindow, my_drive):

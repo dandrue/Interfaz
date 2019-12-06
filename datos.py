@@ -485,20 +485,28 @@ class Sesion(object):
                 self.doubleSpinBox_2.setValue(0)
                 current = self.doubleSpinBox.value()
                 position = float(self.lineEdit_31.text())
-                self.lineEdit_47.setText(str(position))
-                Configuration.closed_loop(self,MainWindow, my_drive)
-                my_drive.axis0.motor.config.current_lim = current
-                my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
-                my_drive.axis0.controller.move_to_pos(-position*66.67)
+                if float(-80)<position<float(80):
+                    self.lineEdit_47.setText(str(position))
+                    Configuration.closed_loop(self,MainWindow, my_drive)
+                    my_drive.axis0.motor.config.current_lim = current
+                    my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
+                    my_drive.axis0.controller.move_to_pos(-position*66.67)
+                else:
+                    print("Posición fuera de rango")
+                    self.plainTextEdit.appendPlainText("Posición fuera de rango")
             else:
                 self.doubleSpinBox_2.setValue(0)
                 current = self.doubleSpinBox.value()
                 position = float(self.lineEdit_31.text())
-                self.lineEdit_47.setText(str(position))
-                Configuration.closed_loop(self,MainWindow, my_drive)
-                my_drive.axis0.motor.config.current_lim = current
-                my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
-                my_drive.axis0.controller.move_to_pos(position*66.67)
+                if float(-80)<position<float(80):
+                    self.lineEdit_47.setText(str(position))
+                    Configuration.closed_loop(self,MainWindow, my_drive)
+                    my_drive.axis0.motor.config.current_lim = current
+                    my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
+                    my_drive.axis0.controller.move_to_pos(position*66.67)
+                else:
+                    print("Posición fuera de rango")
+                    self.plainTextEdit.appendPlainText("Posición fuera de rango")
         except ValueError:
             self.plainTextEdit.appendPlainText("Error en el valor ingresado")
 
@@ -527,20 +535,29 @@ class Sesion(object):
                 self.doubleSpinBox_4.setValue(0)
                 current = self.doubleSpinBox_3.value()
                 position = float(self.lineEdit_34.text())
-                self.lineEdit_48.setText(str(position))
-                Configuration.closed_loop(self,MainWindow, my_drive)
-                my_drive.axis0.motor.config.current_lim = current
-                my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
-                my_drive.axis0.controller.move_to_pos(-position*66.67)
+                if float(-80)<position<float(80):
+                    self.lineEdit_48.setText(str(position))
+                    Configuration.closed_loop(self,MainWindow, my_drive)
+                    my_drive.axis0.motor.config.current_lim = current
+                    my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
+                    my_drive.axis0.controller.move_to_pos(-position*66.67)
+                else:
+                    print("Posición fuera de rango")
+                    self.plainTextEdit.appendPlainText("Posición fuera de rango")
             else:
                 self.doubleSpinBox_4.setValue(0)
                 current = self.doubleSpinBox_3.value()
                 position = float(self.lineEdit_34.text())
-                self.lineEdit_48.setText(str(position))
-                Configuration.closed_loop(self,MainWindow, my_drive)
-                my_drive.axis0.motor.config.current_lim = current
-                my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
-                my_drive.axis0.controller.move_to_pos(position*66.67)
+                if float(-80)<position<float(80):
+                    self.lineEdit_48.setText(str(position))
+                    Configuration.closed_loop(self,MainWindow, my_drive)
+                    my_drive.axis0.motor.config.current_lim = current
+                    my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
+                    my_drive.axis0.controller.move_to_pos(position*66.67)
+                else:
+                    print("Posición fuera de rango")
+                    self.plainTextEdit.appendPlainText("Posición fuera de rango")
+
         except ValueError:
             self.plainTextEdit.appendPlainText("Error en el valor ingresado")
 
@@ -577,10 +594,7 @@ class Sesion(object):
         angfins = float(self.lineEdit_48.text())
         torquep = float(self.lineEdit_33.text())
         torques = float(self.lineEdit_35.text())
-
         nsesiones = int(self.lineEdit_52.text()) + 1
-
-
         data = [idsesion, idprograma, sesionnumero, nombre,fecha, repeticionesp, anginitp, angfinp, repeticioness, anginits, angfins, torquep, torques]
         data_2 = [nsesiones,angfinp, angfins,torquep, torques, idprograma]
 

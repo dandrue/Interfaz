@@ -82,7 +82,7 @@ class Ui_MainWindow(object):
         self.my_drive = ""
         my_drive = self.my_drive
 
-    
+
 
     def findThread(self, MainWindow):
         self.funthread = FindOdriveThread()
@@ -2870,6 +2870,10 @@ class Ui_MainWindow(object):
         self.actionSesion.triggered.connect(self.sesion)
 
         # lineas de texto limitadas a enteros
+        self.lineEdit_3.setValidator(self.onlyInt)
+        self.lineEdit.setValidator(self.onlyInt)
+        self.lineEdit_2.setValidator(self.onlyInt)
+        self.lineEdit_4.setValidator(self.onlyInt)
         self.lineEdit_8.setValidator(self.onlyInt)
         self.lineEdit_9.setValidator(self.onlyInt)
         self.lineEdit_13.setValidator(self.onlyInt)
@@ -3266,17 +3270,11 @@ class Ui_MainWindow(object):
     def sesion(self,MainWindow):
         self.stackedWidget.setCurrentIndex(5)
 
-    def set_vel(self,MainWindow):
-        my_drive = self.my_drive
-        Configuration.set_vel(self,MainWindow, my_drive)
-
     def set_current(self,MainWindow):
         my_drive = self.my_drive
-        Configuration.set_current(self,MainWindow,my_drive)
-
-    def set_calibration_current(self,MainWindow):
-        my_drive = self.my_drive
+        Configuration.set_vel(self,MainWindow, my_drive)
         Configuration.set_calibration_current(self,MainWindow, my_drive)
+        Configuration.set_current(self,MainWindow,my_drive)
 
     def initial_calibration(self,MainWindow):
         my_drive = self.my_drive
