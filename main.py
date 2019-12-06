@@ -14,22 +14,6 @@ import odrive
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class TimeOut(QThread):
-    signal = pyqtSignal('PyQt_PyObject')
-
-    def __init__(self):
-        QThread.__init__(self)
-
-
-    def run(self):
-        counter = 0
-        seconds = 40
-        while counter < seconds:
-            counter = counter + 0.5
-            time.sleep(0.5)
-        else:
-            self.signal.emit("Finish")
-
 
 class FindOdriveThread(QThread):
     signal = pyqtSignal('PyQt_PyObject')
@@ -49,28 +33,46 @@ class FindOdriveThread(QThread):
 class FunctionThread(QThread):
     signal = pyqtSignal('PyQt_PyObject')
 
-    def __init__(self, my_drive, value, seconds):
+    def __init__(self, my_drive, value, seconds,miembro):
         QThread.__init__(self)
         self.my_drive = my_drive
         self.value = value
         self.seconds = seconds
+        self.miembro = miembro
 
     def run(self):
-        counter = 0
-        seconds = self.seconds
-        value = self.value
-        while value == True and counter < seconds:
-            my_drive = self.my_drive
-            torque = (8.27/270) * my_drive.axis0.motor.current_control.Iq_measured
-            torque = 3*((torque * 2)/0.02)*(220/(4*101.25))*0.06
-            enc_position = my_drive.axis0.encoder.pos_estimate
-            enc_position = enc_position / 66.67
-            data = [round(torque,2), round(enc_position,2), seconds - counter - 0.5]
-            self.signal.emit(data)
-            counter = counter +  0.5
-            time.sleep(0.5)
+        if self.miembro:
+            counter = 0
+            seconds = self.seconds
+            value = self.value
+            while value == True and counter < seconds:
+                my_drive = self.my_drive
+                torque = 3*(8.27/270) * my_drive.axis0.motor.current_control.Iq_measured
+                torque = ((torque * 2)/0.02)*(220/(4*101.25))*0.06
+                enc_position = -my_drive.axis0.encoder.pos_estimate
+                enc_position = enc_position / 66.67
+                data = [round(torque,2), round(enc_position,2), seconds - counter - 0.5]
+                self.signal.emit(data)
+                counter = counter +  0.5
+                time.sleep(0.5)
+            else:
+                self.signal.emit('finish')
         else:
-            self.signal.emit('finish')
+            counter = 0
+            seconds = self.seconds
+            value = self.value
+            while value == True and counter < seconds:
+                my_drive = self.my_drive
+                torque = (8.27/270) * my_drive.axis0.motor.current_control.Iq_measured
+                torque = 3*((torque * 2)/0.02)*(220/(4*101.25))*0.06
+                enc_position = my_drive.axis0.encoder.pos_estimate
+                enc_position = enc_position / 66.67
+                data = [round(torque,2), round(enc_position,2), seconds - counter - 0.5]
+                self.signal.emit(data)
+                counter = counter +  0.5
+                time.sleep(0.5)
+            else:
+                self.signal.emit('finish')
 
 class Ui_MainWindow(object):
     def __init__(self):
@@ -80,10 +82,7 @@ class Ui_MainWindow(object):
         self.my_drive = ""
         my_drive = self.my_drive
 
-    def timeout(self, MainWindow):
-        self.funthread = TimeOut()
-        self.funthread.start()
-        self.funthread.signal.connect(self.timecompleted)
+    
 
     def findThread(self, MainWindow):
         self.funthread = FindOdriveThread()
@@ -98,8 +97,8 @@ class Ui_MainWindow(object):
             value = False
         self.seconds = float(self.lineEdit_38.text())
         seconds = self.seconds
-        self.funthread = FunctionThread(self.my_drive, value, seconds)
         miembro = self.radioButton_3.isChecked()
+        self.funthread = FunctionThread(self.my_drive, value, seconds, miembro)
         Sesion.supinacion(self, MainWindow,self.my_drive, miembro)
         self.pushButton_27.setDisabled(True)
         self.plainTextEdit.appendPlainText("Iniciando recolección de datos")
@@ -114,8 +113,8 @@ class Ui_MainWindow(object):
             value = False
         self.seconds = float(self.lineEdit_37.text())
         seconds = self.seconds
-        self.funthread = FunctionThread(self.my_drive, value, seconds)
         miembro = self.radioButton_3.isChecked()
+        self.funthread = FunctionThread(self.my_drive, value, seconds, miembro)
         Sesion.pronacion(self, MainWindow,self.my_drive, miembro)
         self.pushButton_26.setDisabled(True)
         self.plainTextEdit.appendPlainText("Iniciando recolección de datos")
@@ -127,7 +126,8 @@ class Ui_MainWindow(object):
             self.lineEdit_37.setText(str(self.seconds))
             self.pushButton_26.setEnabled(True)
             self.plainTextEdit.appendPlainText("Finalizando recolección de datos")
-            self.funthread.terminate()
+            #self.funthread.terminate()
+            self.funthread.quit()
             # self.my_drive.axis0.requested_state = AXIS_STATE_IDLE
             self.lineEdit_41.setText(str(self.pronrep))
             TMax = max(self.torque)
@@ -142,7 +142,8 @@ class Ui_MainWindow(object):
             self.lineEdit_38.setText(str(self.seconds))
             self.pushButton_27.setEnabled(True)
             self.plainTextEdit.appendPlainText("Finalizando recolección de datos")
-            self.funthread.terminate()
+            #self.funthread.terminate()
+            self.funthread.quit()
             # self.my_drive.axis0.requested_state = AXIS_STATE_IDLE
             self.lineEdit_44.setText(str(self.suprep))
             TMax = max(self.torqueSup)
@@ -172,7 +173,7 @@ class Ui_MainWindow(object):
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Window, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Base, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
@@ -1931,7 +1932,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.doubleSpinBox.sizePolicy().hasHeightForWidth())
         self.doubleSpinBox.setSizePolicy(sizePolicy)
         self.doubleSpinBox.setMaximumSize(QtCore.QSize(150, 16777215))
-        self.doubleSpinBox.setMaximum(50.0)
+        self.doubleSpinBox.setMaximum(30.0)
         self.doubleSpinBox.setProperty("value", 10.0)
         self.doubleSpinBox.setObjectName("doubleSpinBox")
         self.gridLayout_33.addWidget(self.doubleSpinBox, 0, 1, 1, 1, QtCore.Qt.AlignHCenter)
@@ -2057,7 +2058,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.doubleSpinBox_3.sizePolicy().hasHeightForWidth())
         self.doubleSpinBox_3.setSizePolicy(sizePolicy)
         self.doubleSpinBox_3.setMaximumSize(QtCore.QSize(150, 16777215))
-        self.doubleSpinBox_3.setMaximum(50.0)
+        self.doubleSpinBox_3.setMaximum(30.0)
         self.doubleSpinBox_3.setProperty("value", 10.0)
         self.doubleSpinBox_3.setObjectName("doubleSpinBox_3")
         self.gridLayout_34.addWidget(self.doubleSpinBox_3, 0, 1, 1, 1, QtCore.Qt.AlignHCenter)
@@ -2643,7 +2644,7 @@ class Ui_MainWindow(object):
         self.label_4.setObjectName("label_4")
         self.gridLayout_5.addWidget(self.label_4, 0, 0, 1, 1, QtCore.Qt.AlignHCenter)
         self.pushButton_33 = QtWidgets.QPushButton(self.groupBox_5)
-        self.pushButton_33.setEnabled(False)
+        self.pushButton_33.setEnabled(True)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -3159,7 +3160,7 @@ class Ui_MainWindow(object):
         self.lineEdit_4.setText(_translate("MainWindow", "10"))
         self.pushButton_8.setText(_translate("MainWindow", "Guardar"))
         self.groupBox_7.setTitle(_translate("MainWindow", "Conexión"))
-        self.label_93.setText(_translate("MainWindow", "Asegurece de que el la marca situada en el soporte de los rodillos esté alineada con la marca situada en la guía frontal, antes de conectar al prototipo."))
+        self.label_93.setText(_translate("MainWindow", "Asegúrece de que la marca situada en el soporte de los rodillos esté alineada con la marca situada en la guía frontal, antes de conectar al prototipo."))
         self.pushButton_6.setText(_translate("MainWindow", "Conectar"))
         self.groupBox_2.setTitle(_translate("MainWindow", "Calibración y control"))
         self.groupBox_3.setTitle(_translate("MainWindow", "Calibración Inicial"))
@@ -3442,27 +3443,14 @@ class Ui_MainWindow(object):
         else:
             self.supFinish(MainWindow)
 
-    def timecompleted(self,data):
-        if data=="Finish" and self.my_drive == "":
-            print("timeout, tiempo limite de busqueda alcanzado")
-            print("Compruebe la conexión a la tarjeta")
-            self.plainTextEdit_6.appendPlainText("Timeout, tiempo de busqueda superado")
-            self.plainTextEdit_6.appendPlainText("Compruebe las conexiones de la tarjeta")
-            self.plainTextEdit.appendPlainText("Timeout, tiempo de busqueda superado")
-            self.plainTextEdit.appendPlainText("Compruebe las conexiones de la tarjeta")
-            self.funthread.terminate()
-            self.find_odrive("Finish")
-        else:
-            print("Tarjeta encontrada")
-            self.funthread.terminate()
 
     def find_odrive(self, data):
         if data!="Finish":
             self.my_drive = data
             my_drive = self.my_drive
-            my_drive.axis0.controller.config.pos_gain = 150
-            my_drive.axis0.controller.config.vel_gain = 7.5/10000
-            my_drive.axis0.controller.config.vel_integrator_gain = 100/10000
+            my_drive.axis0.controller.config.pos_gain = 130
+            my_drive.axis0.controller.config.vel_gain = 6/10000
+            my_drive.axis0.controller.config.vel_integrator_gain = 80/10000
             print("Prototipo encontrado")
             self.plainTextEdit_6.appendPlainText('Prototipo encontrado ...')
             self.plainTextEdit_6.appendPlainText('Axis definido como: odrv0.axis0')
@@ -3470,8 +3458,8 @@ class Ui_MainWindow(object):
             print(self.my_drive)
         else:
             print("Terminando busqueda")
-            self.timecompleted(" ")
-            self.funthread.terminate()
+            #self.funthread.terminate()
+            self.funthread.quit()
 
     def guardarSesion(self, MainWindow):
         Sesion.guardarSesion(self, MainWindow)
@@ -3491,7 +3479,6 @@ class Ui_MainWindow(object):
 
 
     def buscar_prototipo(self, MainWindow):
-        self.timeout(MainWindow)
         print("Conectando con el prototipo ...")
         self.plainTextEdit_6.appendPlainText('Conectando con el prototipo ...')
         self.plainTextEdit.appendPlainText('Conectando con el prototipo ...')
