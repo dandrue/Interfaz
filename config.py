@@ -54,9 +54,11 @@ class Configuration(object):
 
     def initial_calibration(self,MainWindow, my_drive):
         self.errors(my_drive)
-        self.set_vel(my_drive)
-        self.set_current(my_drive)
-        self.set_calibration_current(my_drive)
+        #self.set_vel(my_drive)
+        #self.set_current(my_drive)
+        #self.set_calibration_current(my_drive)
+        my_drive.axis0.motor.config.calibration_current = 10
+        my_drive.axis0.motor.config.current_lim = 20
         my_drive.config.brake_resistance = 0.5
         my_drive.axis0.motor.config.pole_pairs = 7
         my_drive.axis0.encoder.config.cpr = 2400
@@ -76,7 +78,7 @@ class Configuration(object):
         #self.errors(my_drive)
         set_point = float(self.lineEdit_3.text())
         print(set_point)
-        if float(-80.0)<set_point<float(80.0):
+        if float(-80.0)<=set_point<=float(80.0):
             counts_degree = 66.67
             # Set_point para el control de lazo cerrado en pulsos
             set_point = set_point * counts_degree

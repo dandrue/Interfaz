@@ -3272,9 +3272,9 @@ class Ui_MainWindow(object):
 
     def set_current(self,MainWindow):
         my_drive = self.my_drive
-        Configuration.set_vel(self,MainWindow, my_drive)
+        #Configuration.set_vel(self,MainWindow, my_drive)
         Configuration.set_calibration_current(self,MainWindow, my_drive)
-        Configuration.set_current(self,MainWindow,my_drive)
+        #Configuration.set_current(self,MainWindow,my_drive)
 
     def initial_calibration(self,MainWindow):
         my_drive = self.my_drive
