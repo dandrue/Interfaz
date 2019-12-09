@@ -626,7 +626,7 @@
              </palette>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="tab">
              <attribute name="title">
@@ -659,11 +659,76 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>1010</width>
-                       <height>609</height>
+                       <width>1008</width>
+                       <height>612</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_6">
+                      <item row="4" column="1">
+                       <spacer name="verticalSpacer_19">
+                        <property name="orientation">
+                         <enum>Qt::Vertical</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>20</width>
+                          <height>40</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item row="6" column="1">
+                       <spacer name="verticalSpacer_23">
+                        <property name="orientation">
+                         <enum>Qt::Vertical</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>20</width>
+                          <height>40</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item row="0" column="1">
+                       <spacer name="verticalSpacer_26">
+                        <property name="orientation">
+                         <enum>Qt::Vertical</enum>
+                        </property>
+                        <property name="sizeType">
+                         <enum>QSizePolicy::Fixed</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>20</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item row="2" column="1">
+                       <spacer name="verticalSpacer_27">
+                        <property name="orientation">
+                         <enum>Qt::Vertical</enum>
+                        </property>
+                        <property name="sizeType">
+                         <enum>QSizePolicy::Expanding</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>20</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item row="1" column="1" alignment="Qt::AlignHCenter">
+                       <widget class="QLabel" name="label_82">
+                        <property name="text">
+                         <string>BUSCAR PACIENTE</string>
+                        </property>
+                       </widget>
+                      </item>
                       <item row="5" column="1">
                        <widget class="QGroupBox" name="groupBox_9">
                         <property name="palette">
@@ -882,84 +947,6 @@
                         </layout>
                        </widget>
                       </item>
-                      <item row="0" column="1">
-                       <spacer name="verticalSpacer_26">
-                        <property name="orientation">
-                         <enum>Qt::Vertical</enum>
-                        </property>
-                        <property name="sizeType">
-                         <enum>QSizePolicy::Fixed</enum>
-                        </property>
-                        <property name="sizeHint" stdset="0">
-                         <size>
-                          <width>20</width>
-                          <height>20</height>
-                         </size>
-                        </property>
-                       </spacer>
-                      </item>
-                      <item row="4" column="1">
-                       <spacer name="verticalSpacer_19">
-                        <property name="orientation">
-                         <enum>Qt::Vertical</enum>
-                        </property>
-                        <property name="sizeHint" stdset="0">
-                         <size>
-                          <width>20</width>
-                          <height>40</height>
-                         </size>
-                        </property>
-                       </spacer>
-                      </item>
-                      <item row="6" column="1">
-                       <spacer name="verticalSpacer_23">
-                        <property name="orientation">
-                         <enum>Qt::Vertical</enum>
-                        </property>
-                        <property name="sizeHint" stdset="0">
-                         <size>
-                          <width>20</width>
-                          <height>40</height>
-                         </size>
-                        </property>
-                       </spacer>
-                      </item>
-                      <item row="2" column="1">
-                       <spacer name="verticalSpacer_27">
-                        <property name="orientation">
-                         <enum>Qt::Vertical</enum>
-                        </property>
-                        <property name="sizeType">
-                         <enum>QSizePolicy::Expanding</enum>
-                        </property>
-                        <property name="sizeHint" stdset="0">
-                         <size>
-                          <width>20</width>
-                          <height>20</height>
-                         </size>
-                        </property>
-                       </spacer>
-                      </item>
-                      <item row="1" column="1" alignment="Qt::AlignHCenter">
-                       <widget class="QLabel" name="label_82">
-                        <property name="text">
-                         <string>BUSCAR PACIENTE</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="8" column="1">
-                       <spacer name="verticalSpacer_18">
-                        <property name="orientation">
-                         <enum>Qt::Vertical</enum>
-                        </property>
-                        <property name="sizeHint" stdset="0">
-                         <size>
-                          <width>20</width>
-                          <height>141</height>
-                         </size>
-                        </property>
-                       </spacer>
-                      </item>
                       <item row="7" column="1">
                        <widget class="QFrame" name="frame_6">
                         <property name="frameShape">
@@ -1118,6 +1105,19 @@
                         </layout>
                        </widget>
                       </item>
+                      <item row="8" column="1">
+                       <spacer name="verticalSpacer_18">
+                        <property name="orientation">
+                         <enum>Qt::Vertical</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>20</width>
+                          <height>141</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
                      </layout>
                     </widget>
                    </widget>
@@ -1139,8 +1139,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>960</width>
-                       <height>609</height>
+                       <width>497</width>
+                       <height>344</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_9">
@@ -1580,9 +1580,9 @@
                      <property name="geometry">
                       <rect>
                        <x>0</x>
-                       <y>-85</y>
-                       <width>960</width>
-                       <height>680</height>
+                       <y>0</y>
+                       <width>956</width>
+                       <height>651</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_37">
@@ -2149,8 +2149,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>960</width>
-                       <height>609</height>
+                       <width>578</width>
+                       <height>532</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_10">
@@ -3007,8 +3007,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>946</width>
-                       <height>844</height>
+                       <width>555</width>
+                       <height>795</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_41">
@@ -3979,9 +3979,9 @@
                      <property name="geometry">
                       <rect>
                        <x>0</x>
-                       <y>-244</y>
-                       <width>946</width>
-                       <height>853</height>
+                       <y>0</y>
+                       <width>635</width>
+                       <height>769</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_40">
@@ -5703,8 +5703,8 @@
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>1028</width>
-                   <height>627</height>
+                   <width>1026</width>
+                   <height>630</height>
                   </rect>
                  </property>
                  <property name="sizePolicy">
@@ -6741,7 +6741,7 @@
      <x>0</x>
      <y>0</y>
      <width>1380</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="sizePolicy">
