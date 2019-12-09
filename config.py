@@ -9,6 +9,21 @@ import math
 import time
 
 class Configuration(object):
+
+    def initial_calibration(self,MainWindow, my_drive):
+        self.errors(my_drive)
+        # self.set_vel(my_drive)
+        # self.set_current(my_drive)
+        # self.set_calibration_current(my_drive)
+        # my_drive.axis0.motor.config.calibration_current = 10
+        # my_drive.axis0.motor.config.current_lim = 20
+        my_drive.config.brake_resistance = 0.5
+        my_drive.axis0.motor.config.pole_pairs = 7
+        my_drive.axis0.encoder.config.cpr = 2400
+        print("Iniciando calibración inicial del sistema")
+        self.plainTextEdit.appendPlainText("Iniciando calibración inicial del sistema")
+        my_drive.axis0.requested_state = AXIS_STATE_FULL_CALIBRATION_SEQUENCE
+
     def set_vel(self,MainWindow, my_drive):
         get_vel = self.lineEdit.text()
         if float(get_vel)>200 or float(get_vel)<120:
@@ -52,19 +67,7 @@ class Configuration(object):
             print("Corriente de calibración cambiada a: {} [A]".format(str(get_calibration_current)))
             self.plainTextEdit.appendPlainText("Corriente de calibración cambiada a : {} [A]".format(get_calibration_current))
 
-    def initial_calibration(self,MainWindow, my_drive):
-        self.errors(my_drive)
-        #self.set_vel(my_drive)
-        #self.set_current(my_drive)
-        #self.set_calibration_current(my_drive)
-        my_drive.axis0.motor.config.calibration_current = 10
-        my_drive.axis0.motor.config.current_lim = 20
-        my_drive.config.brake_resistance = 0.5
-        my_drive.axis0.motor.config.pole_pairs = 7
-        my_drive.axis0.encoder.config.cpr = 2400
-        print("Iniciando calibración inicial del sistema")
-        self.plainTextEdit.appendPlainText("Iniciando calibración inicial del sistema")
-        my_drive.axis0.requested_state = AXIS_STATE_FULL_CALIBRATION_SEQUENCE
+
 
     def closed_loop(self,MainWindow, my_drive):
         self.errors(my_drive)

@@ -480,36 +480,47 @@ class Sesion(object):
         self.lineEdit_34.setText(str(sup_actual))
 
     def pronacion(self, MainWindow, my_drive, miembro):
-        try:
-            if miembro:
-                self.doubleSpinBox_2.setValue(0)
-                current = self.doubleSpinBox.value()
-                position = float(self.lineEdit_31.text())
-                if float(-80)<=position<=float(80):
-                    self.lineEdit_47.setText(str(position))
-                    Configuration.closed_loop(self,MainWindow, my_drive)
-                    my_drive.axis0.motor.config.current_lim = current
-                    my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
-                    my_drive.axis0.controller.move_to_pos(-position*66.67)
-                else:
-                    print("Posición fuera de rango")
-                    self.plainTextEdit.appendPlainText("Posición fuera de rango")
-            else:
-                self.doubleSpinBox_2.setValue(0)
-                current = self.doubleSpinBox.value()
-                position = float(self.lineEdit_31.text())
-                if float(-80)<=position<=float(80):
-                    self.lineEdit_47.setText(str(position))
-                    Configuration.closed_loop(self,MainWindow, my_drive)
-                    my_drive.axis0.motor.config.current_lim = current
-                    my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
-                    my_drive.axis0.controller.move_to_pos(position*66.67)
-                else:
-                    print("Posición fuera de rango")
-                    self.plainTextEdit.appendPlainText("Posición fuera de rango")
-        except ValueError:
-            self.plainTextEdit.appendPlainText("Error en el valor ingresado")
+        msgBox = QMessageBox()
+        msgBox.setIcon(QMessageBox.Warning)
+        msgBox.setWindowIcon(QtGui.QIcon("icons/prosthetic.png"))
+        msgBox.setText("Asegúrese de retirar al paciente del prototipo mientras se setea la posición de trabajo, si ya fue seteada la posición de trabajo haga caso omiso a este aviso")
+        msgBox.setWindowTitle("Advertencia")
+        msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        returnValue = msgBox.exec()
 
+        if returnValue == QMessageBox.Yes:
+
+            try:
+                if miembro:
+                    self.doubleSpinBox_2.setValue(0)
+                    current = self.doubleSpinBox.value()
+                    position = float(self.lineEdit_31.text())
+                    if float(-80)<=position<=float(80):
+                        self.lineEdit_47.setText(str(position))
+                        Configuration.closed_loop(self,MainWindow, my_drive)
+                        my_drive.axis0.motor.config.current_lim = current
+                        my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
+                        my_drive.axis0.controller.move_to_pos(-position*66.67)
+                    else:
+                        print("Posición fuera de rango")
+                        self.plainTextEdit.appendPlainText("Posición fuera de rango")
+                else:
+                    self.doubleSpinBox_2.setValue(0)
+                    current = self.doubleSpinBox.value()
+                    position = float(self.lineEdit_31.text())
+                    if float(-80)<=position<=float(80):
+                        self.lineEdit_47.setText(str(position))
+                        Configuration.closed_loop(self,MainWindow, my_drive)
+                        my_drive.axis0.motor.config.current_lim = current
+                        my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
+                        my_drive.axis0.controller.move_to_pos(position*66.67)
+                    else:
+                        print("Posición fuera de rango")
+                        self.plainTextEdit.appendPlainText("Posición fuera de rango")
+            except ValueError:
+                self.plainTextEdit.appendPlainText("Error en el valor ingresado")
+        else:
+            print("Abortando Movimiento")
 
     def ganancia(self, MainWindow, my_drive, miembro):
         if miembro:
@@ -530,36 +541,46 @@ class Sesion(object):
             my_drive.axis0.controller.move_to_pos(total * 66.67)
 
     def supinacion(self, MainWindow, my_drive, miembro):
-        try:
-            if miembro:
-                self.doubleSpinBox_4.setValue(0)
-                current = self.doubleSpinBox_3.value()
-                position = float(self.lineEdit_34.text())
-                if float(-80)<=position<=float(80):
-                    self.lineEdit_48.setText(str(position))
-                    Configuration.closed_loop(self,MainWindow, my_drive)
-                    my_drive.axis0.motor.config.current_lim = current
-                    my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
-                    my_drive.axis0.controller.move_to_pos(-position*66.67)
-                else:
-                    print("Posición fuera de rango")
-                    self.plainTextEdit.appendPlainText("Posición fuera de rango")
-            else:
-                self.doubleSpinBox_4.setValue(0)
-                current = self.doubleSpinBox_3.value()
-                position = float(self.lineEdit_34.text())
-                if float(-80)<=position<=float(80):
-                    self.lineEdit_48.setText(str(position))
-                    Configuration.closed_loop(self,MainWindow, my_drive)
-                    my_drive.axis0.motor.config.current_lim = current
-                    my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
-                    my_drive.axis0.controller.move_to_pos(position*66.67)
-                else:
-                    print("Posición fuera de rango")
-                    self.plainTextEdit.appendPlainText("Posición fuera de rango")
 
-        except ValueError:
-            self.plainTextEdit.appendPlainText("Error en el valor ingresado")
+        msgBox = QMessageBox()
+        msgBox.setIcon(QMessageBox.Warning)
+        msgBox.setWindowIcon(QtGui.QIcon("icons/prosthetic.png"))
+        msgBox.setText("Asegúrese de retirar al paciente del prototipo mientras se setea la posición de trabajo, si ya fue seteada la posición de trabajo haga caso omiso a este aviso")
+        msgBox.setWindowTitle("Advertencia")
+        msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        returnValue = msgBox.exec()
+
+        if returnValue == QMessageBox.Yes:
+            try:
+                if miembro:
+                    self.doubleSpinBox_4.setValue(0)
+                    current = self.doubleSpinBox_3.value()
+                    position = float(self.lineEdit_34.text())
+                    if float(-80)<=position<=float(80):
+                        self.lineEdit_48.setText(str(position))
+                        Configuration.closed_loop(self,MainWindow, my_drive)
+                        my_drive.axis0.motor.config.current_lim = current
+                        my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
+                        my_drive.axis0.controller.move_to_pos(-position*66.67)
+                    else:
+                        print("Posición fuera de rango")
+                        self.plainTextEdit.appendPlainText("Posición fuera de rango")
+                else:
+                    self.doubleSpinBox_4.setValue(0)
+                    current = self.doubleSpinBox_3.value()
+                    position = float(self.lineEdit_34.text())
+                    if float(-80)<=position<=float(80):
+                        self.lineEdit_48.setText(str(position))
+                        Configuration.closed_loop(self,MainWindow, my_drive)
+                        my_drive.axis0.motor.config.current_lim = current
+                        my_drive.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
+                        my_drive.axis0.controller.move_to_pos(position*66.67)
+                    else:
+                        print("Posición fuera de rango")
+                        self.plainTextEdit.appendPlainText("Posición fuera de rango")
+
+            except ValueError:
+                self.plainTextEdit.appendPlainText("Error en el valor ingresado")
 
     def gananciaSup(self, MainWindow, my_drive, miembro):
         if miembro:

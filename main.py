@@ -22,7 +22,6 @@ class FindOdriveThread(QThread):
         QThread.__init__(self)
 
     def run(self):
-
         print("Buscando prototipo")
         my_drive = odrive.find_any()
         # my_drive = "Hola mundo"
@@ -1943,7 +1942,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.doubleSpinBox_2.sizePolicy().hasHeightForWidth())
         self.doubleSpinBox_2.setSizePolicy(sizePolicy)
         self.doubleSpinBox_2.setMaximumSize(QtCore.QSize(150, 16777215))
-        self.doubleSpinBox_2.setMaximum(10.0)
+        self.doubleSpinBox_2.setMaximum(20.0)
         self.doubleSpinBox_2.setObjectName("doubleSpinBox_2")
         self.gridLayout_33.addWidget(self.doubleSpinBox_2, 1, 1, 1, 1, QtCore.Qt.AlignHCenter)
         self.gridLayout_30.addWidget(self.groupBox_21, 0, 3, 1, 1)
@@ -2070,7 +2069,7 @@ class Ui_MainWindow(object):
         self.doubleSpinBox_4.setSizePolicy(sizePolicy)
         self.doubleSpinBox_4.setMaximumSize(QtCore.QSize(150, 16777215))
         self.doubleSpinBox_4.setMinimum(0.0)
-        self.doubleSpinBox_4.setMaximum(10.0)
+        self.doubleSpinBox_4.setMaximum(20.0)
         self.doubleSpinBox_4.setProperty("value", 0.0)
         self.doubleSpinBox_4.setObjectName("doubleSpinBox_4")
         self.gridLayout_34.addWidget(self.doubleSpinBox_4, 1, 1, 1, 1, QtCore.Qt.AlignHCenter)
@@ -2478,6 +2477,8 @@ class Ui_MainWindow(object):
         self.gridLayout_3.setObjectName("gridLayout_3")
         self.groupBox_8 = QtWidgets.QGroupBox(self.groupBox)
         self.groupBox_8.setObjectName("groupBox_8")
+        self.groupBox_8.setCheckable(True)
+        self.groupBox_8.setChecked(False)
         self.gridLayout_11 = QtWidgets.QGridLayout(self.groupBox_8)
         self.gridLayout_11.setObjectName("gridLayout_11")
         self.label_7 = QtWidgets.QLabel(self.groupBox_8)
@@ -2935,9 +2936,9 @@ class Ui_MainWindow(object):
         self.pushButton_37.clicked.connect(self.nuevo)
         self.pushButton_38.clicked.connect(self.buscar)
 
-        self.doubleSpinBox.valueChanged.connect(self.pronacion)
+        #self.doubleSpinBox.valueChanged.connect(self.pronacion)
         self.doubleSpinBox_2.valueChanged.connect(self.ganancia)
-        self.doubleSpinBox_3.valueChanged.connect(self.supinacion)
+        #self.doubleSpinBox_3.valueChanged.connect(self.supinacion)
         self.doubleSpinBox_4.valueChanged.connect(self.gananciaSup)
 
         # self.Counter.valueChange(self.vel_control)
@@ -3164,7 +3165,7 @@ class Ui_MainWindow(object):
         self.lineEdit_4.setText(_translate("MainWindow", "10"))
         self.pushButton_8.setText(_translate("MainWindow", "Guardar"))
         self.groupBox_7.setTitle(_translate("MainWindow", "Conexión"))
-        self.label_93.setText(_translate("MainWindow", "Asegúrece de que la marca situada en el soporte de los rodillos esté alineada con la marca situada en la guía frontal, antes de conectar al prototipo."))
+        self.label_93.setText(_translate("MainWindow", "Asegúrese de que la marca situada en el soporte de los rodillos esté alineada con la marca situada en la guía frontal, antes de conectar al prototipo."))
         self.pushButton_6.setText(_translate("MainWindow", "Conectar"))
         self.groupBox_2.setTitle(_translate("MainWindow", "Calibración y control"))
         self.groupBox_3.setTitle(_translate("MainWindow", "Calibración Inicial"))
@@ -3271,13 +3272,31 @@ class Ui_MainWindow(object):
         self.stackedWidget.setCurrentIndex(5)
 
     def set_current(self,MainWindow):
-        my_drive = self.my_drive
-        #Configuration.set_vel(self,MainWindow, my_drive)
-        Configuration.set_calibration_current(self,MainWindow, my_drive)
-        #Configuration.set_current(self,MainWindow,my_drive)
+        msgBox = QMessageBox()
+        msgBox.setIcon(QMessageBox.Warning)
+        msgBox.setWindowIcon(QtGui.QIcon("icons/prosthetic.png"))
+        msgBox.setText("¿Está seguro de modificar estos parámetros?")
+        msgBox.setWindowTitle("Modificar Parámetros")
+        msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        returnValue = msgBox.exec()
+
+        if returnValue == QMessageBox.Yes:
+            my_drive = self.my_drive
+            Configuration.set_vel(self,MainWindow, my_drive)
+            Configuration.set_calibration_current(self,MainWindow, my_drive)
+            Configuration.set_current(self,MainWindow,my_drive)
+        else:
+            print("Abortando, modificar parámetros")
+            self.lineEdit.setText('180')
+            self.lineEdit_2.setText('10')
+            self.lineEdit_4.setText('10')
+            self.groupBox_8.setChecked(False)
 
     def initial_calibration(self,MainWindow):
         my_drive = self.my_drive
+        Configuration.set_vel(self,MainWindow, my_drive)
+        Configuration.set_calibration_current(self,MainWindow, my_drive)
+        Configuration.set_current(self,MainWindow,my_drive)
         Configuration.initial_calibration(self,MainWindow, my_drive)
 
     def closed_loop(self,MainWindow):
