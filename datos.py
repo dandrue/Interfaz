@@ -485,7 +485,7 @@ class Sesion(object):
                 self.doubleSpinBox_2.setValue(0)
                 current = self.doubleSpinBox.value()
                 position = float(self.lineEdit_31.text())
-                if float(-80)<position<float(80):
+                if float(-80)<=position<=float(80):
                     self.lineEdit_47.setText(str(position))
                     Configuration.closed_loop(self,MainWindow, my_drive)
                     my_drive.axis0.motor.config.current_lim = current
@@ -498,7 +498,7 @@ class Sesion(object):
                 self.doubleSpinBox_2.setValue(0)
                 current = self.doubleSpinBox.value()
                 position = float(self.lineEdit_31.text())
-                if float(-80)<position<float(80):
+                if float(-80)<=position<=float(80):
                     self.lineEdit_47.setText(str(position))
                     Configuration.closed_loop(self,MainWindow, my_drive)
                     my_drive.axis0.motor.config.current_lim = current
@@ -535,7 +535,7 @@ class Sesion(object):
                 self.doubleSpinBox_4.setValue(0)
                 current = self.doubleSpinBox_3.value()
                 position = float(self.lineEdit_34.text())
-                if float(-80)<position<float(80):
+                if float(-80)<=position<=float(80):
                     self.lineEdit_48.setText(str(position))
                     Configuration.closed_loop(self,MainWindow, my_drive)
                     my_drive.axis0.motor.config.current_lim = current
@@ -548,7 +548,7 @@ class Sesion(object):
                 self.doubleSpinBox_4.setValue(0)
                 current = self.doubleSpinBox_3.value()
                 position = float(self.lineEdit_34.text())
-                if float(-80)<position<float(80):
+                if float(-80)<=position<=float(80):
                     self.lineEdit_48.setText(str(position))
                     Configuration.closed_loop(self,MainWindow, my_drive)
                     my_drive.axis0.motor.config.current_lim = current
