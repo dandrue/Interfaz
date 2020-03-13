@@ -626,7 +626,7 @@
              </palette>
             </property>
             <property name="currentIndex">
-             <number>1</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="tab">
              <attribute name="title">
@@ -642,7 +642,7 @@
                  </sizepolicy>
                 </property>
                 <property name="currentIndex">
-                 <number>0</number>
+                 <number>5</number>
                 </property>
                 <widget class="QWidget" name="page">
                  <layout class="QGridLayout" name="gridLayout_14">
@@ -1139,8 +1139,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>497</width>
-                       <height>344</height>
+                       <width>1008</width>
+                       <height>612</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_9">
@@ -1581,7 +1581,7 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>956</width>
+                       <width>991</width>
                        <height>651</height>
                       </rect>
                      </property>
@@ -2149,8 +2149,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>578</width>
-                       <height>532</height>
+                       <width>1008</width>
+                       <height>612</height>
                       </rect>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_10">
@@ -3007,7 +3007,7 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>555</width>
+                       <width>991</width>
                        <height>795</height>
                       </rect>
                      </property>
@@ -3980,7 +3980,7 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>635</width>
+                       <width>991</width>
                        <height>769</height>
                       </rect>
                      </property>
